@@ -2,372 +2,275 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#070710">
-  <meta name="description" content="NOTWIN TV — اكتشف عالم الدراما الآسيوية.">
-  <title>NOTWIN TV | عالم الدراما الآسيوية</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #070710;
-      --panel: #101020;
-      --panel2: #17152b;
-      --line: #292541;
-      --purple: #7c3aed;
-      --lavender: #b9a3ff;
-      --text: #f7f4ff;
-      --muted: #aaa6c2;
-      --pink: #ff75bb;
-      --radius: 15px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070710">
+<meta name="description" content="NOTWIN TV - اكتشف عالم الدراما الآسيوية.">
+<title>NOTWIN TV | عالم الدراما الآسيوية</title>
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Tahoma, sans-serif;
-      min-height: 100vh;
-    }
-    button, input { font: inherit; }
-    button { cursor: pointer; }
-    button:focus-visible, input:focus-visible, a:focus-visible {
-      outline: 2px solid var(--lavender);
-      outline-offset: 3px;
-    }
-    button:disabled { opacity: .5; cursor: not-allowed; }
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#070710;
+  --panel:#101020;
+  --panel2:#17152b;
+  --line:#292541;
+  --purple:#7c3aed;
+  --lavender:#b9a3ff;
+  --text:#f7f4ff;
+  --muted:#aaa6c2;
+  --pink:#ff75bb;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Tahoma,sans-serif;min-height:100vh
+}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,[role=button]:focus-visible{
+  outline:2px solid var(--lavender);outline-offset:3px
+}
+[hidden]{display:none!important}
 
-    .topbar {
-      height: 72px;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: #090914f5;
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(16px);
-    }
-    .brand {
-      direction: ltr;
-      white-space: nowrap;
-      font-size: 23px;
-      font-weight: 900;
-      letter-spacing: -.7px;
-    }
-    .brand b { color: var(--lavender); }
-    .brand-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 36px;
-      height: 36px;
-      margin-right: 7px;
-      border-radius: 11px;
-      background: linear-gradient(135deg, #c3a9ff, #7137f5 65%, #d946ef);
-      box-shadow: 0 0 22px #7137f54d;
-    }
-    .search-wrap { flex: 1; max-width: 540px; margin: auto; }
-    .search-wrap input {
-      width: 100%;
-      padding: 13px 18px;
-      color: var(--text);
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 30px;
-    }
-    .search-wrap input:focus { border-color: var(--purple); }
-    .btn {
-      border: 0;
-      padding: 12px 17px;
-      border-radius: 11px;
-      background: linear-gradient(110deg, #6d28d9, #8b5cf6);
-      color: white;
-      font-weight: bold;
-    }
-    .btn:hover { filter: brightness(1.12); }
-    .ghost {
-      padding: 11px 15px;
-      border-radius: 11px;
-      border: 1px solid #54417e;
-      color: white;
-      background: #111020;
-    }
+.topbar{
+  min-height:70px;padding:10px 20px;display:flex;align-items:center;
+  gap:16px;position:sticky;top:0;z-index:10;
+  background:#090914f5;border-bottom:1px solid var(--line);
+  backdrop-filter:blur(16px)
+}
+.brand{
+  direction:ltr;white-space:nowrap;font-size:22px;
+  font-weight:900;letter-spacing:-.7px
+}
+.brand b{color:var(--lavender)}
+.brand-icon{
+  display:inline-grid;place-items:center;width:35px;height:35px;
+  margin-right:7px;border-radius:11px;
+  background:linear-gradient(135deg,#c3a9ff,#7137f5 65%,#d946ef);
+  box-shadow:0 0 22px #7137f54d
+}
+.search-wrap{flex:1;max-width:540px;margin:auto}
+.search-wrap input{
+  width:100%;padding:12px 16px;color:var(--text);
+  background:var(--panel);border:1px solid var(--line);border-radius:30px
+}
+.search-wrap input:focus{border-color:var(--purple)}
+.btn{
+  border:0;padding:12px 16px;border-radius:11px;
+  background:linear-gradient(110deg,#6d28d9,#8b5cf6);
+  color:white;font-weight:bold
+}
+.btn:hover{filter:brightness(1.12)}
+.ghost{
+  padding:11px 14px;border-radius:11px;border:1px solid #54417e;
+  color:white;background:#111020
+}
+.layout{display:grid;grid-template-columns:205px minmax(0,1fr)}
+aside{
+  min-height:calc(100vh - 70px);padding:18px 12px;
+  border-left:1px solid var(--line);background:#090912
+}
+.nav-btn{
+  display:block;width:100%;text-align:right;padding:13px;
+  margin-bottom:5px;color:#d9d5ed;background:transparent;
+  border:0;border-radius:10px
+}
+.nav-btn:hover,.nav-btn.active{
+  background:linear-gradient(100deg,#4c1d95,#21163f);color:white
+}
+.side-label{padding:20px 12px 9px;color:var(--muted);font-size:12px}
+main{min-width:0}
 
-    .layout { display: grid; grid-template-columns: 210px minmax(0, 1fr); }
-    aside {
-      min-height: calc(100vh - 72px);
-      padding: 18px 12px;
-      border-left: 1px solid var(--line);
-      background: #090912;
-    }
-    .nav-btn {
-      display: block;
-      width: 100%;
-      text-align: right;
-      padding: 13px;
-      margin-bottom: 5px;
-      color: #d9d5ed;
-      background: transparent;
-      border: 0;
-      border-radius: 10px;
-    }
-    .nav-btn:hover, .nav-btn.active {
-      background: linear-gradient(100deg, #4c1d95, #21163f);
-      color: white;
-    }
-    .side-label { padding: 20px 12px 9px; color: var(--muted); font-size: 12px; }
-    main { min-width: 0; }
+.hero{
+  min-height:370px;padding:40px 5%;display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  background:
+    linear-gradient(90deg,#070710 0%,#070710e8 38%,#07071065 100%),
+    linear-gradient(0deg,var(--bg),transparent 65%),
+    url("https://images.unsplash.com/photo-1516575150278-77136aed6920?auto=format&fit=crop&w=1400&q=80")
+    center 40%/cover
+}
+.hero-content{max-width:480px;position:relative;z-index:1}
+.eyebrow{
+  display:inline-block;padding:7px 12px;border-radius:8px;
+  background:#6d28d9;font-size:12px
+}
+.hero h1{
+  direction:ltr;text-align:right;font-size:clamp(30px,4vw,47px);
+  margin:17px 0 12px;overflow-wrap:anywhere
+}
+.metadata{color:var(--muted);font-size:13px}
+.rating{color:#ffd166}
+.hero p{color:#e3deef;line-height:1.9}
+.hero-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 
-    .hero {
-      min-height: 375px;
-      padding: 45px 5%;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(90deg, #070710 0%, #070710e8 35%, #07071045 100%),
-        linear-gradient(0deg, var(--bg), transparent 60%),
-        url("https://images.unsplash.com/photo-1516575150278-77136aed6920?auto=format&fit=crop&w=1600&q=80")
-        center 40% / cover;
-    }
-    .hero-content { max-width: 480px; position: relative; z-index: 1; }
-    .eyebrow {
-      display: inline-block;
-      padding: 7px 12px;
-      border-radius: 8px;
-      background: #6d28d9;
-      font-size: 12px;
-    }
-    .hero h1 {
-      direction: ltr;
-      text-align: right;
-      font-size: clamp(32px, 4vw, 48px);
-      margin: 17px 0 12px;
-    }
-    .metadata { color: var(--muted); font-size: 13px; }
-    .rating { color: #ffd166; }
-    .hero p { color: #e3deef; line-height: 1.9; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.content{padding:26px}
+.section{margin-bottom:36px;scroll-margin-top:90px}
+.section-heading{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;margin-bottom:17px
+}
+.section-heading h2{margin:0;font-size:19px}
+.text-btn{color:var(--lavender);background:none;border:0;padding:8px}
+.cards{
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:16px 12px
+}
+.card{min-width:0}
+.poster{
+  height:220px;position:relative;overflow:hidden;
+  background:var(--panel2);border:1px solid var(--line);
+  border-radius:11px;cursor:pointer;isolation:isolate
+}
+.poster img{
+  display:block;width:100%;height:100%;object-fit:cover;
+  transition:transform .25s ease
+}
+.card:hover .poster img{transform:scale(1.04)}
+.poster::after{
+  content:"";position:absolute;inset:50% 0 0;z-index:2;
+  background:linear-gradient(transparent,#070710bd);pointer-events:none
+}
+.poster-fallback{
+  position:absolute;inset:0;z-index:1;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:12px;text-align:center;direction:ltr;
+  background:
+    radial-gradient(ellipse at 50% 30%,#56328c 0%,transparent 65%),
+    linear-gradient(145deg,#191329,#080810 75%);
+  color:#e8dcff
+}
+.fallback-icon{
+  display:grid;place-items:center;width:44px;height:44px;
+  border-radius:14px;background:linear-gradient(135deg,#b9a3ff,#7137f5);
+  color:white;font-size:19px
+}
+.poster-fallback strong{font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+.category-tag{
+  position:absolute;bottom:9px;right:9px;z-index:3;
+  padding:5px 7px;border-radius:5px;background:#5b21b6;
+  color:white;font-size:10px
+}
+.favorite{
+  position:absolute;top:8px;left:8px;z-index:4;
+  width:34px;height:34px;border:0;border-radius:50%;
+  background:#080812e8;color:white;font-size:20px
+}
+.favorite.saved{color:var(--pink)}
+.card-title{
+  direction:ltr;text-align:right;font-weight:bold;font-size:13px;
+  margin:10px 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.card-meta{color:var(--muted);font-size:11px;line-height:1.7}
+.empty{
+  display:none;padding:32px 10px;text-align:center;
+  color:var(--muted);line-height:1.9
+}
+.footer{
+  border-top:1px solid var(--line);padding:25px;text-align:center;
+  color:var(--muted);font-size:12px;line-height:1.9
+}
+.bottom-nav{display:none}
 
-    .content { padding: 26px; }
-    .section { margin-bottom: 36px; scroll-margin-top: 90px; }
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 17px;
-    }
-    .section-heading h2 { margin: 0; font-size: 19px; }
-    .text-btn { color: var(--lavender); background: none; border: 0; padding: 8px; }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 16px 12px;
-    }
-    .card { min-width: 0; }
-    .poster {
-      height: 220px;
-      position: relative;
-      overflow: hidden;
-      background: var(--panel2);
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      cursor: pointer;
-    }
-    .poster img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .25s ease;
-    }
-    .card:hover .poster img { transform: scale(1.05); }
-    .poster::after {
-      content: "";
-      position: absolute;
-      inset: 50% 0 0;
-      background: linear-gradient(transparent, #070710bd);
-      pointer-events: none;
-    }
-    .category-tag {
-      position: absolute;
-      bottom: 9px;
-      right: 9px;
-      z-index: 2;
-      padding: 5px 7px;
-      border-radius: 5px;
-      background: #5b21b6;
-      color: white;
-      font-size: 10px;
-    }
-    .favorite {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      z-index: 3;
-      width: 34px;
-      height: 34px;
-      border: 0;
-      border-radius: 50%;
-      background: #080812e8;
-      color: white;
-      font-size: 20px;
-    }
-    .favorite.saved { color: var(--pink); }
-    .card-title {
-      direction: ltr;
-      text-align: right;
-      font-weight: bold;
-      font-size: 13px;
-      margin: 10px 0 6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .card-meta { color: var(--muted); font-size: 11px; }
-    .empty {
-      display: none;
-      padding: 32px 10px;
-      text-align: center;
-      color: var(--muted);
-      line-height: 1.9;
-    }
-    .footer {
-      border-top: 1px solid var(--line);
-      padding: 25px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.9;
-    }
-    .bottom-nav { display: none; }
+.modal-backdrop{
+  display:none;position:fixed;inset:0;z-index:20;background:#000b;
+  align-items:center;justify-content:center;padding:18px
+}
+.modal-backdrop.open{display:flex}
+.modal{
+  width:100%;max-width:430px;max-height:85vh;overflow:auto;
+  background:#100e20;border:1px solid #3c315c;border-radius:18px;
+  padding:23px;line-height:1.9;box-shadow:0 20px 80px #0008
+}
+.modal h3{direction:ltr;text-align:right;overflow-wrap:anywhere}
+.modal p{white-space:pre-line;color:#c4bfd8}
+.modal-actions{display:flex;gap:8px;flex-wrap:wrap}
+.toast{
+  display:none;position:fixed;z-index:30;bottom:24px;left:50%;
+  transform:translateX(-50%);max-width:90%;padding:12px 18px;
+  text-align:center;background:#1b1531;border:1px solid #5b438d;
+  border-radius:12px
+}
 
-    .modal-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 20;
-      background: #000b;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-    }
-    .modal-backdrop.open { display: flex; }
-    .modal {
-      width: 100%;
-      max-width: 430px;
-      background: #100e20;
-      border: 1px solid #3c315c;
-      border-radius: 18px;
-      padding: 23px;
-      line-height: 1.9;
-      box-shadow: 0 20px 80px #0008;
-    }
-    .modal h3 { direction: ltr; text-align: right; }
-    .modal p { white-space: pre-line; color: #c4bfd8; }
-    .modal-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .toast {
-      display: none;
-      position: fixed;
-      z-index: 30;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      max-width: 90%;
-      padding: 12px 18px;
-      text-align: center;
-      background: #1b1531;
-      border: 1px solid #5b438d;
-      border-radius: 12px;
-    }
-
-    @media (max-width: 1150px) {
-      .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-      .poster { height: 205px; }
-    }
-    @media (max-width: 760px) {
-      .topbar { height: 64px; padding: 0 10px; gap: 9px; }
-      .brand { font-size: 17px; }
-      .brand-icon { width: 30px; height: 30px; }
-      .search-wrap input { font-size: 12px; padding: 11px 12px; }
-      .login-btn, aside { display: none; }
-      .layout { display: block; }
-      .hero { min-height: 330px; padding: 28px 19px; background-position: center; }
-      .hero p { font-size: 13px; }
-      .content { padding: 21px 12px 95px; }
-      .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px 8px; }
-      .poster { height: clamp(145px, 42vw, 220px); }
-      .card-title { font-size: 12px; }
-      .bottom-nav {
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 10;
-        justify-content: space-around;
-        padding: 10px 5px calc(10px + env(safe-area-inset-bottom));
-        background: #090912f7;
-        border-top: 1px solid var(--line);
-      }
-      .bottom-nav button {
-        border: 0;
-        background: none;
-        color: #c4bfd8;
-        font-size: 11px;
-        line-height: 1.7;
-      }
-    }
-    @media (max-width: 380px) {
-      .brand { font-size: 15px; }
-      .topbar { gap: 6px; }
-      .cards { gap: 13px 7px; }
-      .poster { height: 145px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
-    }
-  </style>
+@media(max-width:1150px){
+  .cards{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .poster{height:205px}
+}
+@media(max-width:760px){
+  .topbar{min-height:64px;padding:9px 10px;gap:9px}
+  .brand{font-size:17px}
+  .brand-icon{width:30px;height:30px}
+  .search-wrap input{font-size:12px;padding:11px 12px}
+  .login-btn,aside{display:none}
+  .layout{display:block}
+  .hero{min-height:330px;padding:28px 19px;background-position:center}
+  .hero-content{max-width:100%}
+  .hero p{font-size:13px}
+  .content{padding:21px 12px 100px}
+  .cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px 8px}
+  .poster{height:clamp(145px,42vw,220px)}
+  .card-title{font-size:12px}
+  .card-meta{font-size:10px}
+  .bottom-nav{
+    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;
+    justify-content:space-around;padding:10px 5px calc(10px + env(safe-area-inset-bottom));
+    background:#090912f7;border-top:1px solid var(--line)
+  }
+  .bottom-nav button{
+    border:0;background:none;color:#c4bfd8;font-size:11px;line-height:1.7
+  }
+  .toast{bottom:85px}
+}
+@media(max-width:380px){
+  .brand{font-size:15px}
+  .topbar{gap:6px}
+  .brand-icon{margin-right:4px}
+  .cards{gap:13px 7px}
+  .poster{height:145px}
+  .hero h1{font-size:30px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
+}
+</style>
 </head>
+
 <body>
 <header class="topbar">
-  <div class="brand"><span class="brand-icon">▶</span>NOTWIN<b>TV</b></div>
+  <div class="brand"><span class="brand-icon" aria-hidden="true">▶</span>NOTWIN<b>TV</b></div>
   <div class="search-wrap">
     <input id="search" type="search" placeholder="ابحث عن مسلسل أو فيلم..." aria-label="ابحث عن عنوان">
   </div>
-  <button class="btn login-btn" id="loginBtn">حسابي</button>
+  <button class="btn login-btn" id="loginBtn" type="button">حسابي</button>
 </header>
 
 <div class="layout">
   <aside aria-label="القائمة الرئيسية">
-    <button class="nav-btn active" data-filter="">⌂　الرئيسية</button>
-    <button class="nav-btn" data-filter="كوري">▣　مسلسلات كورية</button>
-    <button class="nav-btn" data-filter="آسيوي">▣　مسلسلات آسيوية</button>
-    <button class="nav-btn" data-filter="فيلم">▣　أفلام</button>
-    <button class="nav-btn" id="sidebarFavorites">♡　المفضلة</button>
+    <button class="nav-btn active" data-filter="" type="button">⌂　الرئيسية</button>
+    <button class="nav-btn" data-filter="كوري" type="button">▣　مسلسلات كورية</button>
+    <button class="nav-btn" data-filter="آسيوي" type="button">▣　مسلسلات آسيوية</button>
+    <button class="nav-btn" data-filter="فيلم" type="button">▣　أفلام</button>
+    <button class="nav-btn" id="sidebarFavorites" type="button">♡　المفضلة</button>
     <div class="side-label">التصنيفات</div>
-    <button class="nav-btn" data-filter="رومانسي">＃　رومانسي</button>
-    <button class="nav-btn" data-filter="أكشن">＃　أكشن</button>
-    <button class="nav-btn" data-filter="دراما">＃　دراما</button>
-    <button class="nav-btn" data-filter="كوميديا">＃　كوميديا</button>
-    <button class="nav-btn" data-filter="غموض">＃　غموض</button>
+    <button class="nav-btn" data-filter="رومانسي" type="button">＃　رومانسي</button>
+    <button class="nav-btn" data-filter="أكشن" type="button">＃　أكشن</button>
+    <button class="nav-btn" data-filter="دراما" type="button">＃　دراما</button>
+    <button class="nav-btn" data-filter="كوميديا" type="button">＃　كوميديا</button>
+    <button class="nav-btn" data-filter="غموض" type="button">＃　غموض</button>
   </aside>
 
   <main>
-    <section class="hero">
+    <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-content">
         <span class="eyebrow">اختيار NOTWIN TV</span>
-        <h1>Queen of Tears</h1>
+        <h1 id="heroTitle">Queen of Tears</h1>
         <div class="metadata"><span class="rating">★ 9.2</span>　2024　·　16 حلقة</div>
         <p>قصة حب تمرّ باختبارات صعبة بين زوجين، في رحلة تجمع بين المشاعر والتحديات والأمل.</p>
         <div class="hero-actions">
-          <button class="btn" id="heroDetails">▶　التفاصيل</button>
-          <button class="ghost" id="heroFavorite">♡　إضافة للمفضلة</button>
+          <button class="btn" id="heroDetails" type="button">▶　التفاصيل</button>
+          <button class="ghost" id="heroFavorite" type="button">♡ إضافة للمفضلة</button>
         </div>
       </div>
     </section>
@@ -376,7 +279,7 @@
       <section class="section" id="latestSection">
         <div class="section-heading">
           <h2>🔥　أحدث الإضافات</h2>
-          <button class="text-btn" id="latestToggle">عرض الكل ←</button>
+          <button class="text-btn" id="latestToggle" type="button">عرض الكل ←</button>
         </div>
         <div class="cards" id="latestCards"></div>
       </section>
@@ -384,7 +287,7 @@
       <section class="section" id="popularSection">
         <div class="section-heading">
           <h2>✦　الأكثر تقييماً</h2>
-          <button class="text-btn" id="popularToggle">عرض الكل ←</button>
+          <button class="text-btn" id="popularToggle" type="button">عرض الكل ←</button>
         </div>
         <div class="cards" id="popularCards"></div>
       </section>
@@ -392,7 +295,7 @@
       <section class="section" id="favoritesSection" hidden>
         <div class="section-heading">
           <h2>♥　قائمة المفضلة</h2>
-          <button class="text-btn" id="backHome">العودة للرئيسية</button>
+          <button class="text-btn" id="backHome" type="button">العودة للرئيسية</button>
         </div>
         <div class="cards" id="favoriteCards"></div>
         <div class="empty" id="emptyFavorites">ما زلت ما ضفت حتى عنوان للمفضلة.</div>
@@ -409,10 +312,10 @@
 </div>
 
 <nav class="bottom-nav" aria-label="التنقل">
-  <button id="homeMobile">⌂<br>الرئيسية</button>
-  <button id="searchMobile">⌕<br>بحث</button>
-  <button id="favoritesMobile">♡<br>المفضلة</button>
-  <button id="accountMobile">♙<br>حسابي</button>
+  <button id="homeMobile" type="button">⌂<br>الرئيسية</button>
+  <button id="searchMobile" type="button">⌕<br>بحث</button>
+  <button id="favoritesMobile" type="button">♡<br>المفضلة</button>
+  <button id="accountMobile" type="button">♙<br>حسابي</button>
 </nav>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -422,8 +325,8 @@
     <h3 id="modalTitle">تفاصيل العمل</h3>
     <p id="modalDescription"></p>
     <div class="modal-actions">
-      <button class="btn" id="modalClose">إغلاق</button>
-      <button class="ghost" id="modalFavorite" hidden>♡　إضافة للمفضلة</button>
+      <button class="btn" id="modalClose" type="button">إغلاق</button>
+      <button class="ghost" id="modalFavorite" type="button" hidden>♡ إضافة للمفضلة</button>
     </div>
   </div>
 </div>
@@ -432,27 +335,36 @@
 "use strict";
 
 const dramas = [
-  {id:"queen", title:"Queen of Tears", year:2024, episodes:16, rating:9.2, category:"كوري", genres:["رومانسي","دراما"], image:"https://images.unsplash.com/photo-1516575150278-77136aed6920?auto=format&fit=crop&w=500&q=75", description:"قصة حب تمرّ باختبارات صعبة بين زوجين."},
-  {id:"lovely", title:"Lovely Runner", year:2024, episodes:16, rating:9.0, category:"كوري", genres:["رومانسي","كوميديا"], image:"https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=75", description:"حكاية رومانسية عن فرصة ثانية وتغيير مسار القدر."},
-  {id:"moving", title:"Moving", year:2023, episodes:20, rating:8.6, category:"كوري", genres:["أكشن","خيال علمي"], image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=75", description:"شباب يكتشفون قدرات استثنائية وأسراراً عائلية."},
-  {id:"weak", title:"Weak Hero Class 1", year:2022, episodes:8, rating:8.8, category:"كوري", genres:["أكشن","دراما"], image:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=75", description:"طالب هادئ يواجه العنف والضغوط بذكاء وشجاعة."},
-  {id:"glory", title:"The Glory", year:2022, episodes:16, rating:8.9, category:"كوري", genres:["دراما","غموض"], image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=500&q=75", description:"امرأة تخطط لمواجهة ماضيها واستعادة حقها."},
-  {id:"alchemy", title:"Alchemy of Souls", year:2022, episodes:30, rating:8.7, category:"كوري", genres:["خيال علمي","رومانسي"], image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=75", description:"عالم خيالي من السحر والأسرار والروابط غير المتوقعة."},
-  {id:"business", title:"Business Proposal", year:2022, episodes:12, rating:8.2, category:"كوري", genres:["رومانسي","كوميديا"], image:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=75", description:"موعد غير متوقع يقلب حياة موظفة رأساً على عقب."},
-  {id:"woo", title:"Extraordinary Attorney Woo", year:2022, episodes:16, rating:8.7, category:"كوري", genres:["دراما","كوميديا"], image:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=75", description:"محامية شابة تواجه قضايا معقدة بطريقتها الخاصة."},
-  {id:"squid", title:"Squid Game", year:2021, episodes:9, rating:8.0, category:"كوري", genres:["غموض","أكشن"], image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=500&q=75", description:"منافسة غامضة تختبر قرارات المشاركين وحدودهم."},
-  {id:"beauty", title:"True Beauty", year:2020, episodes:16, rating:8.0, category:"كوري", genres:["رومانسي","كوميديا"], image:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=75", description:"قصة عن الثقة بالنفس والصداقة والحب."},
-  {id:"crash", title:"Crash Landing on You", year:2019, episodes:16, rating:8.7, category:"كوري", genres:["رومانسي","دراما"], image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=75", description:"لقاء غير متوقع يجمع شخصين من عالمين مختلفين."},
-  {id:"goblin", title:"Goblin", year:2016, episodes:16, rating:8.6, category:"كوري", genres:["خيال علمي","رومانسي"], image:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=500&q=75", description:"حكاية عن الخلود والقدر والحب."}
+  {id:"queen",title:"Queen of Tears",year:2024,episodes:16,rating:9.2,category:"كوري",genres:["رومانسي","دراما"],image:"https://images.unsplash.com/photo-1516575150278-77136aed6920?auto=format&fit=crop&w=500&q=75",description:"قصة حب تمرّ باختبارات صعبة بين زوجين."},
+  {id:"lovely",title:"Lovely Runner",year:2024,episodes:16,rating:9.0,category:"كوري",genres:["رومانسي","كوميديا"],image:"https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=75",description:"حكاية رومانسية عن فرصة ثانية وتغيير مسار القدر."},
+  {id:"moving",title:"Moving",year:2023,episodes:20,rating:8.6,category:"كوري",genres:["أكشن","خيال علمي"],image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=75",description:"شباب يكتشفون قدرات استثنائية وأسراراً عائلية."},
+  {id:"weak",title:"Weak Hero Class 1",year:2022,episodes:8,rating:8.8,category:"كوري",genres:["أكشن","دراما"],image:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=75",description:"طالب هادئ يواجه العنف والضغوط بذكاء وشجاعة."},
+  {id:"glory",title:"The Glory",year:2022,episodes:16,rating:8.9,category:"كوري",genres:["دراما","غموض"],image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=500&q=75",description:"امرأة تخطط لمواجهة ماضيها واستعادة حقها."},
+  {id:"alchemy",title:"Alchemy of Souls",year:2022,episodes:30,rating:8.7,category:"كوري",genres:["خيال علمي","رومانسي"],image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=75",description:"عالم خيالي من السحر والأسرار والروابط غير المتوقعة."},
+  {id:"business",title:"Business Proposal",year:2022,episodes:12,rating:8.2,category:"كوري",genres:["رومانسي","كوميديا"],image:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=75",description:"موعد غير متوقع يقلب حياة موظفة رأساً على عقب."},
+  {id:"woo",title:"Extraordinary Attorney Woo",year:2022,episodes:16,rating:8.7,category:"كوري",genres:["دراما","كوميديا"],image:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=75",description:"محامية شابة تواجه قضايا معقدة بطريقتها الخاصة."},
+  {id:"squid",title:"Squid Game",year:2021,episodes:9,rating:8.0,category:"كوري",genres:["غموض","أكشن"],image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=500&q=75",description:"منافسة غامضة تختبر قرارات المشاركين وحدودهم."},
+  {id:"beauty",title:"True Beauty",year:2020,episodes:16,rating:8.0,category:"كوري",genres:["رومانسي","كوميديا"],image:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=75",description:"قصة عن الثقة بالنفس والصداقة والحب."},
+  {id:"crash",title:"Crash Landing on You",year:2019,episodes:16,rating:8.7,category:"كوري",genres:["رومانسي","دراما"],image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=75",description:"لقاء غير متوقع يجمع شخصين من عالمين مختلفين."},
+  {id:"goblin",title:"Goblin",year:2016,episodes:16,rating:8.6,category:"كوري",genres:["خيال علمي","رومانسي"],image:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=500&q=75",description:"حكاية عن الخلود والقدر والحب."}
 ];
 
 const $ = selector => document.querySelector(selector);
-const state = {filter:"", query:"", showAllLatest:false, showAllPopular:false, favorites:new Set(), modalId:null};
+const state = {
+  filter:"",
+  query:"",
+  showAllLatest:false,
+  showAllPopular:false,
+  favorites:new Set(),
+  modalId:null
+};
 let toastTimer;
 
 try {
   const stored = JSON.parse(localStorage.getItem("notwin-tv-favorites") || "[]");
-  if (Array.isArray(stored)) state.favorites = new Set(stored.filter(id => dramas.some(d => d.id === id)));
+  if (Array.isArray(stored)) {
+    state.favorites = new Set(stored.filter(id => dramas.some(d => d.id === id)));
+  }
 } catch (_) {}
 
 function notify(message) {
@@ -473,27 +385,49 @@ function saveFavorites() {
 
 function toggleFavorite(id) {
   if (!dramas.some(d => d.id === id)) return;
-  if (state.favorites.has(id)) {
-    state.favorites.delete(id);
-    notify("تمت الإزالة من المفضلة");
-  } else {
-    state.favorites.add(id);
-    notify("أُضيف إلى المفضلة ♥");
-  }
+
+  const removing = state.favorites.has(id);
+  if (removing) state.favorites.delete(id);
+  else state.favorites.add(id);
+
   saveFavorites();
+  notify(removing ? "تمت الإزالة من المفضلة" : "أُضيف إلى المفضلة ♥");
   render();
   updateHeroFavorite();
   updateModalFavorite();
 }
 
+function fallbackImage(img) {
+  const poster = img.closest(".poster");
+  if (!poster || poster.querySelector(".poster-fallback")) return;
+
+  img.style.display = "none";
+
+  const fallback = document.createElement("div");
+  fallback.className = "poster-fallback";
+
+  const icon = document.createElement("span");
+  icon.className = "fallback-icon";
+  icon.textContent = "▶";
+
+  const title = document.createElement("strong");
+  title.textContent = img.alt.replace(/^صورة توضيحية لـ\s*/, "") || "NOTWIN TV";
+
+  fallback.append(icon, title);
+  poster.prepend(fallback);
+}
+
 function cardTemplate(drama) {
   const saved = state.favorites.has(drama.id);
+
   return `
     <article class="card">
       <div class="poster" data-detail="${drama.id}" role="button" tabindex="0" aria-label="تفاصيل ${drama.title}">
         <img loading="lazy" src="${drama.image}" alt="صورة توضيحية لـ ${drama.title}">
         <span class="category-tag">${drama.category}</span>
-        <button class="favorite ${saved ? "saved" : ""}" data-favorite="${drama.id}" aria-label="${saved ? "إزالة من" : "إضافة إلى"} المفضلة">${saved ? "♥" : "♡"}</button>
+        <button class="favorite ${saved ? "saved" : ""}" type="button"
+          data-favorite="${drama.id}"
+          aria-label="${saved ? "إزالة من" : "إضافة إلى"} المفضلة">${saved ? "♥" : "♡"}</button>
       </div>
       <div class="card-title" title="${drama.title}">${drama.title}</div>
       <div class="card-meta">${drama.year} · ${drama.episodes} حلقة · ★ ${drama.rating.toFixed(1)}</div>
@@ -502,9 +436,14 @@ function cardTemplate(drama) {
 
 function getFiltered() {
   const q = state.query.toLocaleLowerCase();
+
   return dramas.filter(d => {
-    const matchesCategory = !state.filter || d.category === state.filter || d.genres.includes(state.filter);
-    const searchable = `${d.title} ${d.description} ${d.genres.join(" ")}`.toLocaleLowerCase();
+    const matchesCategory = !state.filter ||
+      d.category === state.filter || d.genres.includes(state.filter);
+
+    const searchable =
+      `${d.title} ${d.description} ${d.genres.join(" ")} ${d.category}`.toLocaleLowerCase();
+
     return matchesCategory && (!q || searchable.includes(q));
   });
 }
@@ -516,12 +455,15 @@ function bindCards(root) {
       toggleFavorite(button.dataset.favorite);
     });
   });
+
   root.querySelectorAll("[data-detail]").forEach(poster => {
     const open = () => showDetails(poster.dataset.detail);
+
     poster.addEventListener("click", event => {
       if (event.target.closest("[data-favorite]")) return;
       open();
     });
+
     poster.addEventListener("keydown", event => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
@@ -529,30 +471,39 @@ function bindCards(root) {
       }
     });
   });
+
   root.querySelectorAll("img").forEach(img => {
-    img.addEventListener("error", () => {
-      img.alt = "الصورة غير متاحة";
-      img.style.opacity = ".15";
-    }, {once:true});
+    img.addEventListener("error", () => fallbackImage(img), {once:true});
   });
 }
 
 function render() {
   const items = getFiltered();
-  const latest = [...items].sort((a,b) => b.year - a.year || a.title.localeCompare(b.title));
-  const popular = [...items].sort((a,b) => b.rating - a.rating);
-  $("#latestCards").innerHTML = (state.showAllLatest ? latest : latest.slice(0,6)).map(cardTemplate).join("");
-  $("#popularCards").innerHTML = (state.showAllPopular ? popular : popular.slice(0,6)).map(cardTemplate).join("");
+  const latest = [...items].sort((a,b) => b.year-a.year || a.title.localeCompare(b.title));
+  const popular = [...items].sort((a,b) => b.rating-a.rating);
+
+  $("#latestCards").innerHTML =
+    (state.showAllLatest ? latest : latest.slice(0,6)).map(cardTemplate).join("");
+
+  $("#popularCards").innerHTML =
+    (state.showAllPopular ? popular : popular.slice(0,6)).map(cardTemplate).join("");
 
   const favorites = dramas.filter(d => state.favorites.has(d.id));
   $("#favoriteCards").innerHTML = favorites.map(cardTemplate).join("");
   $("#emptyFavorites").style.display = favorites.length ? "none" : "block";
 
   const isFavoritesPage = !$("#favoritesSection").hidden;
-  const noSearchResults = !isFavoritesPage && state.query.length > 0 && items.length === 0;
-  $("#emptySearch").style.display = noSearchResults ? "block" : "none";
-  $("#latestSection").style.display = isFavoritesPage || noSearchResults ? "none" : "block";
-  $("#popularSection").style.display = isFavoritesPage || noSearchResults ? "none" : "block";
+  const noResults = !isFavoritesPage && state.query.length > 0 && items.length === 0;
+  const noCategoryResults = !isFavoritesPage && !state.query && state.filter && items.length === 0;
+
+  $("#emptySearch").style.display = (noResults || noCategoryResults) ? "block" : "none";
+  $("#emptySearch").textContent = noCategoryResults
+    ? "ما زال ما عندناش عناوين في هذا التصنيف."
+    : "ما لقيناش نتائج. جرّب اسمًا آخر.";
+
+  const hideCatalog = isFavoritesPage || noResults || noCategoryResults;
+  $("#latestSection").style.display = hideCatalog ? "none" : "block";
+  $("#popularSection").style.display = hideCatalog ? "none" : "block";
 
   [$("#latestCards"), $("#popularCards"), $("#favoriteCards")].forEach(bindCards);
 }
@@ -560,10 +511,12 @@ function render() {
 function showDetails(id) {
   const drama = dramas.find(d => d.id === id);
   if (!drama) return;
+
   state.modalId = id;
   $("#modalTitle").textContent = drama.title;
   $("#modalDescription").textContent =
-    `${drama.description}\nالسنة: ${drama.year} · عدد الحلقات: ${drama.episodes} · التقييم التجريبي: ${drama.rating.toFixed(1)}\n\nهذه نسخة تجريبية للتعريف بالأعمال. سنضيف روابط رسمية أو محتوى مرخّص فقط عند توفره.`;
+    `${drama.description}\nالسنة: ${drama.year} · عدد الحلقات: ${drama.episodes} · التقييم المعروض: ${drama.rating.toFixed(1)}\n\nهذه نسخة تجريبية للتعريف بالأعمال. سنضيف روابط رسمية أو محتوى مرخّص فقط عند توفره.`;
+
   $("#modalBackdrop").classList.add("open");
   updateModalFavorite();
   $("#modalClose").focus();
@@ -576,17 +529,23 @@ function closeModal() {
 
 function updateHeroFavorite() {
   const saved = state.favorites.has("queen");
-  $("#heroFavorite").textContent = saved ? "♥ تمت الإضافة للمفضلة" : "♡ إضافة للمفضلة";
+  $("#heroFavorite").textContent = saved
+    ? "♥ تمت الإضافة للمفضلة"
+    : "♡ إضافة للمفضلة";
 }
 
 function updateModalFavorite() {
   const button = $("#modalFavorite");
+
   if (!state.modalId) {
     button.hidden = true;
     return;
   }
+
   button.hidden = false;
-  button.textContent = state.favorites.has(state.modalId) ? "♥ إزالة من المفضلة" : "♡ إضافة للمفضلة";
+  button.textContent = state.favorites.has(state.modalId)
+    ? "♥ إزالة من المفضلة"
+    : "♡ إضافة للمفضلة";
 }
 
 function showFavorites() {
@@ -594,9 +553,8 @@ function showFavorites() {
   state.query = "";
   $("#search").value = "";
   $("#favoritesSection").hidden = false;
-  $("#emptySearch").style.display = "none";
   render();
-  $("#favoritesSection").scrollIntoView({behavior:"smooth", block:"start"});
+  $("#favoritesSection").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 function goHome() {
@@ -604,19 +562,29 @@ function goHome() {
   state.query = "";
   state.showAllLatest = false;
   state.showAllPopular = false;
+
   $("#search").value = "";
   $("#favoritesSection").hidden = true;
   $("#latestToggle").textContent = "عرض الكل ←";
   $("#popularToggle").textContent = "عرض الكل ←";
-  document.querySelectorAll(".nav-btn[data-filter]").forEach(b => b.classList.toggle("active", b.dataset.filter === ""));
+
+  document.querySelectorAll(".nav-btn[data-filter]").forEach(button => {
+    button.classList.toggle("active", button.dataset.filter === "");
+  });
+
   render();
-  window.scrollTo({top:0, behavior:"smooth"});
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 $("#search").addEventListener("input", event => {
   state.query = event.target.value.trim();
   state.filter = "";
   $("#favoritesSection").hidden = true;
+
+  document.querySelectorAll(".nav-btn[data-filter]").forEach(button => {
+    button.classList.toggle("active", button.dataset.filter === "");
+  });
+
   render();
 });
 
@@ -626,7 +594,11 @@ document.querySelectorAll(".nav-btn[data-filter]").forEach(button => {
     state.query = "";
     $("#search").value = "";
     $("#favoritesSection").hidden = true;
-    document.querySelectorAll(".nav-btn[data-filter]").forEach(b => b.classList.toggle("active", b === button));
+
+    document.querySelectorAll(".nav-btn[data-filter]").forEach(item => {
+      item.classList.toggle("active", item === button);
+    });
+
     render();
   });
 });
@@ -635,8 +607,9 @@ $("#sidebarFavorites").addEventListener("click", showFavorites);
 $("#favoritesMobile").addEventListener("click", showFavorites);
 $("#backHome").addEventListener("click", goHome);
 $("#homeMobile").addEventListener("click", goHome);
+
 $("#searchMobile").addEventListener("click", () => {
-  window.scrollTo({top:0, behavior:"smooth"});
+  window.scrollTo({top:0,behavior:"smooth"});
   $("#search").focus();
 });
 
@@ -654,15 +627,25 @@ $("#popularToggle").addEventListener("click", () => {
 
 $("#heroDetails").addEventListener("click", () => showDetails("queen"));
 $("#heroFavorite").addEventListener("click", () => toggleFavorite("queen"));
-$("#loginBtn").addEventListener("click", () => notify("تسجيل الحسابات غير متاح في النسخة التجريبية."));
-$("#accountMobile").addEventListener("click", () => notify("ميزة الحسابات ستُضاف لاحقاً."));
+
+$("#loginBtn").addEventListener("click", () => {
+  notify("تسجيل الحسابات غير متاح في النسخة التجريبية.");
+});
+
+$("#accountMobile").addEventListener("click", () => {
+  notify("ميزة الحسابات ستُضاف لاحقاً.");
+});
+
 $("#modalClose").addEventListener("click", closeModal);
+
 $("#modalFavorite").addEventListener("click", () => {
   if (state.modalId) toggleFavorite(state.modalId);
 });
+
 $("#modalBackdrop").addEventListener("click", event => {
   if (event.target === $("#modalBackdrop")) closeModal();
 });
+
 document.addEventListener("keydown", event => {
   if (event.key === "Escape") closeModal();
 });
