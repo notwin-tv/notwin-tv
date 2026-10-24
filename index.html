@@ -4,467 +4,205 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#08060d">
+<meta name="theme-color" content="#080610">
 <title>NOTWIN TV</title>
 <style>
-:root {
-  --bg:#08060d;
-  --panel:#100d19;
-  --line:#282135;
-  --text:#f4f0fa;
-  --muted:#aaa2b7;
-  --purple:#8c42ed;
-  --lavender:#c0a3ff;
-}
+:root{--bg:#080610;--panel:#100d1b;--line:#30213f;--text:#f7f3ff;--muted:#b8adc9;--purple:#7028cf;--lav:#c5a0ff}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,Tahoma,sans-serif;line-height:1.7;
-}
-body,button,input{font-family:Arial,Tahoma,sans-serif}
-button,input{font-size:inherit}
-button,a{-webkit-tap-highlight-color:transparent}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-.wrap{width:min(1200px,calc(100% - 36px));margin:auto}
-
-/* INTRO */
-.intro{
-  position:fixed;inset:0;z-index:1000;background:#05030a;
-  display:flex;align-items:center;justify-content:center;
-  transition:opacity .6s ease,visibility .6s ease;
-}
-.intro.hide{opacity:0;visibility:hidden;pointer-events:none}
-.intro video{width:100%;height:100%;object-fit:cover}
-.intro-shade{
-  position:absolute;inset:0;
-  background:linear-gradient(0deg,#08060d 0%,transparent 65%,#08060d55);
-}
-.intro-brand{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  text-align:center;letter-spacing:4px;font-size:clamp(30px,8vw,58px);
-  font-weight:900;text-shadow:0 5px 35px #000;
-}
-.intro-brand span{color:var(--lavender)}
-.skip{
-  position:absolute;bottom:max(28px,env(safe-area-inset-bottom));
-  left:22px;background:#100d19dd;border:1px solid #827096;
-  color:white;padding:12px 20px;border-radius:5px;
-}
-
-/* HEADER */
-header{
-  position:sticky;top:0;z-index:30;
-  background:#09070df2;backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
-}
-.topbar{
-  min-height:76px;display:flex;align-items:center;gap:20px;
-}
-.brand{font-size:21px;font-weight:900;letter-spacing:-1px;white-space:nowrap}
-.brand span{color:var(--lavender)}
-.searchbox{
-  margin-right:auto;display:flex;align-items:center;gap:10px;
-  width:min(470px,58%);border:1px solid var(--line);
-  background:#100d19;border-radius:30px;padding:0 16px;
-}
-.searchbox input{
-  width:100%;min-width:0;padding:13px 0;
-  color:white;background:transparent;border:0;outline:none;
-}
-.searchbox input::placeholder{color:#8f879e}
-.iconbtn{
-  border:1px solid var(--line);background:#100d19;color:white;
-  min-width:46px;min-height:46px;border-radius:50%;font-size:21px;
-}
-.iconbtn:active,.btn:active{transform:scale(.97)}
-.desktopnav{display:flex;gap:18px;color:#bdb5ca;font-size:13px}
-.desktopnav a:hover{color:var(--lavender)}
-
-/* HERO */
-.hero{
-  position:relative;isolation:isolate;overflow:hidden;
-  min-height:550px;display:flex;align-items:center;
-  background:
-    linear-gradient(90deg,#08060d 0%,#08060d70 48%,#08060d18 100%),
-    linear-gradient(0deg,#08060d 0%,transparent 35%,#08060d35 100%),
-    url("sakura-bg.png") center 40%/cover;
-}
-.hero:before{
-  content:"";position:absolute;inset:0;z-index:-1;
-  background:radial-gradient(ellipse at 75% 45%,#5b1e4a42,transparent 48%);
-}
-.hero-content{padding:70px 0 82px;max-width:680px}
-.eyebrow{
-  color:var(--lavender);font-size:12px;letter-spacing:2px;
-  text-transform:uppercase;
-}
-.hero h1{
-  font-size:clamp(40px,7vw,76px);line-height:1.1;
-  margin:18px 0 12px;letter-spacing:-2px;
-}
-.hero h1 span{color:#c3a2ff}
-.hero-meta{display:flex;gap:18px;align-items:center;flex-wrap:wrap;color:#c5bdcf}
-.rating{color:#e8ca7a}
-.hero p{max-width:550px;color:#d0c8d7;font-size:15px;line-height:2}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
-.btn{
-  min-height:50px;padding:12px 23px;border-radius:5px;
-  border:1px solid #413050;background:transparent;color:white;
-  font-size:14px;display:inline-flex;align-items:center;
-  justify-content:center;gap:10px;
-}
-.btn-primary{background:linear-gradient(120deg,#5620a3,#7132bf);border-color:#7132bf}
-.btn:hover{border-color:var(--lavender)}
-.btn-primary:hover{background:#7835c6}
-.hero-note{font-size:11px;color:#91879e;margin-top:22px}
-
-/* SECTIONS */
-.section{padding:34px 0}
-.section-head{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;margin-bottom:20px;
-}
-.section-head h2{font-size:23px;margin:0}
-.section-head p{font-size:12px;color:var(--muted);margin:3px 0 0}
-.textlink{color:var(--lavender);font-size:13px;white-space:nowrap}
-.filters{display:flex;gap:9px;overflow-x:auto;padding:3px 0 20px;scrollbar-width:none}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Tahoma,sans-serif;line-height:1.7}
+button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:inherit;text-decoration:none}
+.wrap{width:min(1320px,calc(100% - 32px));margin:auto}
+header{position:sticky;top:0;z-index:50;background:#090711ed;backdrop-filter:blur(16px);border-bottom:1px solid #30213f}
+.top{height:68px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:8px;font-size:19px;font-weight:900;white-space:nowrap}
+.brand span{color:var(--lav)}
+.mark{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#974bfa,#47118a);display:grid;place-items:center;font-size:22px}
+.searchbox{flex:1;max-width:550px;margin:auto;position:relative}
+.searchbox input{width:100%;height:45px;border-radius:25px;border:1px solid #30213f;background:#100d1b;color:white;padding:0 16px;outline:none}
+.searchbox input:focus{border-color:#a36af0}
+.searchicon{position:absolute;left:15px;top:7px;font-size:22px}
+.iconbtn{width:44px;height:44px;border-radius:50%;border:1px solid #30213f;background:#100d1b;color:white;font-size:24px}
+.hero{position:relative;min-height:690px;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid #24172f;background:#080610}
+.hero-bg{position:absolute;inset:0;background-image:linear-gradient(0deg,#080610 0%,rgba(8,6,16,.25) 35%,rgba(8,6,16,.25) 100%),linear-gradient(270deg,rgba(8,6,16,.2),rgba(8,6,16,.1)),url("sakura-bg.png");background-position:center;background-size:cover;background-attachment:fixed}
+.hero-content{position:relative;z-index:1;width:min(1320px,calc(100% - 40px));margin:auto;padding:80px 0 125px}
+.eyebrow{font-size:12px;letter-spacing:3px;color:#d0aaff;margin-bottom:20px}
+h1{font-size:clamp(50px,8vw,94px);line-height:1.05;max-width:750px;margin:0 0 20px;font-weight:900;letter-spacing:-2px}
+h1 span{display:block;color:var(--lav)}
+.hero-meta{display:flex;gap:17px;flex-wrap:wrap;color:#e4d9f0;font-size:15px;margin:23px 0}
+.rating{color:#ffd66b}
+.hero p{max-width:620px;color:#e3d9ec;font-size:16px;line-height:2}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{min-height:53px;padding:0 22px;border-radius:12px;border:1px solid #4b3561;background:#100c1bdc;color:white;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700}
+.btn.primary{background:linear-gradient(115deg,#6220b8,#8c40e7);border-color:transparent}
+.btn:active{transform:scale(.98)}
+.hero-note{margin-top:28px;color:#bda8d8;font-size:13px}
+.content{position:relative;z-index:2;margin-top:-35px}
+.section{padding:27px 0 34px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:19px}
+.section-title{font-size:24px;margin:0;font-weight:800}
+.seeall{border:0;background:none;color:var(--lav);font-size:13px}
+.filters{display:flex;gap:9px;overflow-x:auto;padding:4px 0 18px;scrollbar-width:none}
 .filters::-webkit-scrollbar{display:none}
-.filter{
-  flex-shrink:0;border:1px solid var(--line);border-radius:5px;
-  color:#c5bbd1;background:#100d19;padding:10px 15px;font-size:13px;
-}
-.filter.active{color:white;background:#4a2075;border-color:#7642a8}
-.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px 16px}
+.filter{flex-shrink:0;border:1px solid #30213f;background:#100d1b;color:#d0c4df;padding:9px 15px;border-radius:24px;font-size:12px}
+.filter.active{background:#e9d9ff;color:#1a1028;border-color:#e9d9ff}
+.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px 15px}
 .card{min-width:0;cursor:pointer}
-.poster{
-  position:relative;aspect-ratio:2/3;overflow:hidden;
-  border:1px solid #30263d;border-radius:9px;background:#17101f;
-  isolation:isolate;
-}
-.poster-art{
-  position:absolute;inset:0;z-index:-2;
-  background:linear-gradient(145deg,var(--c1),var(--c2) 58%,#09070d);
-}
-.poster-art:before{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 70% 27%,#ffffff28,transparent 33%),
-    linear-gradient(0deg,#08060df5,transparent 78%);
-}
-.poster-art:after{
-  content:"";position:absolute;width:80%;height:58%;right:-14%;top:13%;
-  border-radius:50% 50% 8% 8%;transform:rotate(-17deg);
-  background:linear-gradient(140deg,#ffffff12,#09060d70);
-  border:1px solid #ffffff12;
-}
-.poster-title{
-  position:absolute;bottom:19%;right:8%;left:8%;
-  text-align:center;font-size:clamp(17px,2vw,25px);
-  font-weight:900;line-height:1.2;text-shadow:0 3px 12px #000;
-}
-.poster-mark{
-  position:absolute;bottom:8%;right:0;left:0;text-align:center;
-  font-size:10px;letter-spacing:3px;color:#c6a5ff;
-}
-.poster-tag{
-  position:absolute;top:10px;right:10px;padding:5px 9px;
-  background:#09070dbb;border:1px solid #ffffff25;
-  font-size:10px;border-radius:4px;
-}
-.fav{
-  position:absolute;top:9px;left:9px;width:39px;height:39px;
-  border:1px solid #ffffff50;border-radius:50%;
-  color:white;background:#08060dcc;font-size:22px;
-}
-.fav.saved{color:#d6b4ff;border-color:#9a62dd}
-.card h3{font-size:14px;margin:10px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.meta{font-size:11px;color:var(--muted)}
-.empty{display:none;padding:40px 12px;text-align:center;color:var(--muted)}
-.about{
-  margin:28px auto 55px;display:grid;grid-template-columns:repeat(3,1fr);
-  border-block:1px solid var(--line);
-}
-.about div{padding:22px}
-.about div+div{border-right:1px solid var(--line)}
-.about strong{display:block;font-size:14px}
-.about span{color:var(--muted);font-size:12px}
-footer{padding:24px 0 110px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
-
-/* DETAILS */
-.modal{
-  display:none;position:fixed;inset:0;z-index:80;
-  background:#000d;padding:20px;align-items:center;justify-content:center;
-}
+.poster{position:relative;aspect-ratio:2/3;border-radius:12px;overflow:hidden;background:radial-gradient(ellipse at 50% 20%,var(--tint,#68429a66),transparent 60%),linear-gradient(145deg,#241b32,#0d0915);border:1px solid #352541}
+.poster:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#080610 0%,transparent 70%)}
+.poster-title{position:absolute;z-index:1;inset:20% 10px 22%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(14px,1.6vw,22px);font-weight:900;line-height:1.3;text-shadow:0 3px 20px #000}
+.poster-brand{position:absolute;z-index:1;bottom:13%;width:100%;text-align:center;color:#c7a4ff;letter-spacing:2px;font-size:10px}
+.poster-tag{position:absolute;z-index:2;bottom:9px;right:9px;background:#5920a9;color:white;padding:4px 8px;border-radius:7px;font-size:10px}
+.fav{position:absolute;z-index:3;top:8px;left:8px;width:36px;height:36px;border-radius:50%;border:1px solid #ffffff45;background:#080610d9;color:white;font-size:21px}
+.fav.saved{color:#d1a4ff}
+.card h3{font-size:14px;margin:9px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{color:var(--muted);font-size:11px}
+.empty{display:none;padding:35px;text-align:center;color:var(--muted)}
+.genre-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.genre{min-height:100px;padding:17px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(135deg,#171023,#0d0a15);display:flex;flex-direction:column;justify-content:end;font-weight:700}
+.genre small{color:var(--lav);font-weight:400}
+.about{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:12px}
+footer{border-top:1px solid var(--line);padding:24px 0 100px;color:#887b99;font-size:12px}
+.modal{display:none;position:fixed;inset:0;z-index:100;background:#030207df;backdrop-filter:blur(8px);padding:18px;align-items:center;justify-content:center}
 .modal.open{display:flex}
-.modalbox{
-  width:min(560px,100%);max-height:85dvh;overflow:auto;
-  padding:25px;background:#100d19;border:1px solid #42334e;border-radius:10px;
+.modalbox{width:min(620px,100%);max-height:90vh;overflow:auto;background:#110d1b;border:1px solid #3b2a51;border-radius:17px;padding:26px;position:relative}
+.close{position:absolute;left:14px;top:10px;background:none;color:white;border:0;font-size:27px}
+.modalbox h2{font-size:27px;margin:8px 35px 8px 0}
+.modalbox p{color:#d3c9df;line-height:2}
+.bottomnav{display:none}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero-bg{background-attachment:scroll}}
+@media(max-width:650px){
+ .wrap{width:calc(100% - 24px)}
+ .top{height:62px;gap:8px}
+ .brand{font-size:15px;gap:5px}
+ .mark{width:31px;height:31px;border-radius:9px}
+ .searchbox input{height:41px;font-size:12px;padding-right:12px;padding-left:32px}
+ .searchicon{left:10px;top:6px}
+ .iconbtn{width:40px;height:40px}
+ .hero{min-height:690px}
+ .hero-bg{background-attachment:scroll;background-position:center;background-image:linear-gradient(0deg,#080610 0%,rgba(8,6,16,.22) 45%,rgba(8,6,16,.25) 100%),url("sakura-bg.png")}
+ .hero-content{width:calc(100% - 32px);padding:65px 0 105px}
+ .eyebrow{font-size:10px;letter-spacing:2px}
+ h1{font-size:clamp(48px,14vw,72px);letter-spacing:-1px}
+ .hero-meta{gap:11px;font-size:12px;margin:17px 0}
+ .hero p{font-size:14px}
+ .btn{min-height:51px;padding:0 17px;font-size:13px}
+ .content{margin-top:-25px}
+ .section{padding:22px 0 27px}
+ .section-title{font-size:21px}
+ .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:19px 10px}
+ .poster{border-radius:10px}
+ .poster-title{font-size:clamp(12px,3.5vw,17px);inset:20% 6px 22%}
+ .poster-brand{font-size:8px;letter-spacing:1px}
+ .poster-tag{font-size:9px;right:5px;bottom:6px;padding:3px 6px}
+ .fav{width:31px;height:31px;top:5px;left:5px;font-size:18px}
+ .card h3{font-size:12px;margin-top:7px}
+ .meta{font-size:10px}
+ .genre-row{grid-template-columns:repeat(2,1fr)}
+ .bottomnav{display:flex;position:fixed;z-index:60;bottom:0;left:0;right:0;justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom));background:#090711f5;backdrop-filter:blur(18px);border-top:1px solid #332343}
+ .bottomnav a,.bottomnav button{display:flex;flex-direction:column;align-items:center;gap:3px;color:#c3b5d4;font-size:10px;background:none;border:0;min-width:58px}
+ .bottomnav .navico{font-size:22px;line-height:1.1}
+ .bottomnav .active{color:var(--lav)}
+ footer{padding-bottom:110px}
 }
-.modalbox h2{margin:12px 0}
-.modalbox p{color:#c9c0d2;line-height:2}
-.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-
-/* MOBILE */
-.mobilebar{display:none}
-@media(max-width:850px){
-  .wrap{width:calc(100% - 28px)}
-  .desktopnav{display:none}
-  .topbar{min-height:68px;gap:12px}
-  .brand{font-size:18px}
-  .searchbox{width:auto;flex:1;padding:0 12px}
-  .searchbox input{font-size:13px;padding:12px 0}
-  .iconbtn{min-width:42px;min-height:42px}
-  .hero{min-height:510px;background-position:center,center,60% center}
-  .hero-content{padding:65px 0 76px}
-  .hero h1{font-size:clamp(39px,10vw,62px)}
-  .hero p{font-size:14px}
-  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:21px 11px}
-  .poster{border-radius:7px}
-  .poster-title{font-size:clamp(13px,3vw,20px)}
-  .card h3{font-size:12px}
-  .meta{font-size:10px}
-  .about{grid-template-columns:1fr}
-  .about div{padding:17px}
-  .about div+div{border-right:0;border-top:1px solid var(--line)}
-  .mobilebar{
-    display:flex;position:fixed;bottom:0;right:0;left:0;z-index:50;
-    justify-content:space-around;align-items:center;gap:3px;
-    padding:8px 4px calc(8px + env(safe-area-inset-bottom));
-    background:#0a0710f7;backdrop-filter:blur(16px);
-    border-top:1px solid #33263f;
-  }
-  .mobilebar button{
-    flex:1;min-width:0;min-height:58px;display:flex;
-    flex-direction:column;align-items:center;justify-content:center;
-    gap:2px;background:transparent;border:0;color:#bcb2ca;
-    font-size:11px;padding:5px 0;
-  }
-  .mobilebar .navicon{font-size:23px;line-height:1.2}
-  .mobilebar button.active{color:#c5a3ff}
-  footer{padding-bottom:105px}
-}
-@media(max-width:390px){
-  .wrap{width:calc(100% - 22px)}
-  .brand{font-size:16px}
-  .topbar{gap:8px}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
-  .poster-title{font-size:21px}
-  .hero{min-height:480px}
-  .btn{padding:11px 16px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
-}
+@media(max-width:370px){.brand{font-size:13px}.mark{width:28px;height:28px}.top{gap:6px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{min-height:630px}}
 </style>
 </head>
 <body>
-
-<!-- الافتتاحية: تستعمل intro.mp4 الموجود في جذر المستودع -->
-<div class="intro" id="intro">
-  <video id="introVideo" autoplay muted playsinline preload="auto">
-    <source src="intro.mp4" type="video/mp4">
-  </video>
-  <div class="intro-shade"></div>
-  <div class="intro-brand">NOTWIN <span>TV</span></div>
-  <button class="skip" id="skipIntro">تخطي ←</button>
-</div>
-
-<header>
-  <div class="wrap topbar">
-    <a class="brand" href="#home">NOTWIN <span>TV</span></a>
-    <nav class="desktopnav">
-      <a href="#home">الرئيسية</a>
-      <a href="#catalog">المكتبة</a>
-      <a href="#latest">أحدث الإضافات</a>
-    </nav>
-    <label class="searchbox">
-      <span>⌕</span>
-      <input id="search" type="search" placeholder="ابحث عن مسلسل أو فيلم..." aria-label="بحث">
-    </label>
-    <button class="iconbtn" id="savedButton" aria-label="قائمتي">♡</button>
-  </div>
-</header>
+<header><div class="top wrap">
+<a class="brand" href="#home"><span class="mark">▶</span> NOTWIN <span>TV</span></a>
+<div class="searchbox"><input id="search" type="search" placeholder="ابحث عن مسلسل أو فيلم..." aria-label="بحث"><span class="searchicon">⌕</span></div>
+<button class="iconbtn" id="savedButton" aria-label="المفضلة">♡</button>
+</div></header>
 
 <main id="home">
-  <section class="hero">
-    <div class="wrap hero-content">
-      <div class="eyebrow">NOTWIN TV ORIGINAL SELECTION</div>
-      <h1>Queen of<br><span>Tears.</span></h1>
-      <div class="hero-meta">
-        <span class="rating">★ 9.2</span><span>2024</span><span>16 حلقة</span><span>رومانسي · دراما</span>
-      </div>
-      <p>قصة حب تمر باختبارات صعبة بين زوجين، في رحلة تجمع بين المشاعر والتحديات والأمل.</p>
-      <div class="actions">
-        <button class="btn btn-primary" id="heroDetails">▶ التفاصيل</button>
-        <button class="btn" id="heroFav">♡ إضافة للمفضلة</button>
-      </div>
-      <div class="hero-note">اكتشف قصتك القادمة مع NOTWIN TV</div>
-    </div>
-  </section>
+<section class="hero">
+<div class="hero-bg" aria-hidden="true"></div>
+<div class="hero-content">
+<div class="eyebrow">NOTWIN TV · ORIGINAL SELECTION</div>
+<h1>Queen of <span>Tears.</span></h1>
+<div class="hero-meta"><span class="rating">★ 9.2</span><span>2024</span><span>16 حلقة</span><span>رومانسي · دراما</span></div>
+<p>قصة حب تمر باختبارات صعبة بين زوجين، في رحلة تجمع بين المشاعر والتحديات والأمل.</p>
+<div class="actions"><button class="btn primary" id="heroDetails">▶ التفاصيل</button><button class="btn" id="heroFav">♡ إضافة للمفضلة</button></div>
+<div class="hero-note">اكتشف قصتك القادمة مع NOTWIN TV</div>
+</div></section>
 
-  <section class="section wrap" id="latest">
-    <div class="section-head">
-      <div><h2>🔥 أحدث الإضافات</h2><p>اختيارات لعشاق الدراما الآسيوية</p></div>
-      <a class="textlink" href="#catalog">عرض الكل ←</a>
-    </div>
-    <div class="grid" id="latestGrid"></div>
-  </section>
+<div class="wrap content">
+<section class="section" id="catalog">
+<div class="section-head"><h2 class="section-title">🔥 أحدث الإضافات</h2><button class="seeall" id="allButton">عرض الكل ←</button></div>
+<div class="filters" id="filters">
+<button class="filter active" data-filter="all">الكل</button><button class="filter" data-filter="school">مدرسي وشبابي</button><button class="filter" data-filter="action">أكشن</button><button class="filter" data-filter="romance">رومانسي</button><button class="filter" data-filter="thriller">تشويق وانتقام</button><button class="filter" data-filter="fantasy">خيال وتاريخي</button>
+</div>
+<div class="grid" id="grid"></div><div class="empty" id="empty">ما لقينا حتى مسلسل. جرّب كلمة أخرى.</div>
+</section>
+<section class="section"><div class="section-head"><h2 class="section-title">تصفّح حسب النوع</h2></div>
+<div class="genre-row">
+<a href="#catalog" class="genre" data-genre="romance">رومانسي <small>قصص ومشاعر</small></a>
+<a href="#catalog" class="genre" data-genre="action">أكشن <small>مواجهات وإثارة</small></a>
+<a href="#catalog" class="genre" data-genre="thriller">تشويق <small>غموض وانتقام</small></a>
+<a href="#catalog" class="genre" data-genre="school">مدرسي <small>حياة الشباب</small></a>
+</div></section>
+<section class="about">NOTWIN TV — دليل لاكتشاف الدراما الآسيوية. أسماء الأعمال وحقوقها لأصحابها.</section>
+</div></main>
 
-  <section class="section wrap" id="catalog">
-    <div class="section-head">
-      <div><h2>استكشف المكتبة</h2><p>اختار النوع اللي يعجبك</p></div>
-    </div>
-    <div class="filters" id="filters">
-      <button class="filter active" data-filter="all">الكل</button>
-      <button class="filter" data-filter="school">مدرسي وشبابي</button>
-      <button class="filter" data-filter="action">أكشن</button>
-      <button class="filter" data-filter="romance">رومانسي</button>
-      <button class="filter" data-filter="thriller">تشويق وانتقام</button>
-      <button class="filter" data-filter="fantasy">خيال وتاريخي</button>
-    </div>
-    <div class="grid" id="grid"></div>
-    <div class="empty" id="empty">ما لقينا حتى مسلسل. جرّب كلمة أخرى.</div>
-  </section>
-
-  <section class="about wrap">
-    <div><strong>اختيارات منتقاة</strong><span>أعمال متنوعة من الدراما الآسيوية.</span></div>
-    <div><strong>اكتشف حسب ذوقك</strong><span>بحث وتصنيفات للوصول إلى عملك القادم.</span></div>
-    <div><strong>قائمتك الخاصة</strong><span>احتفظ بمفضلاتك على نفس الجهاز.</span></div>
-  </section>
-</main>
-
-<footer><div class="wrap">NOTWIN TV — دليل لاكتشاف الدراما الآسيوية. حقوق الأعمال لأصحابها.</div></footer>
-
-<nav class="mobilebar" aria-label="التنقل">
-  <button class="active" data-go="home"><span class="navicon">⌂</span><span>الرئيسية</span></button>
-  <button data-go="catalog"><span class="navicon">▤</span><span>المكتبة</span></button>
-  <button id="mobileSearch"><span class="navicon">⌕</span><span>بحث</span></button>
-  <button id="mobileSaved"><span class="navicon">♡</span><span>المفضلة</span></button>
+<footer><div class="wrap">مصمم لعشّاق الدراما الآسيوية · NOTWIN TV</div></footer>
+<nav class="bottomnav">
+<a class="active" href="#home"><span class="navico">⌂</span>الرئيسية</a>
+<a href="#catalog"><span class="navico">▤</span>المكتبة</a>
+<button id="bottomSearch"><span class="navico">⌕</span>بحث</button>
+<button id="bottomSaved"><span class="navico">♡</span>المفضلة</button>
 </nav>
-
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modalbox">
-    <button class="btn" id="closeModal">✕ إغلاق</button>
-    <div class="eyebrow">SERIES PROFILE</div>
-    <h2 id="modalTitle"></h2>
-    <div class="meta" id="modalMeta"></div>
-    <p id="modalDesc"></p>
-    <div class="modal-actions">
-      <button class="btn btn-primary" id="modalFav">♡ أضف للمفضلة</button>
-      <button class="btn" id="modalClose2">رجوع</button>
-    </div>
-  </div>
+<div class="modalbox"><button class="close" id="closeModal" aria-label="إغلاق">×</button><div class="eyebrow">SERIES PROFILE</div><h2 id="modalTitle"></h2><div class="meta" id="modalMeta"></div><p id="modalDesc"></p><button class="btn primary" id="modalFav">♡ إضافة للمفضلة</button></div>
 </div>
 
 <script>
-const dramas = [
- {id:"queen",title:"Queen of Tears",year:2024,genre:"رومانسية · دراما",tags:["romance"],score:"9.2",episodes:"16 حلقة",status:"اختيار NOTWIN",c1:"#8b3e28",c2:"#21101d",desc:"قصة حب تمر باختبارات صعبة بين زوجين، في رحلة تجمع المشاعر والتحديات والأمل."},
- {id:"weak",title:"Weak Hero Class 1",year:2022,genre:"مدرسي · أكشن",tags:["school","action"],score:"8.5",episodes:"8 حلقات",status:"مدرسي",c1:"#344c65",c2:"#11121d",desc:"طالب هادئ وذكي يواجه العنف المدرسي بطرق غير متوقعة ويكتشف معنى الصداقة."},
- {id:"all",title:"All of Us Are Dead",year:2022,genre:"رعب · بقاء",tags:["school","thriller"],score:"7.5",episodes:"12 حلقة",status:"تشويق",c1:"#6e3036",c2:"#14101b",desc:"تفشي خطير يحاصر الطلاب داخل مدرستهم، وتتحول محاولة النجاة إلى اختبار صعب."},
- {id:"study",title:"Study Group",year:2025,genre:"مدرسي · أكشن",tags:["school","action"],score:"8.0",episodes:"10 حلقات",status:"مدرسي",c1:"#a0783e",c2:"#201324",desc:"طالب يحلم بالتفوق الدراسي يؤسس مجموعة للمراجعة وسط صراعات مدرسية."},
- {id:"lovely",title:"Lovely Runner",year:2024,genre:"رومانسية · خيال",tags:["romance","fantasy"],score:"8.6",episodes:"16 حلقة",status:"رومانسي",c1:"#715f8f",c2:"#17152b",desc:"فرصة للعودة بالزمن تفتح باباً لتغيير المصير في قصة تجمع المشاعر والخيال."},
- {id:"business",title:"Business Proposal",year:2022,genre:"رومانسية · كوميديا",tags:["romance"],score:"8.1",episodes:"12 حلقة",status:"كوميديا",c1:"#a65e76",c2:"#241323",desc:"موعد غرامي بالنيابة عن صديقة يتحول إلى مواقف غير متوقعة."},
- {id:"vincenzo",title:"Vincenzo",year:2021,genre:"جريمة · أكشن",tags:["action","thriller"],score:"8.4",episodes:"20 حلقة",status:"جريمة",c1:"#78623e",c2:"#16111b",desc:"محامٍ يعود إلى كوريا ويواجه مجموعة نافذة بأساليب غير تقليدية."},
- {id:"glory",title:"The Glory",year:2022,genre:"انتقام · دراما",tags:["thriller"],score:"8.2",episodes:"16 حلقة",status:"انتقام",c1:"#6c424f",c2:"#120c17",desc:"بعد سنوات من المعاناة، تضع امرأة خطة دقيقة لمواجهة من آذوها."},
- {id:"kingdom",title:"Kingdom",year:2019,genre:"تاريخي · رعب",tags:["fantasy","thriller"],score:"8.3",episodes:"موسمان",status:"تاريخي",c1:"#657044",c2:"#17131a",desc:"في مملكة تاريخية، ينتشر وباء غامض وسط مؤامرة تهدد البلاد."},
- {id:"squid",title:"Squid Game",year:2021,genre:"بقاء · تشويق",tags:["thriller"],score:"7.7",episodes:"3 مواسم",status:"تشويق",c1:"#b84b70",c2:"#241025",desc:"أشخاص يمرون بأزمات مالية يدخلون ألعاباً غامضة بمخاطر كبيرة."},
- {id:"crash",title:"Crash Landing on You",year:2019,genre:"رومانسية · دراما",tags:["romance"],score:"8.7",episodes:"16 حلقة",status:"رومانسي",c1:"#6d7b87",c2:"#171421",desc:"حادث غير متوقع يضع سيدة أعمال في مكان بعيد عن عالمها، حيث تلتقي بضابط يساعدها."},
- {id:"extra",title:"Extracurricular",year:2020,genre:"مدرسي · جريمة",tags:["school","thriller"],score:"7.6",episodes:"10 حلقات",status:"دراما",c1:"#746b50",c2:"#15121b",desc:"طالب متفوق يعيش حياة سرية تنقلب رأساً على عقب عندما تبدأ أسراره بالظهور."}
+const dramas=[
+{id:"queen",title:"Queen of Tears",year:2024,genre:"رومانسي · دراما",tags:["romance"],score:"9.2",episodes:"16 حلقة",status:"كوري",desc:"قصة حب تمر باختبارات صعبة بين زوجين، في رحلة تجمع بين المشاعر والتحديات والأمل.",tint:"#9a3e91"},
+{id:"weak",title:"Weak Hero Class 1",year:2022,genre:"مدرسي · أكشن",tags:["school","action"],score:"8.5",episodes:"8 حلقات",status:"كوري",desc:"طالب هادئ وذكي يواجه العنف المدرسي بطرق غير متوقعة، ويكتشف معنى الصداقة والثقة.",tint:"#416a91"},
+{id:"all",title:"All of Us Are Dead",year:2022,genre:"رعب · بقاء",tags:["school","thriller"],score:"7.5",episodes:"12 حلقة",status:"كوري",desc:"تفشٍّ خطير يحاصر الطلاب داخل مدرستهم ويحوّل محاولة النجاة إلى اختبار قاسٍ.",tint:"#8b363b"},
+{id:"study",title:"Study Group",year:2025,genre:"مدرسي · أكشن",tags:["school","action"],score:"8.0",episodes:"10 حلقات",status:"كوري",desc:"طالب يحلم بالتفوق يؤسس مجموعة للمراجعة، لكن عليه مواجهة مشاكل أكبر من الدراسة.",tint:"#6b9c88"},
+{id:"lovely",title:"Lovely Runner",year:2024,genre:"رومانسية · خيال",tags:["romance","fantasy"],score:"8.6",episodes:"16 حلقة",status:"كوري",desc:"فرصة للعودة بالزمن تفتح باباً لتغيير المصير في قصة تجمع المشاعر والخيال.",tint:"#b277b8"},
+{id:"business",title:"Business Proposal",year:2022,genre:"رومانسية · كوميديا",tags:["romance"],score:"8.1",episodes:"12 حلقة",status:"كوري",desc:"موعد غرامي بالنيابة عن صديقة يتحول إلى سلسلة مواقف غير متوقعة.",tint:"#d19b68"},
+{id:"vincenzo",title:"Vincenzo",year:2021,genre:"جريمة · كوميديا سوداء",tags:["action","thriller"],score:"8.4",episodes:"20 حلقة",status:"كوري",desc:"محامٍ يعود إلى كوريا ويواجه مجموعة نافذة مستخدماً أساليب غير تقليدية لتحقيق العدالة.",tint:"#6b667b"},
+{id:"glory",title:"The Glory",year:2022,genre:"انتقام · دراما",tags:["thriller"],score:"8.2",episodes:"16 حلقة",status:"كوري",desc:"بعد سنوات من المعاناة، تضع امرأة خطة دقيقة لمواجهة من دمّروا سنوات شبابها.",tint:"#9a6767"},
+{id:"kingdom",title:"Kingdom",year:2019,genre:"تاريخي · رعب",tags:["fantasy","thriller"],score:"8.3",episodes:"موسمان",status:"كوري",desc:"في مملكة تاريخية، ينتشر وباء غامض بينما يحاول ولي العهد كشف مؤامرة تهدد البلاد.",tint:"#8a7550"},
+{id:"squid",title:"Squid Game",year:2021,genre:"بقاء · تشويق",tags:["thriller"],score:"7.7",episodes:"3 مواسم",status:"كوري",desc:"أشخاص يمرون بأزمات مالية يدخلون ألعاباً غامضة بجائزة ضخمة ومخاطر غير متوقعة.",tint:"#a44335"},
+{id:"crash",title:"Crash Landing on You",year:2019,genre:"رومانسية · دراما",tags:["romance"],score:"8.7",episodes:"16 حلقة",status:"كوري",desc:"حادث غير متوقع يضع سيدة أعمال في مكان بعيد عن عالمها، حيث تلتقي بضابط يساعدها.",tint:"#628b9b"},
+{id:"extra",title:"Extracurricular",year:2020,genre:"مدرسي · جريمة",tags:["school","thriller"],score:"7.6",episodes:"10 حلقات",status:"كوري",desc:"طالب متفوق يعيش حياة سرية تنقلب رأساً على عقب عندما تبدأ أسراره في الظهور.",tint:"#88749b"}
 ];
-
-const $=id=>document.getElementById(id);
-const grid=$("grid"),latestGrid=$("latestGrid"),search=$("search");
-const key="notwin-tv-saved-v2";
+const grid=document.getElementById("grid"),search=document.getElementById("search"),key="notwin-tv-saved-v3";
 let filter="all",savedOnly=false,current=null;
-function getSaved(){try{return JSON.parse(localStorage.getItem(key)||"[]")}catch(e){return []}}
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function card(d){
- const isSaved=getSaved().includes(d.id);
- return `<article class="card" data-open="${d.id}" tabindex="0" role="button" aria-label="تفاصيل ${escapeHTML(d.title)}">
- <div class="poster">
- <div class="poster-art" style="--c1:${d.c1};--c2:${d.c2}"></div>
- <span class="poster-tag">${escapeHTML(d.status)}</span>
- <button class="fav ${isSaved?"saved":""}" data-fav="${d.id}" aria-label="حفظ">${isSaved?"♥":"♡"}</button>
- <div class="poster-title">${escapeHTML(d.title)}</div><div class="poster-mark">NOTWIN TV</div>
- </div>
- <h3>${escapeHTML(d.title)}</h3>
- <div class="meta">${d.year} · ${escapeHTML(d.genre)} · <span class="rating">★ ${d.score}</span></div>
- </article>`;
-}
+function saved(){try{return JSON.parse(localStorage.getItem(key)||"[]")}catch(e){return[]}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function render(){
- const q=search.value.trim().toLowerCase(),favs=getSaved();
- const matches=dramas.filter(d=>
- (filter==="all"||d.tags.includes(filter))&&
- (!savedOnly||favs.includes(d.id))&&
- (!q||(d.title+" "+d.genre+" "+d.desc).toLowerCase().includes(q)));
- grid.innerHTML=matches.map(card).join("");
- $("empty").style.display=matches.length?"none":"block";
- grid.style.display=matches.length?"grid":"none";
+ const q=search.value.trim().toLowerCase(),f=saved();
+ const list=dramas.filter(d=>(filter==="all"||d.tags.includes(filter))&&(!savedOnly||f.includes(d.id))&&(!q||(d.title+" "+d.genre+" "+d.desc).toLowerCase().includes(q)));
+ grid.innerHTML=list.map(d=>`<article class="card" data-open="${d.id}" tabindex="0" role="button"><div class="poster" style="--tint:${d.tint}"><div class="poster-title">${esc(d.title)}</div><div class="poster-brand">NOTWIN TV</div><span class="poster-tag">${esc(d.status)}</span><button class="fav ${f.includes(d.id)?"saved":""}" data-fav="${d.id}" aria-label="حفظ">${f.includes(d.id)?"♥":"♡"}</button></div><h3>${esc(d.title)}</h3><div class="meta">${d.year} · ${esc(d.genre)} · <span class="rating">★ ${d.score}</span></div></article>`).join("");
+ document.getElementById("empty").style.display=list.length?"none":"block";
+ grid.style.display=list.length?"grid":"none";
  document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));
 }
-function renderLatest(){latestGrid.innerHTML=dramas.slice(0,6).map(card).join("")}
-function toggleFav(id){
- let a=getSaved();a=a.includes(id)?a.filter(x=>x!==id):[...a,id];
- try{localStorage.setItem(key,JSON.stringify(a))}catch(e){}
- render();renderLatest();updateModalFav();
- $("heroFav").textContent=a.includes("queen")?"♥ موجود في المفضلة":"♡ إضافة للمفضلة";
-}
-function showSaved(){
- savedOnly=true;filter="all";search.value="";
- render();$("catalog").scrollIntoView({behavior:"smooth"});
-}
-function openModal(id){
- current=dramas.find(d=>d.id===id);if(!current)return;
- $("modalTitle").textContent=current.title;
- $("modalMeta").textContent=`${current.year} · ${current.genre} · ${current.episodes} · ★ ${current.score}`;
- $("modalDesc").textContent=current.desc;
- updateModalFav();$("modal").classList.add("open");document.body.style.overflow="hidden";
-}
-function updateModalFav(){
- if(current)$("modalFav").textContent=getSaved().includes(current.id)?"♥ موجود في المفضلة":"♡ أضف للمفضلة";
-}
-function closeModal(){$("modal").classList.remove("open");document.body.style.overflow="";current=null}
-function skipIntro(){
- $("intro").classList.add("hide");
- try{$("introVideo").pause()}catch(e){}
-}
-$("skipIntro").addEventListener("click",skipIntro);
-$("introVideo").addEventListener("ended",skipIntro);
-$("introVideo").addEventListener("error",skipIntro);
-$("introVideo").play().catch(()=>{ /* يبقى زر التخطي متاحاً */ });
-setTimeout(()=>{if(!$("intro").classList.contains("hide"))skipIntro()},12000);
-
-$("filters").addEventListener("click",e=>{
- const b=e.target.closest("[data-filter]");if(!b)return;
- filter=b.dataset.filter;savedOnly=false;render();
-});
+function toggleFav(id){let a=saved();a=a.includes(id)?a.filter(x=>x!==id):[...a,id];try{localStorage.setItem(key,JSON.stringify(a))}catch(e){}render();if(current)updateModalFav();document.getElementById("savedButton").textContent=a.length?"♥":"♡"}
+function showSaved(){savedOnly=true;filter="all";search.value="";render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
+function openModal(id){current=dramas.find(d=>d.id===id);if(!current)return;document.getElementById("modalTitle").textContent=current.title;document.getElementById("modalMeta").textContent=`${current.year} · ${current.genre} · ${current.episodes} · ★ ${current.score}`;document.getElementById("modalDesc").textContent=current.desc;updateModalFav();document.getElementById("modal").classList.add("open");document.body.style.overflow="hidden"}
+function updateModalFav(){document.getElementById("modalFav").textContent=saved().includes(current.id)?"♥ موجود في المفضلة":"♡ إضافة للمفضلة"}
+function closeModal(){document.getElementById("modal").classList.remove("open");document.body.style.overflow="";current=null}
+document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b){filter=b.dataset.filter;savedOnly=false;render()}});
 search.addEventListener("input",()=>{savedOnly=false;render()});
-[grid,latestGrid].forEach(el=>el.addEventListener("click",e=>{
- const f=e.target.closest("[data-fav]");
- if(f){e.stopPropagation();toggleFav(f.dataset.fav);return}
- const c=e.target.closest("[data-open]");if(c)openModal(c.dataset.open);
-}));
-[grid,latestGrid].forEach(el=>el.addEventListener("keydown",e=>{
- if((e.key==="Enter"||e.key===" ")&&e.target.dataset.open){e.preventDefault();openModal(e.target.dataset.open)}
-}));
-$("savedButton").addEventListener("click",showSaved);
-$("mobileSaved").addEventListener("click",showSaved);
-$("heroFav").addEventListener("click",()=>toggleFav("queen"));
-$("heroDetails").addEventListener("click",()=>openModal("queen"));
-$("closeModal").addEventListener("click",closeModal);
-$("modalClose2").addEventListener("click",closeModal);
-$("modalFav").addEventListener("click",()=>{if(current)toggleFav(current.id)});
-$("modal").addEventListener("click",e=>{if(e.target===$("modal"))closeModal()});
+grid.addEventListener("click",e=>{const f=e.target.closest("[data-fav]");if(f){e.stopPropagation();toggleFav(f.dataset.fav);return}const c=e.target.closest("[data-open]");if(c)openModal(c.dataset.open)});
+grid.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset.open){e.preventDefault();openModal(e.target.dataset.open)}});
+["savedButton","bottomSaved"].forEach(id=>document.getElementById(id).addEventListener("click",showSaved));
+document.getElementById("heroDetails").addEventListener("click",()=>openModal("queen"));
+document.getElementById("heroFav").addEventListener("click",()=>toggleFav("queen"));
+document.getElementById("modalFav").addEventListener("click",()=>{if(current)toggleFav(current.id)});
+document.getElementById("closeModal").addEventListener("click",closeModal);
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
-$("mobileSearch").addEventListener("click",()=>{search.focus();window.scrollTo({top:0,behavior:"smooth"})});
-document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{
- document.querySelectorAll(".mobilebar button").forEach(x=>x.classList.remove("active"));
- b.classList.add("active");$(b.dataset.go).scrollIntoView({behavior:"smooth"});
-}));
-$("heroFav").textContent=getSaved().includes("queen")?"♥ موجود في المفضلة":"♡ إضافة للمفضلة";
-render();renderLatest();
+document.getElementById("allButton").addEventListener("click",()=>{filter="all";savedOnly=false;search.value="";render()});
+document.querySelectorAll("[data-genre]").forEach(a=>a.addEventListener("click",()=>{filter=a.dataset.genre;savedOnly=false;render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}));
+document.getElementById("bottomSearch").addEventListener("click",()=>{search.focus();window.scrollTo({top:0,behavior:"smooth"})});
+render();
 </script>
 </body>
 </html>
