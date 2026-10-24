@@ -3,623 +3,286 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#08080e">
-<meta name="description" content="NOTWIN TV - اكتشف مسلسلاتك الآسيوية المفضلة">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08090b">
 <title>NOTWIN TV</title>
-
 <style>
 :root {
-  --bg:#08080e;
-  --panel:#11111c;
-  --panel2:#171725;
-  --purple:#9065ff;
-  --pink:#e879f9;
-  --text:#f6f3ff;
-  --muted:#a19bb6;
-  --border:#282439;
+  --bg: #08090b;
+  --panel: #111216;
+  --line: #292a30;
+  --text: #f1f1f2;
+  --muted: #a1a2aa;
+  --accent: #b8adff;
 }
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Tahoma,sans-serif;
-  padding-bottom:110px;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Tahoma, sans-serif;
+  line-height: 1.7;
 }
-button,input { font:inherit; }
-button { cursor:pointer; }
-button:focus-visible,input:focus-visible {
-  outline:2px solid var(--pink);
-  outline-offset:3px;
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.wrap { width: min(1200px, calc(100% - 32px)); margin: auto; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(8,9,11,.96);
+  border-bottom: 1px solid var(--line);
 }
-.topbar {
-  position:sticky;
-  top:0;
-  z-index:10;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:15px 16px;
-  background:#0b0a12f5;
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);
+nav {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
-.logo {
-  font-size:24px;
-  font-weight:900;
-  letter-spacing:-1px;
+.logo { font-size: 19px; font-weight: 800; letter-spacing: 1px; }
+.logo span { color: var(--accent); }
+.navlinks { display: flex; gap: 20px; color: #b9b9c0; font-size: 13px; }
+.navtools { margin-right: auto; display: flex; gap: 8px; }
+input {
+  width: 205px;
+  max-width: 42vw;
+  padding: 10px 12px;
+  background: var(--panel);
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 3px;
 }
-.logo span { color:var(--purple); }
-.logo small {
-  display:block;
-  font-size:10px;
-  color:var(--muted);
-  letter-spacing:2px;
-  margin-top:3px;
+.btn {
+  padding: 10px 15px;
+  background: transparent;
+  color: white;
+  border: 1px solid #55545f;
+  border-radius: 3px;
+  font-size: 12px;
 }
-.top-actions { display:flex;gap:8px; }
-.icon-btn {
-  width:44px;
-  height:44px;
-  border:1px solid var(--border);
-  border-radius:14px;
-  background:var(--panel);
-  color:white;
-  font-size:19px;
-}
-main { max-width:1000px;margin:auto;padding:18px 15px; }
+.btn:hover { background: #202127; }
 .hero {
-  min-height:225px;
-  padding:24px 20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  align-items:flex-start;
-  border:1px solid #46336d;
-  border-radius:25px;
-  overflow:hidden;
+  min-height: 450px;
+  display: flex;
+  align-items: end;
+  padding: 65px 0 48px;
   background:
-    radial-gradient(ellipse at 85% 10%,#a15aff55,transparent 40%),
-    radial-gradient(ellipse at 10% 90%,#ed66d933,transparent 45%),
-    linear-gradient(135deg,#201438,#10101e 65%,#171027);
+    linear-gradient(90deg, rgba(8,9,11,.98), rgba(8,9,11,.63)),
+    linear-gradient(0deg, #08090b, transparent),
+    url("sakura-bg.png") center 40% / cover;
 }
-.eyebrow {
-  color:#d7baff;
-  font-size:12px;
-  font-weight:bold;
-  letter-spacing:2px;
+.kicker { color: var(--accent); font-size: 11px; letter-spacing: 2px; }
+h1 { font-size: clamp(42px, 7vw, 76px); line-height: 1.1; margin: 15px 0; }
+h1 span { color: var(--accent); }
+.hero p { max-width: 540px; color: #c3c3ca; font-size: 14px; }
+.actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+.section { padding: 32px 0; }
+.sectionhead { display: flex; align-items: end; justify-content: space-between; gap: 12px; }
+h2 { font-size: 22px; margin: 0; }
+.sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
+.filters { display: flex; gap: 8px; overflow-x: auto; padding: 20px 0; }
+.filter {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: #c5c5cc;
+  padding: 7px 13px;
+  border-radius: 3px;
+  font-size: 12px;
 }
-.hero h1 { font-size:29px;margin:12px 0 8px; }
-.hero p { color:#d1cadd;line-height:1.8;margin:0 0 18px; }
-.primary-btn {
-  border:0;
-  border-radius:14px;
-  background:linear-gradient(120deg,var(--purple),#b45df2);
-  color:white;
-  padding:13px 19px;
-  min-height:48px;
-  font-weight:bold;
-}
-.search-wrap { margin:20px 0; }
-.search-box {
-  width:100%;
-  height:54px;
-  padding:0 17px;
-  border-radius:16px;
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:white;
-  font-size:15px;
-}
-.search-box::placeholder { color:#8e879f; }
-.section-head {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin:26px 0 14px;
-}
-.section-head h2 { font-size:19px;margin:0; }
-.section-head span { color:var(--muted);font-size:12px; }
-.categories {
-  display:flex;
-  gap:9px;
-  overflow-x:auto;
-  padding:3px 0 10px;
-  scrollbar-width:none;
-}
-.categories::-webkit-scrollbar { display:none; }
-.category {
-  flex-shrink:0;
-  min-height:43px;
-  padding:0 17px;
-  border-radius:13px;
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:#d4cde3;
-}
-.category.active {
-  background:#38245d;
-  border-color:var(--purple);
-  color:white;
-}
-.drama-grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-.drama-card {
-  min-width:0;
-  overflow:hidden;
-  border-radius:18px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  transition:transform .2s,border-color .2s;
-}
-.drama-card:active { transform:scale(.98); }
+.filter.active { background: #e8e5ef; color: #111; border-color: #e8e5ef; }
+.grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px 16px; }
+.card { min-width: 0; cursor: pointer; }
 .poster {
-  position:relative;
-  height:205px;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 70% 25%,#a06cff88,transparent 40%),
-    linear-gradient(150deg,#31214a,#151522 70%,#572d5c);
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: linear-gradient(145deg,#292630,#111216);
+  border: 1px solid #292a30;
 }
-.poster img {
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+.poster img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .poster-fallback {
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:12px;
-  background:linear-gradient(145deg,#302047,#10101b 75%,#48264c);
+  position: absolute; inset: 0; padding: 15px;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
 }
-.poster-fallback b { font-size:32px;color:#d6baff; }
-.poster-fallback span { font-size:12px;margin-top:10px;line-height:1.5; }
-.badge {
-  position:absolute;
-  top:9px;
-  right:9px;
-  background:#09080dcc;
-  border:1px solid #ffffff24;
-  border-radius:8px;
-  padding:6px 8px;
-  font-size:11px;
+.poster-fallback b { font-size: 20px; line-height: 1.3; }
+.poster-fallback small { color: var(--accent); margin-top: 10px; letter-spacing: 2px; }
+.fav {
+  position: absolute; top: 9px; left: 9px;
+  width: 32px; height: 32px;
+  border: 1px solid #777; border-radius: 50%;
+  color: white; background: rgba(0,0,0,.8); font-size: 18px;
 }
-.card-info { padding:12px; }
-.card-title {
-  font-size:14px;
-  font-weight:bold;
-  line-height:1.5;
-  direction:ltr;
-  text-align:right;
-  min-height:42px;
+.fav.saved { color: var(--accent); }
+.tag {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(0,0,0,.8); padding: 4px 7px;
+  font-size: 10px; border: 1px solid #555;
 }
-.card-meta {
-  color:var(--muted);
-  font-size:12px;
-  margin:6px 0 12px;
+.card h3 { font-size: 14px; margin: 10px 0 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.meta { color: var(--muted); font-size: 11px; }
+.empty { display: none; padding: 35px; text-align: center; color: var(--muted); }
+.about {
+  margin: 25px auto 55px;
+  border-block: 1px solid var(--line);
+  display: grid; grid-template-columns: repeat(3,1fr);
 }
-.card-actions { display:flex;gap:7px; }
-.small-btn {
-  flex:1;
-  min-height:42px;
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:var(--panel2);
-  color:white;
-  font-size:12px;
-}
-.small-btn.details {
-  background:#33214e;
-  border-color:#503574;
-}
-.empty {
-  grid-column:1/-1;
-  text-align:center;
-  color:var(--muted);
-  padding:35px 15px;
-  line-height:1.8;
-}
-footer {
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.8;
-  padding:30px 15px;
-}
-.bottom-nav {
-  position:fixed;
-  z-index:20;
-  bottom:0;
-  left:0;
-  right:0;
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:5px;
-  padding:9px 8px calc(9px + env(safe-area-inset-bottom));
-  background:#0c0b14f7;
-  border-top:1px solid #302642;
-  backdrop-filter:blur(16px);
-}
-.nav-item {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  min-width:0;
-  min-height:69px;
-  padding:8px 2px;
-  border:1px solid transparent;
-  border-radius:16px;
-  color:#a9a1bb;
-  background:transparent;
-  font-size:12px;
-  font-weight:bold;
-}
-.nav-icon { font-size:24px;line-height:1.1; }
-.nav-item.active {
-  color:white;
-  background:#281b40;
-  border-color:#493269;
-}
-.nav-item.active .nav-icon { color:#c3a4ff; }
+.about div { padding: 20px; }
+.about div + div { border-right: 1px solid var(--line); }
+.about strong { display: block; font-size: 13px; }
+.about span { color: var(--muted); font-size: 11px; }
+footer { border-top: 1px solid var(--line); padding: 24px 0 90px; color: var(--muted); font-size: 11px; }
 .modal {
-  position:fixed;
-  inset:0;
-  z-index:40;
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  background:#000c;
-  padding:12px;
+  display: none; position: fixed; inset: 0; z-index: 30;
+  background: rgba(0,0,0,.85); padding: 20px;
+  align-items: center; justify-content: center;
 }
-.modal.show { display:flex; }
-.modal-panel {
-  width:100%;
-  max-width:550px;
-  max-height:85dvh;
-  overflow-y:auto;
-  background:#12111d;
-  border:1px solid #39304c;
-  border-radius:24px;
-  padding:20px;
+.modal.open { display: flex; }
+.modalbox {
+  position: relative; width: min(680px,100%);
+  max-height: 90vh; overflow: auto; background: #111216;
+  border: 1px solid #383840; padding: 25px;
 }
-.modal-top {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.modal-top h2 { font-size:20px; }
-.close-btn {
-  width:44px;height:44px;border-radius:13px;
-  background:var(--panel2);color:white;
-  border:1px solid var(--border);font-size:20px;
-}
-.modal-description { color:#c5bed3;line-height:1.9; }
-.modal-actions { display:flex;gap:10px;margin-top:18px; }
-.modal-actions button { flex:1; }
-.toast {
-  position:fixed;
-  z-index:60;
-  bottom:105px;
-  left:50%;
-  transform:translateX(-50%);
-  width:max-content;
-  max-width:90%;
-  padding:13px 18px;
-  background:#292039;
-  color:white;
-  border:1px solid #594174;
-  border-radius:14px;
-  display:none;
-  text-align:center;
-  line-height:1.6;
-}
-.toast.show { display:block; }
-@media(min-width:650px) {
-  main { padding:24px; }
-  .drama-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
-  .poster { height:245px; }
-  .hero { min-height:270px;padding:30px; }
-  .hero h1 { font-size:36px; }
-  .modal { align-items:center; }
-  .bottom-nav { left:50%;right:auto;transform:translateX(-50%);width:min(600px,100%);border:1px solid var(--border);border-bottom:0;border-radius:20px 20px 0 0; }
-}
-@media(max-width:360px) {
-  main { padding:12px; }
-  .poster { height:170px; }
-  .card-info { padding:9px; }
-  .nav-item { font-size:11px; }
-  .nav-icon { font-size:22px; }
+.close { position: absolute; top: 8px; left: 8px; }
+.modalbox h2 { margin: 12px 0; }
+.modalbox p { color: #c4c4ca; font-size: 13px; }
+.mobilebar { display: none; }
+@media(max-width:800px) {
+  .navlinks { display: none; }
+  nav { min-height: 60px; }
+  .logo { font-size: 16px; }
+  .navtools { gap: 5px; }
+  input { width: 145px; }
+  .hero { min-height: 400px; }
+  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 23px 12px; }
+  .about { grid-template-columns: 1fr; }
+  .about div + div { border-right: 0; border-top: 1px solid var(--line); }
+  .mobilebar {
+    display: flex; position: fixed; z-index: 20; bottom: 0; right: 0; left: 0;
+    justify-content: space-around; padding: 12px 5px;
+    padding-bottom: max(12px,env(safe-area-inset-bottom));
+    background: rgba(8,9,11,.97); border-top: 1px solid var(--line);
+  }
+  .mobilebar a { font-size: 11px; color: #c5c5cc; }
 }
 </style>
 </head>
-
 <body>
-<header class="topbar">
-  <div class="logo">NOTWIN <span>TV</span><small>ASIAN DRAMA DISCOVERY</small></div>
-  <div class="top-actions">
-    <button class="icon-btn" id="headerSearch" aria-label="البحث">⌕</button>
-    <button class="icon-btn" id="headerFav" aria-label="المفضلة">♡</button>
-  </div>
+<header>
+  <nav class="wrap">
+    <a class="logo" href="#home">NOTWIN <span>TV</span></a>
+    <div class="navlinks">
+      <a href="#home">الرئيسية</a>
+      <a href="#catalog">المكتبة</a>
+      <a href="#catalog" id="savedLink">قائمتي</a>
+    </div>
+    <div class="navtools">
+      <input id="search" type="search" placeholder="ابحث عن مسلسل..." aria-label="بحث">
+      <button class="btn" id="savedButton">قائمتي <span id="count">0</span></button>
+    </div>
+  </nav>
 </header>
 
-<main>
+<main id="home">
   <section class="hero">
-    <span class="eyebrow">YOUR NEXT FAVORITE</span>
-    <h1>عالم الدراما بين يديك ✨</h1>
-    <p>اكتشف قصص جديدة، تعرّف على المسلسلات، واحفظ المفضلة تاعك في مكان واحد.</p>
-    <button class="primary-btn" id="exploreBtn">اكتشف المسلسلات ←</button>
+    <div class="wrap">
+      <div class="kicker">ASIAN DRAMA · SELECTED STORIES</div>
+      <h1>قصص تبقى<br><span>معك.</span></h1>
+      <p>اكتشف عالماً من الدراما الآسيوية، من قصص الانتقام والتشويق إلى الرومانسية والأعمال المدرسية.</p>
+      <div class="actions">
+        <a class="btn" href="#catalog">اكتشف المكتبة ←</a>
+        <button class="btn" id="heroSaved">افتح قائمتي</button>
+      </div>
+    </div>
   </section>
 
-  <div class="search-wrap" id="searchSection">
-    <input class="search-box" id="searchInput" type="search"
-      placeholder="🔎 ابحث عن مسلسل..." aria-label="ابحث عن مسلسل">
-  </div>
+  <section class="section wrap" id="catalog">
+    <div class="sectionhead">
+      <div><h2>اختيارات NOTWIN</h2><div class="sub">أعمال مختارة لعشّاق الدراما الآسيوية</div></div>
+      <button class="btn" id="allButton">عرض الكل</button>
+    </div>
+    <div class="filters" id="filters">
+      <button class="filter active" data-filter="all">الكل</button>
+      <button class="filter" data-filter="school">مدرسي وشبابي</button>
+      <button class="filter" data-filter="action">أكشن</button>
+      <button class="filter" data-filter="romance">رومانسي</button>
+      <button class="filter" data-filter="thriller">تشويق وانتقام</button>
+      <button class="filter" data-filter="fantasy">خيال وتاريخي</button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty">ما لقينا حتى مسلسل. جرّب كلمة أخرى.</div>
+  </section>
 
-  <div class="section-head">
-    <h2 id="sectionTitle">مسلسلات مقترحة</h2>
-    <span id="resultCount"></span>
-  </div>
-
-  <div class="categories" id="categories">
-    <button class="category active" data-filter="all">الكل</button>
-    <button class="category" data-filter="كوري">كوري</button>
-    <button class="category" data-filter="صيني">صيني</button>
-    <button class="category" data-filter="ياباني">ياباني</button>
-    <button class="category" data-filter="رومانسي">رومانسي</button>
-    <button class="category" data-filter="أكشن">أكشن</button>
-    <button class="category" data-filter="فيلم">أفلام</button>
-  </div>
-
-  <section class="drama-grid" id="dramaGrid" aria-live="polite"></section>
-
-  <footer>
-    NOTWIN TV · اكتشف قصتك القادمة 💜<br>
-    صور تعريفية توضيحية. توفّر الأعمال ومصادر المشاهدة يختلف حسب البلد.
-  </footer>
+  <section class="about wrap">
+    <div><strong>اختيارات منتقاة</strong><span>قائمة متنوعة من الدراما الآسيوية.</span></div>
+    <div><strong>اكتشف حسب ذوقك</strong><span>بحث وتصنيفات للوصول للعمل المناسب.</span></div>
+    <div><strong>قائمتك الخاصة</strong><span>احتفظ بمسلسلاتك على نفس الجهاز.</span></div>
+  </section>
 </main>
 
-<nav class="bottom-nav" aria-label="القائمة الرئيسية">
-  <button class="nav-item active" data-page="home">
-    <span class="nav-icon">⌂</span><span>الرئيسية</span>
-  </button>
-  <button class="nav-item" data-page="search">
-    <span class="nav-icon">⌕</span><span>البحث</span>
-  </button>
-  <button class="nav-item" data-page="favorites">
-    <span class="nav-icon">♡</span><span>المفضلة</span>
-  </button>
-  <button class="nav-item" data-page="categories">
-    <span class="nav-icon">▦</span><span>التصنيفات</span>
-  </button>
-</nav>
+<footer><div class="wrap">NOTWIN TV — دليل لاكتشاف الدراما الآسيوية. حقوق الأعمال لأصحابها.</div></footer>
+<div class="mobilebar"><a href="#home">⌂ الرئيسية</a><a href="#catalog">▤ المكتبة</a><a href="#catalog" id="mobileSaved">♡ قائمتي</a></div>
 
-<div class="modal" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-panel">
-    <div class="modal-top">
-      <h2 id="modalTitle"></h2>
-      <button class="close-btn" id="closeModal" aria-label="إغلاق">×</button>
-    </div>
-    <p class="modal-description" id="modalDescription"></p>
-    <p id="modalMeta" class="card-meta"></p>
-    <div class="modal-actions">
-      <button class="primary-btn" id="modalFavorite">♡ أضف للمفضلة</button>
-      <button class="small-btn" id="officialInfo">معلومات رسمية</button>
-    </div>
-    <p class="card-meta">هذا الموقع دليل تعريفي، وليس مشغّل فيديو. تابع العمل عبر مصدر رسمي مرخّص.</p>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modalbox">
+    <button class="btn close" id="closeModal" aria-label="إغلاق">×</button>
+    <div class="kicker">SERIES PROFILE</div>
+    <h2 id="modalTitle"></h2>
+    <div class="meta" id="modalMeta"></div>
+    <p id="modalDesc"></p>
+    <button class="btn" id="modalFav">♡ أضف إلى قائمتي</button>
   </div>
 </div>
 
-<div class="toast" id="toast" role="status"></div>
-
 <script>
-"use strict";
-
 const dramas = [
-  {id:1,title:"Queen of Tears",year:2024,type:"كوري",genres:["رومانسي","دراما"],rating:"9.0",desc:"قصة زوجين يواجهان تحديات كبيرة في حياتهما وعلاقتهما."},
-  {id:2,title:"Crash Landing on You",year:2019,type:"كوري",genres:["رومانسي","دراما"],rating:"9.1",desc:"لقاء غير متوقع يغيّر حياة وريثة كورية جنوبية وضابط في الشمال."},
-  {id:3,title:"Vincenzo",year:2021,type:"كوري",genres:["أكشن","كوميديا"],rating:"8.7",desc:"محامٍ يعود إلى كوريا ويدخل في مواجهة مع منظمة قوية."},
-  {id:4,title:"Business Proposal",year:2022,type:"كوري",genres:["رومانسي","كوميديا"],rating:"8.1",desc:"موعد مدبّر يتحول إلى سلسلة من المواقف المفاجئة."},
-  {id:5,title:"Goblin",year:2016,type:"كوري",genres:["رومانسي","خيال"],rating:"8.8",desc:"حكاية خيالية عن كائن خالد يبحث عن نهاية لرحلته الطويلة."},
-  {id:6,title:"All of Us Are Dead",year:2022,type:"كوري",genres:["أكشن","رعب"],rating:"7.5",desc:"طلاب يحاولون النجاة خلال تفشّي خطير داخل مدرستهم."},
-  {id:7,title:"Extraordinary Attorney Woo",year:2022,type:"كوري",genres:["دراما","كوميديا"],rating:"8.6",desc:"محامية شابة متميزة تواجه قضايا وتحديات مهنية واجتماعية."},
-  {id:8,title:"Alchemy of Souls",year:2022,type:"كوري",genres:["خيال","أكشن","رومانسي"],rating:"8.7",desc:"عالم خيالي مليء بالسحر والأسرار والتحولات."},
-  {id:9,title:"Lovely Runner",year:2024,type:"كوري",genres:["رومانسي","خيال"],rating:"8.9",desc:"فرصة غير متوقعة تمنح شابة أملاً في تغيير أحداث الماضي."},
-  {id:10,title:"Hidden Love",year:2023,type:"صيني",genres:["رومانسي","دراما"],rating:"8.6",desc:"قصة مشاعر تنمو تدريجياً عبر مراحل مختلفة من الحياة."},
-  {id:11,title:"When I Fly Towards You",year:2023,type:"صيني",genres:["رومانسي","كوميديا"],rating:"8.7",desc:"ذكريات المدرسة والصداقة والحب الأول."},
-  {id:12,title:"First Love",year:2022,type:"ياباني",genres:["رومانسي","دراما"],rating:"8.4",desc:"قصة حب وذكريات تمتد عبر سنوات طويلة."}
+ {id:"weak",title:"Weak Hero Class 1",year:2022,genre:"مدرسي · أكشن",tags:["school","action"],score:"8.5",episodes:"8 حلقات",status:"اختيار المحرر",desc:"طالب هادئ وذكي يواجه العنف المدرسي بطرق غير متوقعة، ويكتشف معنى الصداقة والثقة وسط صراعات قاسية."},
+ {id:"all",title:"All of Us Are Dead",year:2022,genre:"رعب · بقاء",tags:["school","thriller"],score:"7.5",episodes:"12 حلقة",status:"تشويق",desc:"تفشّي خطير يحاصر مجموعة من الطلاب داخل مدرستهم، ويحوّل كل محاولة للنجاة إلى اختبار صعب."},
+ {id:"study",title:"Study Group",year:2025,genre:"مدرسي · أكشن",tags:["school","action"],score:"8.0",episodes:"10 حلقات",status:"مدرسي",desc:"طالب يحلم بالتفوق الدراسي يؤسس مجموعة للمراجعة، لكن محيطه يجبره على مواجهة مشاكل أكبر من الدراسة."},
+ {id:"lovely",title:"Lovely Runner",year:2024,genre:"رومانسية · خيال",tags:["romance","fantasy"],score:"8.6",episodes:"16 حلقة",status:"رومانسي",desc:"فرصة غير متوقعة للعودة بالزمن تفتح باباً لتغيير المصير، في قصة تجمع المشاعر والموسيقى والخيال."},
+ {id:"business",title:"Business Proposal",year:2022,genre:"رومانسية · كوميديا",tags:["romance"],score:"8.1",episodes:"12 حلقة",status:"خفيف",desc:"موعد غرامي بالنيابة عن صديقة يتحول إلى سلسلة مواقف غير متوقعة عندما تكتشف البطلة هوية الطرف الآخر."},
+ {id:"vincenzo",title:"Vincenzo",year:2021,genre:"جريمة · كوميديا سوداء",tags:["action","thriller"],score:"8.4",episodes:"20 حلقة",status:"جريمة",desc:"محامٍ يعود إلى كوريا ويجد نفسه في مواجهة مجموعة نافذة، مستخدماً أساليب غير تقليدية لتحقيق العدالة."},
+ {id:"glory",title:"The Glory",year:2022,genre:"انتقام · دراما",tags:["thriller"],score:"8.2",episodes:"16 حلقة",status:"انتقام",desc:"بعد سنوات من المعاناة، تضع امرأة خطة دقيقة لمواجهة من دمّروا سنوات شبابها."},
+ {id:"kingdom",title:"Kingdom",year:2019,genre:"تاريخي · رعب",tags:["fantasy","thriller"],score:"8.3",episodes:"موسمان",status:"تاريخي",desc:"في مملكة تاريخية، ينتشر وباء غامض بينما يحاول ولي العهد كشف مؤامرة تهدد البلاد."},
+ {id:"squid",title:"Squid Game",year:2021,genre:"بقاء · تشويق",tags:["thriller"],score:"7.7",episodes:"3 مواسم",status:"ظاهرة عالمية",desc:"أشخاص يمرّون بأزمات مالية يدخلون ألعاباً غامضة بجائزة ضخمة، لكن المخاطر تتجاوز توقعاتهم."},
+ {id:"crash",title:"Crash Landing on You",year:2019,genre:"رومانسية · دراما",tags:["romance"],score:"8.7",episodes:"16 حلقة",status:"رومانسي",desc:"حادث غير متوقع يضع سيدة أعمال في مكان بعيد عن عالمها، حيث تلتقي بضابط يقرر مساعدتها."},
+ {id:"extra",title:"Extracurricular",year:2020,genre:"مدرسي · جريمة",tags:["school","thriller"],score:"7.6",episodes:"10 حلقات",status:"دراما",desc:"طالب متفوق يعيش حياة سرية تنقلب رأساً على عقب عندما تبدأ أسراره في الظهور."}
 ];
-
-const grid = document.getElementById("dramaGrid");
-const searchInput = document.getElementById("searchInput");
-const resultCount = document.getElementById("resultCount");
-const sectionTitle = document.getElementById("sectionTitle");
-const modal = document.getElementById("detailsModal");
-const toast = document.getElementById("toast");
-
-let activeFilter = "all";
-let currentPage = "home";
-let selectedDrama = null;
-let toastTimer;
-
-function getFavorites() {
-  try {
-    const value = JSON.parse(localStorage.getItem("notwin-tv-favorites") || "[]");
-    return Array.isArray(value) ? value : [];
-  } catch (_) {
-    return [];
-  }
+const grid=document.getElementById("grid"), search=document.getElementById("search");
+let filter="all", savedOnly=false, current=null;
+const key="notwin-tv-saved-v1";
+function saved(){try{return JSON.parse(localStorage.getItem(key)||"[]")}catch(e){return []}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function updateCount(){document.getElementById("count").textContent=saved().length}
+function render(){
+ const q=search.value.trim().toLowerCase(), favs=saved();
+ const list=dramas.filter(d=>(filter==="all"||d.tags.includes(filter))&&(!savedOnly||favs.includes(d.id))&&(!q||(d.title+" "+d.genre+" "+d.desc).toLowerCase().includes(q)));
+ grid.innerHTML=list.map(d=>`<article class="card" data-open="${d.id}" tabindex="0" role="button">
+ <div class="poster"><div class="poster-fallback"><b>${esc(d.title)}</b><small>NOTWIN TV</small></div><span class="tag">${esc(d.status)}</span><button class="fav ${favs.includes(d.id)?"saved":""}" data-fav="${d.id}" aria-label="حفظ المسلسل">${favs.includes(d.id)?"♥":"♡"}</button></div>
+ <h3>${esc(d.title)}</h3><div class="meta">${d.year} · ${esc(d.genre)} · ★ ${d.score}</div></article>`).join("");
+ document.getElementById("empty").style.display=list.length?"none":"block";
+ grid.style.display=list.length?"grid":"none";
+ document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));
 }
-function saveFavorites(ids) {
-  try {
-    localStorage.setItem("notwin-tv-favorites", JSON.stringify(ids));
-    return true;
-  } catch (_) {
-    showToast("المفضلة ما قدرتش تتحفظ في هذا المتصفح.");
-    return false;
-  }
-}
-function isFavorite(id) {
-  return getFavorites().includes(id);
-}
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
-}
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  })[char]);
-}
-function render() {
-  const query = searchInput.value.trim().toLowerCase();
-  let items = dramas.filter(drama => {
-    const matchesFilter = activeFilter === "all"
-      || drama.type === activeFilter
-      || drama.genres.includes(activeFilter);
-    const matchesSearch = (drama.title + " " + drama.type + " " + drama.genres.join(" "))
-      .toLowerCase().includes(query);
-    const matchesPage = currentPage !== "favorites" || isFavorite(drama.id);
-    return matchesFilter && matchesSearch && matchesPage;
-  });
-
-  sectionTitle.textContent = currentPage === "favorites" ? "المفضلة تاعك"
-    : query ? "نتائج البحث" : activeFilter === "all" ? "مسلسلات مقترحة" : activeFilter;
-
-  resultCount.textContent = items.length + " عمل";
-
-  if (!items.length) {
-    grid.innerHTML = '<div class="empty">ما لقيناش نتائج هنا 💜<br>جرّب كلمة أخرى أو بدّل التصنيف.</div>';
-    return;
-  }
-
-  grid.innerHTML = items.map(drama => `
-    <article class="drama-card">
-      <div class="poster">
-        <div class="poster-fallback">
-          <b>NT</b>
-          <span>${escapeHTML(drama.title)}</span>
-        </div>
-        <span class="badge">★ ${escapeHTML(drama.rating)}</span>
-      </div>
-      <div class="card-info">
-        <div class="card-title">${escapeHTML(drama.title)}</div>
-        <div class="card-meta">${drama.year} · ${escapeHTML(drama.type)} · ${escapeHTML(drama.genres[0])}</div>
-        <div class="card-actions">
-          <button class="small-btn details" data-details="${drama.id}">التفاصيل</button>
-          <button class="small-btn" data-favorite="${drama.id}" aria-label="المفضلة">${isFavorite(drama.id) ? "♥ محفوظ" : "♡ حفظ"}</button>
-        </div>
-      </div>
-    </article>
-  `).join("");
-}
-function setFilter(filter) {
-  activeFilter = filter;
-  document.querySelectorAll(".category").forEach(button => {
-    button.classList.toggle("active", button.dataset.filter === filter);
-  });
-  render();
-}
-function setPage(page) {
-  currentPage = page;
-  document.querySelectorAll(".nav-item").forEach(button => {
-    button.classList.toggle("active", button.dataset.page === page);
-  });
-  if (page === "search") {
-    searchInput.focus();
-    document.getElementById("searchSection").scrollIntoView({behavior:"smooth",block:"start"});
-  } else if (page === "categories") {
-    document.getElementById("categories").scrollIntoView({behavior:"smooth",block:"center"});
-  } else if (page === "favorites") {
-    activeFilter = "all";
-    document.querySelectorAll(".category").forEach(button => {
-      button.classList.toggle("active", button.dataset.filter === "all");
-    });
-    window.scrollTo({top:0,behavior:"smooth"});
-  } else {
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-  render();
-}
-function toggleFavorite(id) {
-  const favorites = getFavorites();
-  const exists = favorites.includes(id);
-  const updated = exists ? favorites.filter(item => item !== id) : [...favorites,id];
-  saveFavorites(updated);
-  showToast(exists ? "تنحّى من المفضلة" : "تزاد للمفضلة ♥");
-  render();
-  if (selectedDrama && selectedDrama.id === id) updateModalFavorite();
-}
-function openDetails(id) {
-  selectedDrama = dramas.find(drama => drama.id === id);
-  if (!selectedDrama) return;
-  document.getElementById("modalTitle").textContent = selectedDrama.title;
-  document.getElementById("modalDescription").textContent = selectedDrama.desc;
-  document.getElementById("modalMeta").textContent =
-    selectedDrama.year + " · " + selectedDrama.type + " · " +
-    selectedDrama.genres.join("، ") + " · ★ " + selectedDrama.rating;
-  updateModalFavorite();
-  modal.classList.add("show");
-}
-function updateModalFavorite() {
-  if (!selectedDrama) return;
-  document.getElementById("modalFavorite").textContent =
-    isFavorite(selectedDrama.id) ? "♥ إزالة من المفضلة" : "♡ أضف للمفضلة";
-}
-function closeModal() {
-  modal.classList.remove("show");
-}
-document.getElementById("categories").addEventListener("click", event => {
-  const button = event.target.closest("[data-filter]");
-  if (button) setFilter(button.dataset.filter);
-});
-grid.addEventListener("click", event => {
-  const detailButton = event.target.closest("[data-details]");
-  const favoriteButton = event.target.closest("[data-favorite]");
-  if (detailButton) openDetails(Number(detailButton.dataset.details));
-  if (favoriteButton) toggleFavorite(Number(favoriteButton.dataset.favorite));
-});
-searchInput.addEventListener("input", render);
-document.querySelector(".bottom-nav").addEventListener("click", event => {
-  const button = event.target.closest("[data-page]");
-  if (button) setPage(button.dataset.page);
-});
-document.getElementById("exploreBtn").addEventListener("click", () => {
-  document.getElementById("categories").scrollIntoView({behavior:"smooth",block:"center"});
-});
-document.getElementById("headerSearch").addEventListener("click", () => setPage("search"));
-document.getElementById("headerFav").addEventListener("click", () => setPage("favorites"));
-document.getElementById("closeModal").addEventListener("click", closeModal);
-modal.addEventListener("click", event => {
-  if (event.target === modal) closeModal();
-});
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") closeModal();
-});
-document.getElementById("modalFavorite").addEventListener("click", () => {
-  if (selectedDrama) toggleFavorite(selectedDrama.id);
-});
-document.getElementById("officialInfo").addEventListener("click", () => {
-  showToast("استعمل اسم المسلسل للبحث عن صفحته الرسمية.");
-});
-render();
+function toggleFav(id){let a=saved();a=a.includes(id)?a.filter(x=>x!==id):[...a,id];try{localStorage.setItem(key,JSON.stringify(a))}catch(e){}updateCount();render();if(current)updateModalFav()}
+function showSaved(){savedOnly=true;filter="all";search.value="";render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
+document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b){filter=b.dataset.filter;savedOnly=false;render()}});
+search.addEventListener("input",render);
+grid.addEventListener("click",e=>{const f=e.target.closest("[data-fav]");if(f){e.stopPropagation();toggleFav(f.dataset.fav);return}const c=e.target.closest("[data-open]");if(c)openModal(c.dataset.open)});
+grid.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset.open){e.preventDefault();openModal(e.target.dataset.open)}});
+function openModal(id){current=dramas.find(d=>d.id===id);if(!current)return;document.getElementById("modalTitle").textContent=current.title;document.getElementById("modalMeta").textContent=`${current.year} · ${current.genre} · ${current.episodes} · ★ ${current.score}`;document.getElementById("modalDesc").textContent=current.desc;updateModalFav();document.getElementById("modal").classList.add("open");document.body.style.overflow="hidden"}
+function updateModalFav(){if(current)document.getElementById("modalFav").textContent=saved().includes(current.id)?"♥ موجود في قائمتي":"♡ أضف إلى قائمتي"}
+function closeModal(){document.getElementById("modal").classList.remove("open");document.body.style.overflow="";current=null}
+["savedButton","heroSaved","savedLink","mobileSaved"].forEach(id=>document.getElementById(id).addEventListener("click",e=>{e.preventDefault();showSaved()}));
+document.getElementById("allButton").addEventListener("click",()=>{filter="all";savedOnly=false;search.value="";render()});
+document.getElementById("closeModal").addEventListener("click",closeModal);
+document.getElementById("modalFav").addEventListener("click",()=>{if(current)toggleFav(current.id)});
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+updateCount();render();
 </script>
 </body>
 </html>
