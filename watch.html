@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05050b">
+  <title>NOTWIN TV — المشاهدة</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #05050b;
+      color: #f5f3ff;
+      font-family: Arial, Tahoma, sans-serif;
+      padding: 22px;
+    }
+    .brand {
+      color: #b49dff;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 24px;
+    }
+    .panel {
+      max-width: 850px;
+      margin: auto;
+    }
+    h1 { font-size: 25px; }
+    .muted { color: #aaa6bd; line-height: 1.8; }
+    .player {
+      margin-top: 22px;
+      background: #0d0d18;
+      border: 1px solid #29243b;
+      border-radius: 14px;
+      padding: 8px;
+      overflow: hidden;
+    }
+    iframe {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: 9px;
+      background: #000;
+    }
+    .note {
+      margin-top: 18px;
+      padding: 14px;
+      border: 1px solid #29243b;
+      border-radius: 10px;
+      color: #c9c4d8;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <div class="brand">NOTWIN TV</div>
+    <h1 id="title">مسلسل كوري</h1>
+    <p class="muted">
+      استمتع بالمشاهدة من خلال مصدر مرخّص.
+    </p>
+
+    <div class="player">
+      <iframe
+        id="video"
+        src="https://www.youtube-nocookie.com/embed/M7lc1UVf-VE"
+        title="مشغل فيديو NOTWIN TV"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="note">
+      هذا فيديو تجريبي من YouTube، وليس حلقة مسلسل.
+      استبدل معرّفه بفيديو تملك إذنًا بعرضه،
+      وتأكد أن صاحبه يسمح بالتضمين.
+    </div>
+  </main>
+</body>
+</html>
