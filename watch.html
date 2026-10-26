@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080610">
 <title>المشاهدة | notwin tv</title>
+
 <style>
 *{box-sizing:border-box}
 body{
@@ -13,9 +14,10 @@ body{
  font-family:Arial,Tahoma,sans-serif
 }
 header{
- padding:18px;background:#100d1b;
+ padding:16px;background:#100d1b;
  border-bottom:1px solid #30213f;
- display:flex;justify-content:space-between;align-items:center
+ display:flex;justify-content:space-between;
+ align-items:center;gap:12px
 }
 .logo{font-size:22px;font-weight:bold;color:#c5a0ff}
 a{color:#c5a0ff;text-decoration:none}
@@ -26,25 +28,56 @@ h1{font-size:24px}
  width:100%;aspect-ratio:16/9;background:#000;
  border:1px solid #30213f;border-radius:12px;overflow:hidden
 }
-iframe{width:100%;height:100%;border:0}
+iframe{width:100%;height:100%;border:0;display:block}
 .controls{
  display:flex;gap:10px;flex-wrap:wrap;margin:18px 0
 }
-button{
+button,select{
  background:#201532;color:#fff;border:1px solid #493363;
- padding:12px 16px;border-radius:9px;cursor:pointer
+ padding:12px 14px;border-radius:9px;font-size:15px
 }
-button:disabled{opacity:.4}
-select{
- background:#100d1b;color:white;border:1px solid #493363;
- padding:12px;border-radius:9px
-}
+button{cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}
+select{background:#100d1b}
 .note{
  margin-top:18px;padding:14px;background:#100d1b;
  border:1px solid #30213f;border-radius:10px
 }
+.primary{background:#392151;border-color:#8b65b5}
+#status{overflow-wrap:anywhere}
+
+/* وضع المشاهدة */
+body.watching{overflow:hidden}
+body.watching header,
+body.watching main>*:not(#player):not(#exitWatch){
+ display:none!important
+}
+body.watching main{
+ max-width:none;width:100%;height:100dvh;
+ padding:0;margin:0
+}
+body.watching #player{
+ position:fixed;inset:0;width:100%;height:100dvh;
+ aspect-ratio:auto;border:0;border-radius:0;
+ z-index:1000;background:#000
+}
+body.watching #player iframe{
+ width:100%;height:100%
+}
+#exitWatch{
+ display:none;position:fixed;top:12px;right:12px;
+ z-index:1002;background:#201532eF;
+ border:1px solid #8b65b5;border-radius:10px
+}
+body.watching #exitWatch{display:block}
+@media(max-width:480px){
+ main{padding:14px}
+ h1{font-size:22px}
+ .controls>*{flex:1}
+}
 </style>
 </head>
+
 <body>
 <header>
  <a class="logo" href="./index.html">notwin tv</a>
@@ -56,45 +89,61 @@ select{
  <p class="muted" id="episodeLabel">اختار الموسم والحلقة.</p>
 
  <div class="player" id="player">
-  <p style="padding:20px">حمّل صفحة العمل لتشغيل المشغّل.</p>
+  <p style="padding:20px">اضغط على تحميل المشغّل لبدء المشاهدة.</p>
  </div>
+
+ <button id="exitWatch">✕ الخروج من وضع المشاهدة</button>
 
  <div class="controls">
   <select id="season" aria-label="الموسم"></select>
   <select id="episode" aria-label="الحلقة"></select>
+
+  <select id="quality" aria-label="جودة الفيديو">
+   <option value="480">480p — توفير الإنترنت</option>
+   <option value="720">720p — جودة أعلى</option>
+  </select>
+
   <button id="prev">الحلقة السابقة</button>
   <button id="next">الحلقة التالية</button>
-  <button id="play">تحميل المشغّل</button>
+  <button id="play" class="primary">تحميل المشغّل</button>
+  <button id="watchMode">🎬 وضع المشاهدة</button>
  </div>
 
  <div class="note muted" id="status">
-  المشغّل لا يُحمّل إلا بعد الضغط على الزر.
+  المشغّل لا يُحمّل حتى تضغط على الزر.
  </div>
+
  <p class="muted">
-  توفر الحلقات والترجمة يعتمد على المصدر الخارجي.
+  الترجمة العربية متوفرة فقط إذا كان المصدر يوفّرها.
+  الجودة المختارة تفضيل للمشغّل وليست ضمانًا لحدّ استهلاك البيانات.
  </p>
 </main>
 
 <script>
 const params = new URLSearchParams(location.search);
 
-// غيّر هذه القيم حسب العمل الذي تضيفه
 const CONFIG = {
  id: params.get("id") || "",
  title: params.get("title") || "notwin tv",
- type: params.get("type") || "tv",
+ type: params.get("type") === "movie" ? "movie" : "tv",
  seasons: Math.max(1, Number(params.get("seasons")) || 1),
  episodes: Math.max(1, Number(params.get("episodes")) || 16)
 };
 
-const seasonSelect = document.getElementById("season");
-const episodeSelect = document.getElementById("episode");
-const player = document.getElementById("player");
-const statusBox = document.getElementById("status");
-let currentSeason = Math.max(1, Number(params.get("s")) || 1);
-let currentEpisode = Math.max(1, Number(params.get("e")) || 1);
+const $ = id => document.getElementById(id);
+const seasonSelect = $("season");
+const episodeSelect = $("episode");
+const player = $("player");
+const statusBox = $("status");
 
-document.getElementById("title").textContent = CONFIG.title;
+let currentSeason = Math.min(
+ CONFIG.seasons, Math.max(1, Number(params.get("s")) || 1)
+);
+let currentEpisode = Math.max(1, Number(params.get("e")) || 1);
+let frame = null;
+let quality = "480";
+
+$("title").textContent = CONFIG.title;
 
 function fillSelect(select, count, selected) {
  select.replaceChildren();
@@ -107,85 +156,156 @@ function fillSelect(select, count, selected) {
  }
 }
 
-function updateEpisodeLabel() {
- document.getElementById("episodeLabel").textContent =
+function updateLabel() {
+ $("episodeLabel").textContent =
   CONFIG.type === "movie"
   ? "فيلم"
   : `الموسم ${currentSeason} — الحلقة ${currentEpisode}`;
 
- document.getElementById("prev").disabled =
-  currentSeason === 1 && currentEpisode === 1;
+ $("prev").disabled =
+  CONFIG.type === "movie" ||
+  (currentSeason === 1 && currentEpisode === 1);
 
- document.getElementById("next").disabled =
-  currentEpisode >= CONFIG.episodes;
+ $("next").disabled = CONFIG.type === "movie";
+}
+
+function buildURL() {
+ const color = "%23c5a0ff";
+
+ if (CONFIG.type === "movie") {
+  return `https://cinesrc.st/embed/movie/${CONFIG.id}` +
+   `?color=${color}&quality=${quality}&autonext=false`;
+ }
+
+ return `https://cinesrc.st/embed/tv/${CONFIG.id}` +
+  `?s=${currentSeason}&e=${currentEpisode}` +
+  `&color=${color}&quality=${quality}&autonext=false`;
 }
 
 function loadPlayer() {
  if (!/^\d+$/.test(CONFIG.id)) {
   statusBox.textContent =
-   "لازم تحط معرّف TMDB رقمي صحيح للعمل قبل التشغيل.";
+   "معرّف TMDB غير صحيح. لازم يكون رقمًا.";
   return;
  }
 
- const src = CONFIG.type === "movie"
-  ? `https://cinesrc.st/embed/movie/${CONFIG.id}?color=%23c5a0ff`
-  : `https://cinesrc.st/embed/tv/${CONFIG.id}?s=${currentSeason}&e=${currentEpisode}&color=%23c5a0ff&autonext=false`;
-
- const frame = document.createElement("iframe");
- frame.src = src;
- frame.title = "مشغّل الفيديو";
+ frame = document.createElement("iframe");
+ frame.src = buildURL();
+ frame.title = "مشغّل notwin tv";
  frame.allow = "autoplay; fullscreen; picture-in-picture";
  frame.allowFullscreen = true;
+ frame.loading = "eager";
  frame.referrerPolicy = "strict-origin-when-cross-origin";
 
  player.replaceChildren(frame);
- statusBox.textContent =
-  "تم طلب المشغّل. إذا ما خدمش، جرّب التحقق من توفر الحلقة.";
 
- updateEpisodeLabel();
+ statusBox.textContent =
+  `تم طلب المشغّل بجودة ${quality}p. انتظر تحميل الحلقة.`;
+
+ updateLabel();
 }
 
-fillSelect(seasonSelect, CONFIG.seasons, currentSeason);
-fillSelect(episodeSelect, CONFIG.episodes, currentEpisode);
-updateEpisodeLabel();
+function changeEpisode(season, episode) {
+ currentSeason = season;
+ currentEpisode = episode;
+
+ fillSelect(seasonSelect, CONFIG.seasons, currentSeason);
+ fillSelect(episodeSelect, CONFIG.episodes, currentEpisode);
+
+ updateLabel();
+ loadPlayer();
+}
 
 seasonSelect.addEventListener("change", () => {
- currentSeason = Number(seasonSelect.value);
- currentEpisode = 1;
- fillSelect(episodeSelect, CONFIG.episodes, 1);
- updateEpisodeLabel();
- loadPlayer();
+ changeEpisode(Number(seasonSelect.value), 1);
 });
 
 episodeSelect.addEventListener("change", () => {
- currentEpisode = Number(episodeSelect.value);
- updateEpisodeLabel();
- loadPlayer();
+ changeEpisode(currentSeason, Number(episodeSelect.value));
 });
 
-document.getElementById("play").addEventListener("click", loadPlayer);
+$("quality").addEventListener("change", () => {
+ quality = $("quality").value;
+ if (frame) loadPlayer();
+});
 
-document.getElementById("prev").addEventListener("click", () => {
+$("play").addEventListener("click", loadPlayer);
+
+$("prev").addEventListener("click", () => {
+ if (CONFIG.type === "movie") return;
+
  if (currentEpisode > 1) {
-  currentEpisode--;
+  changeEpisode(currentSeason, currentEpisode - 1);
  } else if (currentSeason > 1) {
-  currentSeason--;
-  currentEpisode = CONFIG.episodes;
+  changeEpisode(currentSeason - 1, CONFIG.episodes);
  }
- fillSelect(seasonSelect, CONFIG.seasons, currentSeason);
- fillSelect(episodeSelect, CONFIG.episodes, currentEpisode);
- updateEpisodeLabel();
- loadPlayer();
 });
 
-document.getElementById("next").addEventListener("click", () => {
+$("next").addEventListener("click", () => {
+ if (CONFIG.type === "movie") return;
+
  if (currentEpisode < CONFIG.episodes) {
-  currentEpisode++;
-  fillSelect(episodeSelect, CONFIG.episodes, currentEpisode);
-  updateEpisodeLabel();
-  loadPlayer();
+  changeEpisode(currentSeason, currentEpisode + 1);
+ } else if (currentSeason < CONFIG.seasons) {
+  changeEpisode(currentSeason + 1, 1);
  }
 });
+
+async function enterWatchMode() {
+ document.body.classList.add("watching");
+
+ try {
+  if (!document.fullscreenElement &&
+      document.documentElement.requestFullscreen) {
+   await document.documentElement.requestFullscreen();
+  }
+ } catch (e) {
+  // وضع المشاهدة يبقى متاحًا حتى لو رفض المتصفح ملء الشاشة.
+ }
+
+ try {
+  if (screen.orientation && screen.orientation.lock) {
+   await screen.orientation.lock("landscape");
+  }
+ } catch (e) {
+  statusBox.textContent =
+   "وضع المشاهدة مفعّل. إذا لم يدُر الهاتف، دوّره يدويًا.";
+ }
+}
+
+async function exitWatchMode() {
+ document.body.classList.remove("watching");
+
+ try {
+  if (screen.orientation && screen.orientation.unlock) {
+   screen.orientation.unlock();
+  }
+ } catch (e) {}
+
+ try {
+  if (document.fullscreenElement && document.exitFullscreen) {
+   await document.exitFullscreen();
+  }
+ } catch (e) {}
+}
+
+$("watchMode").addEventListener("click", enterWatchMode);
+$("exitWatch").addEventListener("click", exitWatchMode);
+
+document.addEventListener("fullscreenchange", () => {
+ if (!document.fullscreenElement) {
+  document.body.classList.remove("watching");
+  try {
+   if (screen.orientation && screen.orientation.unlock) {
+    screen.orientation.unlock();
+   }
+  } catch (e) {}
+ }
+});
+
+fillSelect(seasonSelect, CONFIG.seasons, currentSeason);
+fillSelect(episodeSelect, CONFIG.episodes, currentEpisode);
+updateLabel();
 </script>
 </body>
 </html>
