@@ -1,1184 +1,606 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#090909">
-<meta name="description" content="NOTWIN TV — اكتشف عالم الدراما الآسيوية والمسلسلات الكورية.">
-<title>NOTWIN TV | عالم الدراما</title>
-
+<title>NOTWIN TV | عالم المسلسلات والأفلام</title>
 <style>
-:root {
-  --bg: #090909;
-  --surface: #121111;
-  --surface2: #1b1617;
-  --red: #a51f2b;
-  --red2: #e3424e;
-  --white: #f8f5f5;
-  --muted: #a79c9c;
-  --border: #ffffff12;
+:root{
+  --bg:#090909;
+  --panel:#141414;
+  --panel2:#1c1c1c;
+  --red:#e50914;
+  --red2:#ff2934;
+  --text:#f5f5f5;
+  --muted:#a5a5a5;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--white);
-  font-family: Arial, Tahoma, sans-serif;
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Tahoma,sans-serif;
 }
-button, input { font: inherit; }
-button { cursor: pointer; }
-button:focus-visible, input:focus-visible {
-  outline: 2px solid var(--red2);
-  outline-offset: 3px;
+button,input{font:inherit}
+button{cursor:pointer}
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(9,9,9,.96);
+  border-bottom:1px solid #252525;
+  backdrop-filter:blur(12px);
 }
-a { color: inherit; text-decoration: none; }
-[hidden] { display: none !important; }
-
-header {
-  position: sticky;
-  z-index: 20;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  padding: 12px 5%;
-  background: #090909ed;
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(18px);
+.nav{
+  max-width:1250px;margin:auto;padding:14px 18px;
+  display:flex;align-items:center;gap:18px;
 }
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 19px;
-  font-weight: 900;
-  letter-spacing: .6px;
+.logo{font-size:25px;font-weight:900;white-space:nowrap}
+.logo span{color:var(--red)}
+.search{flex:1;position:relative}
+.search input{
+  width:100%;padding:12px 15px;border-radius:10px;
+  border:1px solid #333;background:#171717;color:white;outline:none;
 }
-.brand-name span { color: var(--red2); }
-.logo {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: linear-gradient(145deg, #d63743, #580b13);
-  box-shadow: 0 5px 22px #a51f2b30;
+.search input:focus{border-color:var(--red)}
+.navbtn,.tab,.filterbtn{
+  border:1px solid #333;background:#171717;color:#ddd;
+  padding:10px 13px;border-radius:9px;white-space:nowrap;
 }
-.logo svg { width: 23px; height: 23px; fill: white; }
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 9px;
+.navbtn:hover,.tab.active,.filterbtn.active{
+  background:var(--red);border-color:var(--red);color:white;
 }
-.header-btn {
-  padding: 10px 13px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: white;
-  background: #ffffff08;
+.hero{
+  max-width:1250px;margin:20px auto;padding:0 18px;
 }
-.header-btn:hover { border-color: #a51f2b; }
-.header-btn.active {
-  color: #ff8b94;
-  background: #a51f2b20;
-  border-color: #a51f2b70;
+.hero-inner{
+  min-height:280px;border-radius:18px;overflow:hidden;
+  position:relative;display:flex;align-items:end;
+  background:linear-gradient(0deg,#090909 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,.08)),
+  linear-gradient(110deg,#3b080b,#161616 55%,#29090b);
+  border:1px solid #2b2020;
 }
-
-main {
-  width: 100%;
-  max-width: 1500px;
-  margin: auto;
-  padding: 22px 5% 105px;
+.hero-content{padding:30px;max-width:650px}
+.tag{
+  display:inline-block;background:var(--red);color:white;
+  border-radius:5px;padding:5px 9px;font-size:12px;font-weight:bold;
 }
-
-/* Hero */
-.hero {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  align-items: center;
-  min-height: 425px;
-  overflow: hidden;
-  padding: clamp(25px, 5vw, 60px);
-  border: 1px solid #a51f2b42;
-  border-radius: 22px;
-  background:
-    linear-gradient(90deg, #090909 0%, #090909e8 38%, #09090955 100%),
-    linear-gradient(0deg, #09090970, transparent 75%),
-    radial-gradient(ellipse at 75% 40%, #54121c, #171011 55%, #090909);
+.hero h1{font-size:clamp(27px,5vw,44px);margin:14px 0 10px}
+.hero p{color:#ccc;line-height:1.8;margin:0 0 18px}
+.primary{
+  border:0;background:var(--red);color:white;
+  padding:12px 18px;border-radius:9px;font-weight:bold;
 }
-.hero::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 82% 15%, #b72b3720, transparent 42%),
-    linear-gradient(135deg, transparent 60%, #a51f2b13);
+.primary:hover{background:var(--red2)}
+main{max-width:1250px;margin:auto;padding:0 18px 90px}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;margin:25px 0 16px;
 }
-.hero-content { max-width: 590px; }
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border: 1px solid #c62d3b55;
-  border-radius: 99px;
-  background: #a51f2b1c;
-  color: #ff969e;
-  font-size: 11px;
-  letter-spacing: 1px;
+.section-head h2{font-size:21px;margin:0}
+.section-head h2:before{
+  content:"";display:inline-block;width:4px;height:21px;
+  background:var(--red);margin-left:10px;vertical-align:middle;border-radius:3px;
 }
-.hero h1 {
-  margin: 20px 0 12px;
-  font-size: clamp(38px, 6vw, 68px);
-  line-height: 1.18;
-  letter-spacing: -1.5px;
+.tabs,.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters{margin-bottom:18px}
+.grid{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:17px;
 }
-.hero h1 span {
-  color: var(--red2);
-  text-shadow: 0 0 35px #a51f2b45;
+.card{
+  min-width:0;background:var(--panel);border:1px solid #242424;
+  border-radius:12px;overflow:hidden;cursor:pointer;transition:.2s;
 }
-.hero p {
-  max-width: 470px;
-  color: #d0c6c6;
-  font-size: 15px;
-  line-height: 2;
+.card:hover{transform:translateY(-4px);border-color:#6e2024}
+.poster{
+  position:relative;aspect-ratio:2/3;background:#202020;overflow:hidden;
 }
-.hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 25px;
+.poster img{width:100%;height:100%;object-fit:cover;display:block}
+.poster .missing{
+  height:100%;display:flex;align-items:center;justify-content:center;
+  padding:12px;text-align:center;color:#777;
 }
-.primary, .secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 13px 18px;
-  border-radius: 10px;
-  font-weight: bold;
-  transition: .2s;
+.rating{
+  position:absolute;top:8px;right:8px;background:#000d;
+  padding:5px 7px;border-radius:5px;font-size:12px;
 }
-.primary {
-  color: white;
-  border: 1px solid #e34b56;
-  background: linear-gradient(135deg, #c52b38, #79121d);
-  box-shadow: 0 7px 25px #a51f2b25;
+.kind{
+  position:absolute;bottom:8px;right:8px;background:var(--red);
+  padding:5px 7px;border-radius:5px;font-size:11px;
 }
-.primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
-.secondary {
-  color: #f5eaea;
-  border: 1px solid #ffffff24;
-  background: #ffffff08;
+.favorite{
+  position:absolute;top:8px;left:8px;border:0;
+  background:#000b;color:white;width:34px;height:34px;
+  border-radius:50%;font-size:18px;
 }
-.secondary:hover { border-color: #a51f2b; }
-
-.hero-decoration {
-  position: absolute;
-  z-index: -1;
-  left: 6%;
-  top: 50%;
-  transform: translateY(-50%) rotate(-9deg);
-  width: clamp(150px, 22vw, 290px);
-  aspect-ratio: 2 / 3;
-  border: 1px solid #ffffff18;
-  border-radius: 15px;
-  background:
-    linear-gradient(0deg, #080606bb, transparent 65%),
-    radial-gradient(ellipse at 60% 30%, #a72b37, transparent 55%),
-    linear-gradient(145deg, #301317, #100d0e 70%);
-  box-shadow: 0 25px 80px #000a, 0 0 55px #a51f2b12;
+.favorite.on{color:#ff3440}
+.card-info{padding:11px}
+.card-info h3{
+  font-size:14px;margin:0 0 8px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
 }
-.hero-decoration::before,
-.hero-decoration::after {
-  content: "";
-  position: absolute;
-  border: 1px solid #ffffff0c;
-  border-radius: 15px;
-  inset: 12px -13px -12px 13px;
-  z-index: -1;
-  background: #1a1113;
+.meta{color:var(--muted);font-size:12px;display:flex;gap:7px;flex-wrap:wrap}
+.empty,.loading,.error{
+  padding:35px 15px;text-align:center;color:var(--muted);
+  grid-column:1/-1;line-height:1.8;
 }
-.hero-decoration::after {
-  inset: 24px -25px -24px 25px;
-  background: #120d0e;
-  z-index: -2;
+.loadrow{text-align:center;margin:25px 0}
+footer{
+  border-top:1px solid #222;text-align:center;padding:24px 15px;
+  color:#777;font-size:13px;
 }
-.hero-decoration span {
-  position: absolute;
-  right: 17px;
-  bottom: 20px;
-  color: #ffffff22;
-  font-size: clamp(35px, 7vw, 70px);
-  font-weight: 900;
-  letter-spacing: -3px;
+.bottom{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:15;
+  background:#101010f5;border-top:1px solid #303030;
+  padding:9px 6px calc(9px + env(safe-area-inset-bottom));
+  justify-content:space-around;
 }
-
-/* Search */
-.search-wrap {
-  margin: 26px 0 35px;
+.bottom button{
+  background:none;border:0;color:#aaa;font-size:12px;
+  display:flex;flex-direction:column;gap:4px;align-items:center;
 }
-.search {
-  display: flex;
-  gap: 10px;
+.bottom button.active{color:var(--red)}
+.modal{
+  display:none;position:fixed;inset:0;z-index:30;
+  background:#000d;overflow:auto;padding:22px;
+  align-items:center;justify-content:center;
 }
-.search input {
-  flex: 1;
-  min-width: 0;
-  padding: 15px 17px;
-  color: white;
-  border: 1px solid #ffffff18;
-  border-radius: 11px;
-  background: #141212;
+.modal.open{display:flex}
+.modal-box{
+  width:min(700px,100%);background:#151515;border:1px solid #333;
+  border-radius:15px;overflow:hidden;position:relative;
 }
-.search input::placeholder { color: #8e8383; }
-.search input:focus {
-  border-color: #a51f2b;
-  outline: none;
-  box-shadow: 0 0 0 3px #a51f2b18;
+.modal-top{display:grid;grid-template-columns:170px 1fr;gap:20px;padding:22px}
+.modal-top img{width:100%;border-radius:9px}
+.modal-info h2{margin:8px 0}
+.modal-info p{color:#ccc;line-height:1.8;font-size:14px}
+.close{
+  position:absolute;top:10px;left:10px;background:#000b;color:white;
+  border:1px solid #555;border-radius:50%;width:35px;height:35px;font-size:20px;
 }
-
-/* Sections and filters */
-.section { margin-top: 38px; }
-.section-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+.modal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.secondary{
+  background:#252525;color:white;border:1px solid #444;
+  padding:11px 14px;border-radius:8px;text-decoration:none;
 }
-.section-head h2 {
-  margin: 0;
-  font-size: clamp(20px, 3vw, 27px);
+@media(max-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:700px){
+  .nav{gap:10px;padding:12px}
+  .logo{font-size:21px}
+  .navbtn{display:none}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  main{padding:0 12px 95px}
+  .hero{padding:0 12px}
+  .hero-inner{min-height:245px}
+  .hero-content{padding:20px}
+  .hero p{font-size:13px}
+  .card-info{padding:8px}
+  .card-info h3{font-size:12px}
+  .meta{font-size:11px}
+  .bottom{display:flex}
+  .modal{padding:10px}
+  .modal-top{grid-template-columns:105px 1fr;gap:13px;padding:16px}
+  .modal-info h2{font-size:18px}
+  .modal-info p{font-size:12px}
 }
-.section-head h2::before {
-  content: "";
-  display: inline-block;
-  width: 4px;
-  height: 23px;
-  margin-left: 10px;
-  vertical-align: -4px;
-  border-radius: 5px;
-  background: var(--red);
-}
-.section-head p {
-  margin: 7px 0 0;
-  color: var(--muted);
-  font-size: 12px;
-}
-.count {
-  color: #c9baba;
-  font-size: 12px;
-  white-space: nowrap;
-}
-.filters {
-  display: flex;
-  gap: 9px;
-  overflow-x: auto;
-  padding: 17px 0 20px;
-  scrollbar-width: thin;
-  scrollbar-color: #532026 transparent;
-}
-.filters button {
-  flex-shrink: 0;
-  padding: 9px 15px;
-  border: 1px solid #ffffff17;
-  border-radius: 9px;
-  color: #c9bebe;
-  background: #ffffff06;
-  white-space: nowrap;
-}
-.filters button:hover { border-color: #a51f2b88; color: white; }
-.filters button.active {
-  border-color: var(--red);
-  background: var(--red);
-  color: white;
-  box-shadow: 0 4px 15px #a51f2b25;
-}
-
-/* Show cards */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 17px;
-}
-.card {
-  position: relative;
-  min-width: 0;
-  overflow: hidden;
-  border: 1px solid #ffffff12;
-  border-radius: 13px;
-  background: linear-gradient(180deg, #181414, #100e0e);
-  cursor: pointer;
-  transition: transform .23s, border-color .23s, box-shadow .23s;
-}
-.card:hover {
-  transform: translateY(-5px);
-  border-color: #a51f2b99;
-  box-shadow: 0 12px 28px #0008, 0 0 18px #a51f2b10;
-}
-.poster {
-  position: relative;
-  aspect-ratio: 2 / 2.85;
-  overflow: hidden;
-  background: #201517;
-}
-.poster img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .4s;
-}
-.card:hover .poster img { transform: scale(1.045); }
-.poster-placeholder {
-  display: grid;
-  height: 100%;
-  min-height: 150px;
-  place-items: center;
-  background: radial-gradient(circle, #49151d, #160f10);
-  color: #e3424e;
-  font-size: 38px;
-  font-weight: 900;
-}
-.poster-shade {
-  position: absolute;
-  inset: 45% 0 0;
-  background: linear-gradient(transparent, #08060640);
-  pointer-events: none;
-}
-.fav {
-  position: absolute;
-  z-index: 3;
-  top: 9px;
-  left: 9px;
-  display: grid;
-  place-items: center;
-  width: 35px;
-  height: 35px;
-  padding: 0;
-  border: 1px solid #ffffff30;
-  border-radius: 50%;
-  background: #090909dd;
-  color: white;
-  font-size: 19px;
-  backdrop-filter: blur(8px);
-}
-.fav:hover, .fav.saved {
-  border-color: #e3424e80;
-  color: #ff5360;
-  background: #2a0b0fdf;
-}
-.type-tag {
-  position: absolute;
-  z-index: 2;
-  top: 10px;
-  right: 9px;
-  padding: 6px 8px;
-  border: 1px solid #ffffff1a;
-  border-radius: 7px;
-  background: #090909d9;
-  color: #eee1e1;
-  font-size: 10px;
-}
-.info { padding: 12px; }
-.card-title {
-  min-height: 39px;
-  color: #f7eeee;
-  font-size: 13px;
-  line-height: 1.6;
-  font-weight: bold;
-}
-.meta {
-  margin-top: 7px;
-  color: #a99b9b;
-  font-size: 11px;
-  line-height: 1.6;
-}
-.rating { color: #e8bd78; }
-.description {
-  display: -webkit-box;
-  overflow: hidden;
-  margin-top: 8px;
-  color: #bdb0b0;
-  font-size: 11px;
-  line-height: 1.7;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-.status {
-  grid-column: 1 / -1;
-  padding: 35px 12px;
-  color: var(--muted);
-  text-align: center;
-  line-height: 1.9;
-}
-.status strong {
-  display: block;
-  margin-bottom: 5px;
-  color: white;
-  font-size: 16px;
-}
-.load {
-  margin: 25px 0;
-  text-align: center;
-}
-.load button { min-width: 160px; }
-.spinner {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #ffffff20;
-  border-top-color: var(--red2);
-  border-radius: 50%;
-  animation: spin .7s linear infinite;
-  vertical-align: middle;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Bottom navigation */
-.bottom {
-  position: fixed;
-  z-index: 30;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-  border-top: 1px solid #ffffff12;
-  background: #0b0909ed;
-  backdrop-filter: blur(18px);
-}
-.bottom button {
-  flex: 1;
-  max-width: 180px;
-  padding: 8px;
-  border: 0;
-  border-radius: 10px;
-  background: transparent;
-  color: #9c9090;
-  line-height: 1.6;
-}
-.bottom button.active {
-  background: #a51f2b20;
-  color: #ff7c85;
-}
-.bottom .nav-icon {
-  display: block;
-  margin-bottom: 2px;
-  font-size: 17px;
-}
-footer {
-  margin: 38px 0 12px;
-  color: #756a6a;
-  font-size: 11px;
-  line-height: 1.9;
-  text-align: center;
-}
-footer strong { color: #c65b63; }
-
-@media (min-width: 1200px) {
-  .hero { min-height: 465px; }
-  .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-}
-@media (max-width: 1000px) {
-  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .hero-decoration { left: 4%; }
-}
-@media (max-width: 700px) {
-  header { padding: 10px 4%; }
-  main { padding: 14px 4% 95px; }
-  .hero {
-    min-height: 340px;
-    padding: 25px 20px;
-    border-radius: 17px;
-    background: linear-gradient(90deg, #090909f5, #090909bb),
-      radial-gradient(ellipse at 80% 30%, #54121c, #090909 75%);
-  }
-  .hero h1 { font-size: 39px; }
-  .hero p { max-width: 330px; font-size: 13px; }
-  .hero-decoration { left: -55px; opacity: .5; width: 180px; }
-  .search-wrap { margin: 20px 0 30px; }
-  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-  .info { padding: 8px; }
-  .card-title { font-size: 12px; }
-  .description { font-size: 10px; }
-  .section { margin-top: 29px; }
-}
-@media (max-width: 390px) {
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hero h1 { font-size: 34px; }
-  .brand { font-size: 16px; }
-  .logo { width: 38px; height: 38px; }
-  .search { flex-wrap: wrap; }
-  .search input, .search .primary { width: 100%; }
-  .header-btn { padding: 9px; font-size: 12px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-}
+@media(max-width:370px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
-
 <body>
 <header>
-  <a class="brand" href="./index.html" aria-label="NOTWIN TV الرئيسية">
-    <span class="logo" aria-hidden="true">
-      <svg viewBox="0 0 24 24"><path d="M7 3.5a1 1 0 0 0-1.5.86v15.28a1 1 0 0 0 1.5.86l12-7.64a1 1 0 0 0 0-1.72L7 3.5z"/></svg>
-    </span>
-    <span class="brand-name">NOTWIN <span>TV</span></span>
-  </a>
-  <div class="header-actions">
-    <button class="header-btn" id="topSearch" type="button">⌕ البحث</button>
-    <button class="header-btn" id="topFavorites" type="button">♡ المفضلة</button>
+  <div class="nav">
+    <div class="logo">NOTWIN <span>TV</span></div>
+    <div class="search">
+      <input id="searchInput" type="search" placeholder="ابحث عن فيلم أو مسلسل..." autocomplete="off">
+    </div>
+    <button class="navbtn" id="favoritesNav">♥ المفضلة</button>
   </div>
 </header>
 
-<main>
-  <section class="hero">
+<section class="hero">
+  <div class="hero-inner">
     <div class="hero-content">
-      <span class="eyebrow">✦ YOUR PRIVATE CINEMA</span>
-      <h1>كل قصة،<br><span>تستحق أن تُعاش.</span></h1>
-      <p>اكتشف عوالم الدراما الآسيوية، من القصص الرومانسية إلى الغموض والأكشن. حكايتك القادمة تبدأ من هنا.</p>
-      <div class="hero-buttons">
-        <button class="primary" id="exploreBtn" type="button">اكتشف الأعمال <span>←</span></button>
-        <button class="secondary" id="heroFavorites" type="button">♡ قائمتك الخاصة</button>
-      </div>
+      <span class="tag">NOTWIN TV ORIGINAL EXPERIENCE</span>
+      <h1>عالمك من الأفلام والمسلسلات</h1>
+      <p>اكتشف أعمالًا جديدة، تصفّح الأفلام والمسلسلات، وابحث عن المفضلة تاعك في مكان واحد.</p>
+      <button class="primary" id="exploreBtn">اكتشف المكتبة ←</button>
     </div>
-    <div class="hero-decoration" aria-hidden="true"><span>NTV</span></div>
-  </section>
+  </div>
+</section>
 
-  <div class="search-wrap" id="searchArea">
-    <form class="search" id="searchForm">
-      <input id="searchInput" type="search" placeholder="ابحث عن مسلسل..." autocomplete="off" aria-label="البحث عن مسلسل">
-      <button class="primary" type="submit">بحث ⌕</button>
-    </form>
+<main id="catalog">
+  <div class="section-head">
+    <h2 id="sectionTitle">الأكثر شهرة</h2>
+    <div class="tabs">
+      <button class="tab active" data-type="all">الكل</button>
+      <button class="tab" data-type="movie">أفلام</button>
+      <button class="tab" data-type="tv">مسلسلات</button>
+    </div>
   </div>
 
-  <section class="section" id="catalog">
-    <div class="section-head">
-      <div>
-        <h2 id="sectionTitle">اكتشف عالمك</h2>
-        <p id="sectionSubtitle">اختيارات جديدة تنتظرك</p>
-      </div>
-      <span class="count" id="resultCount"></span>
-    </div>
+  <div class="filters">
+    <button class="filterbtn active" data-filter="popular">الأكثر شهرة</button>
+    <button class="filterbtn" data-filter="top">الأعلى تقييماً</button>
+    <button class="filterbtn" data-filter="favorites">المفضلة ♥</button>
+  </div>
 
-    <div class="filters" id="filters" aria-label="تصنيفات المسلسلات">
-      <button class="active" data-filter="all" type="button">الكل</button>
-      <button data-filter="Drama" type="button">دراما</button>
-      <button data-filter="Romance" type="button">رومانسي</button>
-      <button data-filter="Action" type="button">أكشن</button>
-      <button data-filter="Thriller" type="button">غموض وتشويق</button>
-      <button data-filter="Comedy" type="button">كوميديا</button>
-      <button data-filter="Crime" type="button">جريمة</button>
-      <button data-filter="favorites" type="button">♡ المفضلة</button>
-    </div>
-
-    <div class="grid" id="showGrid">
-      <div class="status"><span class="spinner"></span><br>نحضّر لك مكتبة المسلسلات...</div>
-    </div>
-    <div class="load" id="loadArea" hidden>
-      <button class="secondary" id="loadMore" type="button">عرض المزيد</button>
-    </div>
-  </section>
-
-  <footer>
-    <strong>NOTWIN TV</strong> — عالمك الخاص من الدراما الآسيوية.
-    <br>معلومات الأعمال تُستخدم لأغراض العرض والتعريف.
-  </footer>
+  <div id="grid" class="grid">
+    <div class="loading">جاري تحميل مكتبة NOTWIN TV...</div>
+  </div>
+  <div class="loadrow">
+    <button id="loadMore" class="secondary">تحميل المزيد</button>
+  </div>
 </main>
 
-<nav class="bottom" aria-label="التنقل">
-  <button class="active" data-nav="home" type="button"><span class="nav-icon">⌂</span>الرئيسية</button>
-  <button data-nav="search" type="button"><span class="nav-icon">⌕</span>البحث</button>
-  <button data-nav="favorites" type="button"><span class="nav-icon">♡</span>المفضلة</button>
+<footer>NOTWIN TV © <span id="year"></span> — مكتبتك الترفيهية</footer>
+
+<nav class="bottom">
+  <button class="active" data-bottom="all"><span>⌂</span>الرئيسية</button>
+  <button data-bottom="movie"><span>▣</span>أفلام</button>
+  <button data-bottom="tv"><span>▤</span>مسلسلات</button>
+  <button data-bottom="favorites"><span>♥</span>المفضلة</button>
 </nav>
 
+<div class="modal" id="detailsModal">
+  <div class="modal-box">
+    <button class="close" id="closeModal" aria-label="إغلاق">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
 <script>
-"use strict";
+(() => {
+  "use strict";
 
-/*
-  NOTWIN TV
-  صفحة الفهرس فقط.
-  لا تغيّر watch.html.
-  TMDB API key: المفتاح المستخدم في مشروعك الحالي.
-*/
+  // مفتاح TMDB الذي وضعته في نسختك السابقة
+  const TMDB_KEY = "26c5ad9f51818e110945285552c11a75";
+  const TMDB = "https://api.themoviedb.org/3";
+  const IMG = "https://image.tmdb.org/t/p/w500";
+  const ORIGINAL = "https://image.tmdb.org/t/p/original";
 
-const TMDB_KEY = "26c5ad9f51818e110945285552c11a75";
-const TVMAZE_BASE = "https://api.tvmaze.com";
-const TMDB_BASE = "https://api.themoviedb.org/3";
-const TMDB_IMAGE = "https://image.tmdb.org/t/p/w500";
+  const grid = document.getElementById("grid");
+  const searchInput = document.getElementById("searchInput");
+  const modal = document.getElementById("detailsModal");
+  const modalContent = document.getElementById("modalContent");
 
-const grid = document.getElementById("showGrid");
-const searchInput = document.getElementById("searchInput");
-const searchForm = document.getElementById("searchForm");
-const filters = document.getElementById("filters");
-const resultCount = document.getElementById("resultCount");
-const sectionTitle = document.getElementById("sectionTitle");
-const sectionSubtitle = document.getElementById("sectionSubtitle");
-const loadArea = document.getElementById("loadArea");
-const loadMoreButton = document.getElementById("loadMore");
+  let activeType = "all";
+  let activeFilter = "popular";
+  let page = 1;
+  let allItems = [];
+  let shownItems = [];
+  let searchTimer = null;
+  let requestId = 0;
+  let currentSearch = "";
 
-let allShows = [];
-let visibleShows = [];
-let currentFilter = "all";
-let currentSearch = "";
-let currentPage = 1;
-let loading = false;
-let searchTimer = null;
-let requestToken = 0;
-const PAGE_SIZE = 18;
-const tmdbIdCache = new Map();
-const failedTmdbNames = new Set();
+  const favorites = new Set(
+    JSON.parse(localStorage.getItem("notwin_favorites") || "[]")
+  );
 
-function readFavorites() {
-  try {
-    const saved = JSON.parse(localStorage.getItem("notwin_tv_favorites") || "[]");
-    return new Set(Array.isArray(saved) ? saved.map(String) : []);
-  } catch {
-    return new Set();
-  }
-}
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-let favorites = readFavorites();
-
-function saveFavorites() {
-  try {
-    localStorage.setItem("notwin_tv_favorites", JSON.stringify([...favorites]));
-  } catch (error) {
-    console.warn("Could not save favorites", error);
-  }
-}
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
-}
-
-function cleanText(html) {
-  const node = document.createElement("div");
-  node.innerHTML = html || "";
-  return (node.textContent || "").replace(/\s+/g, " ").trim();
-}
-
-function showStatus(title, message = "") {
-  grid.innerHTML = `
-    <div class="status">
-      <strong>${escapeHTML(title)}</strong>
-      ${escapeHTML(message)}
-    </div>`;
-  loadArea.hidden = true;
-}
-
-function normalizedShow(show) {
-  return {
-    id: String(show.id),
-    name: show.name || "مسلسل بدون اسم",
-    image: show.image?.original || show.image?.medium || "",
-    summary: cleanText(show.summary || ""),
-    genres: Array.isArray(show.genres) ? show.genres : [],
-    rating: show.rating?.average ?? null,
-    year: show.premiered ? String(show.premiered).slice(0, 4) : "",
-    language: show.language || "",
-    country: show.network?.country?.name || show.webChannel?.country?.name || "",
-    url: show.url || "",
-    type: "tv"
-  };
-}
-
-function showKey(show) {
-  return String(show.id);
-}
-
-function isFavorite(show) {
-  return favorites.has(showKey(show));
-}
-
-function setFilterButton(filter) {
-  document.querySelectorAll("#filters button").forEach(button => {
-    const active = button.dataset.filter === filter;
-    button.classList.toggle("active", active);
-    button.setAttribute("aria-pressed", String(active));
-  });
-}
-
-function setNavActive(nav) {
-  document.querySelectorAll(".bottom button").forEach(button => {
-    button.classList.toggle("active", button.dataset.nav === nav);
-  });
-}
-
-function updateFavoriteButtons() {
-  document.querySelectorAll(".fav").forEach(button => {
-    const id = String(button.dataset.id);
-    const saved = favorites.has(id);
-    button.classList.toggle("saved", saved);
-    button.textContent = saved ? "♥" : "♡";
-    button.setAttribute("aria-label", saved ? "إزالة من المفضلة" : "إضافة إلى المفضلة");
-    button.setAttribute("aria-pressed", String(saved));
-  });
-}
-
-function renderCard(show) {
-  const favorite = isFavorite(show);
-  const rating = show.rating != null
-    ? `★ ${escapeHTML(show.rating)}`
-    : "دراما آسيوية";
-
-  const image = show.image
-    ? `<img src="${escapeHTML(show.image)}" alt="${escapeHTML(show.name)}" loading="lazy" referrerpolicy="no-referrer">`
-    : `<div class="poster-placeholder">NTV</div>`;
-
-  const genres = show.genres.slice(0, 2).join(" • ");
-  const description = show.summary || "اكتشف تفاصيل هذا العمل وأجواءه قبل المشاهدة.";
-  const meta = [show.year, genres].filter(Boolean).join(" • ");
-
-  return `
-    <article class="card" data-card-id="${escapeHTML(show.id)}"
-      tabindex="0" role="link" aria-label="مشاهدة ${escapeHTML(show.name)}">
-      <div class="poster">
-        ${image}
-        <div class="poster-shade"></div>
-        <span class="type-tag">مسلسل</span>
-        <button class="fav ${favorite ? "saved" : ""}" type="button"
-          data-id="${escapeHTML(show.id)}"
-          aria-label="${favorite ? "إزالة من المفضلة" : "إضافة إلى المفضلة"}"
-          aria-pressed="${favorite}">${favorite ? "♥" : "♡"}</button>
-      </div>
-      <div class="info">
-        <div class="card-title">${escapeHTML(show.name)}</div>
-        <div class="meta rating">${rating}</div>
-        <div class="meta">${escapeHTML(meta || "دراما آسيوية")}</div>
-        <div class="description">${escapeHTML(description)}</div>
-      </div>
-    </article>`;
-}
-
-function renderShows() {
-  const start = (currentPage - 1) * PAGE_SIZE;
-  const pageShows = visibleShows.slice(0, currentPage * PAGE_SIZE);
-
-  resultCount.textContent = visibleShows.length
-    ? `${visibleShows.length} عمل`
-    : "";
-
-  if (!pageShows.length) {
-    showStatus(
-      currentFilter === "favorites" ? "قائمتك ما زالت فارغة" : "ما لقيناش نتائج",
-      currentFilter === "favorites"
-        ? "اضغط على ♡ في أي مسلسل باش تحفظه هنا."
-        : "جرّب اسمًا آخر أو غيّر التصنيف."
-    );
-    return;
+  function saveFavorites() {
+    localStorage.setItem("notwin_favorites", JSON.stringify([...favorites]));
   }
 
-  grid.innerHTML = pageShows.map(renderCard).join("");
-  loadArea.hidden = pageShows.length >= visibleShows.length;
-  updateFavoriteButtons();
-}
-
-function applyFilters() {
-  let list = [...allShows];
-
-  if (currentFilter === "favorites") {
-    list = list.filter(isFavorite);
-    sectionTitle.textContent = "قائمتك الخاصة";
-    sectionSubtitle.textContent = "المسلسلات التي حفظتها";
-  } else {
-    sectionTitle.textContent = currentSearch ? "نتائج البحث" : "اكتشف عالمك";
-    sectionSubtitle.textContent = currentSearch
-      ? `نتائج مطابقة لـ «${currentSearch}»`
-      : "اختيارات جديدة تنتظرك";
-
-    if (currentFilter !== "all") {
-      list = list.filter(show => show.genres.includes(currentFilter));
-    }
+  function escapeHTML(value = "") {
+    return String(value).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[ch]));
   }
 
-  visibleShows = list;
-  currentPage = 1;
-  renderShows();
-}
-
-async function fetchJSON(url) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  return response.json();
-}
-
-function uniqueShows(shows) {
-  const map = new Map();
-  for (const item of shows) {
-    if (!item || item.id == null || !item.name) continue;
-    const show = normalizedShow(item);
-    if (!map.has(show.id)) map.set(show.id, show);
+  function getTitle(item) {
+    return item.title || item.name || "بدون عنوان";
   }
-  return [...map.values()];
-}
 
-/*
-  TVmaze is used as the catalogue data source.
-  Search results and show cards are displayed in our own UI.
-*/
-async function loadCatalog() {
-  if (loading) return;
-  loading = true;
-  showStatus("لحظة برك...", "نحمّلو المسلسلات.");
+  function getYear(item) {
+    const date = item.release_date || item.first_air_date || "";
+    return date ? date.slice(0, 4) : "غير معروف";
+  }
 
-  try {
-    const queries = [
-      "Korean drama",
-      "Korean",
-      "Japanese drama",
-      "Chinese drama",
-      "Asian drama",
-      "Thai drama"
-    ];
+  function itemKey(item) {
+    return item.media_type + "-" + item.id;
+  }
 
-    const requests = [
-      fetchJSON(`${TVMAZE_BASE}/shows?page=0`).catch(() => [])
-    ];
-
-    for (const query of queries) {
-      requests.push(
-        fetchJSON(`${TVMAZE_BASE}/search/shows?q=${encodeURIComponent(query)}`)
-          .then(rows => rows.map(row => row.show).filter(Boolean))
-          .catch(() => [])
-      );
-    }
-
-    const results = await Promise.all(requests);
-    const merged = [];
-
-    for (const rows of results) {
-      if (Array.isArray(rows)) merged.push(...rows);
-    }
-
-    allShows = uniqueShows(merged);
-    allShows.sort((a, b) => {
-      const score = show => {
-        let n = show.rating || 0;
-        const words = `${show.name} ${show.country}`.toLowerCase();
-        if (/korean|korea|japan|chinese|china|thai|asian|taiwan|south korea/.test(words)) n += 1;
-        return n;
-      };
-      return score(b) - score(a);
+  async function api(path, params = {}) {
+    const url = new URL(TMDB + path);
+    url.searchParams.set("api_key", TMDB_KEY);
+    url.searchParams.set("language", "ar");
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== "") {
+        url.searchParams.set(key, value);
+      }
     });
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("TMDB API error: " + response.status);
+    return response.json();
+  }
 
-    if (!allShows.length) {
-      showStatus("تعذّر تحميل المكتبة", "تحقّق من اتصال الإنترنت وحاول مجددًا.",);
-      const retry = document.createElement("button");
-      retry.className = "secondary";
-      retry.textContent = "إعادة المحاولة";
-      retry.style.marginTop = "12px";
-      retry.onclick = () => {
-        loading = false;
-        loadCatalog();
-      };
-      grid.querySelector(".status")?.appendChild(retry);
+  function normalize(item, type) {
+    return {...item, media_type: type};
+  }
+
+  function posterHTML(item) {
+    if (item.poster_path) {
+      return `<img loading="lazy" src="${IMG}${item.poster_path}"
+        alt="${escapeHTML(getTitle(item))}"
+        onerror="this.parentElement.innerHTML='<div class=&quot;missing&quot;>لا توجد صورة</div>'">`;
+    }
+    return `<div class="missing">NOTWIN TV</div>`;
+  }
+
+  function cardHTML(item) {
+    const key = itemKey(item);
+    const title = escapeHTML(getTitle(item));
+    const rating = Number(item.vote_average || 0).toFixed(1);
+    const typeName = item.media_type === "movie" ? "فيلم" : "مسلسل";
+    return `
+      <article class="card" data-key="${escapeHTML(key)}" tabindex="0"
+        aria-label="${title}">
+        <div class="poster">
+          ${posterHTML(item)}
+          <span class="rating">★ ${rating}</span>
+          <span class="kind">${typeName}</span>
+          <button class="favorite ${favorites.has(key) ? "on" : ""}"
+            data-fav="${escapeHTML(key)}" aria-label="إضافة للمفضلة">
+            ${favorites.has(key) ? "♥" : "♡"}
+          </button>
+        </div>
+        <div class="card-info">
+          <h3>${title}</h3>
+          <div class="meta"><span>${getYear(item)}</span><span>★ ${rating}</span></div>
+        </div>
+      </article>`;
+  }
+
+  function render(items) {
+    shownItems = items;
+    if (!items.length) {
+      grid.innerHTML = `<div class="empty">ما لقيناش نتائج هنا. جرّب كلمة بحث أخرى.</div>`;
       return;
     }
-
-    applyFilters();
-  } catch (error) {
-    console.error(error);
-    showStatus("تعذّر تحميل المكتبة", "تحقّق من الإنترنت ثم حدّث الصفحة.");
-  } finally {
-    loading = false;
-  }
-}
-
-async function searchShows(query) {
-  const token = ++requestToken;
-  currentSearch = query.trim();
-  currentFilter = "all";
-  setFilterButton("all");
-  setNavActive("search");
-
-  if (!currentSearch) {
-    applyFilters();
-    return;
+    grid.innerHTML = items.map(cardHTML).join("");
   }
 
-  sectionTitle.textContent = "نتائج البحث";
-  sectionSubtitle.textContent = `نبحث عن «${currentSearch}»`;
-  showStatus("جاري البحث...", "نفتّش في مكتبة المسلسلات.");
-
-  try {
-    const rows = await fetchJSON(
-      `${TVMAZE_BASE}/search/shows?q=${encodeURIComponent(currentSearch)}`
-    );
-
-    if (token !== requestToken) return;
-
-    const results = rows.map(row => row.show).filter(Boolean);
-    const found = uniqueShows(results);
-
-    // Merge search results so they can also be saved and filtered locally.
-    const merged = uniqueShows([...found, ...allShows]);
-    const queryLower = currentSearch.toLowerCase();
-
-    visibleShows = found.length
-      ? found
-      : merged.filter(show => show.name.toLowerCase().includes(queryLower));
-
-    currentPage = 1;
-    resultCount.textContent = visibleShows.length
-      ? `${visibleShows.length} نتيجة`
-      : "";
-
-    if (!visibleShows.length) {
-      showStatus("ما لقيناش نتائج", "جرّب اسمًا آخر أو اكتب الاسم بالإنجليزية.");
-      return;
-    }
-
-    grid.innerHTML = visibleShows.slice(0, PAGE_SIZE).map(renderCard).join("");
-    loadArea.hidden = visibleShows.length <= PAGE_SIZE;
-    updateFavoriteButtons();
-  } catch (error) {
-    console.error(error);
-    if (token === requestToken) {
-      showStatus("فشل البحث", "تحقّق من الإنترنت وحاول مرة أخرى.");
-    }
-  }
-}
-
-async function getTMDBId(show) {
-  const key = show.name.trim().toLowerCase();
-
-  if (tmdbIdCache.has(key)) return tmdbIdCache.get(key);
-  if (failedTmdbNames.has(key)) return null;
-
-  try {
-    const data = await fetchJSON(
-      `${TMDB_BASE}/search/tv?api_key=${encodeURIComponent(TMDB_KEY)}&query=${encodeURIComponent(show.name)}`
-    );
-
-    const results = Array.isArray(data.results) ? data.results : [];
-    if (!results.length) {
-      failedTmdbNames.add(key);
-      return null;
-    }
-
-    const normalize = value => String(value || "")
-      .normalize("NFKD")
-      .toLowerCase()
-      .replace(/[^\p{L}\p{N}]+/gu, "");
-
-    const target = normalize(show.name);
-    const exact = results.find(item =>
-      normalize(item.name) === target ||
-      normalize(item.original_name) === target
-    );
-
-    // Prefer exact title matches; don't guess among multiple unrelated results.
-    let match = exact || null;
-    if (!match && results.length === 1) match = results[0];
-
-    if (!match || !match.id) {
-      failedTmdbNames.add(key);
-      return null;
-    }
-
-    tmdbIdCache.set(key, match.id);
-    return match.id;
-  } catch (error) {
-    console.error("TMDB lookup failed:", error);
-    return null;
-  }
-}
-
-async function openWatch(show) {
-  if (!show) return;
-
-  const card = document.querySelector(`[data-card-id="${CSS.escape(String(show.id))}"]`);
-  if (card) {
-    card.style.opacity = ".65";
-    card.style.pointerEvents = "none";
-  }
-
-  try {
-    const tmdbId = await getTMDBId(show);
-
-    if (!tmdbId) {
-      alert("ما لقيناش معرّف موثوق لهذا المسلسل في مكتبة المشاهدة. جرّب مسلسلًا آخر.");
-      return;
-    }
-
-    const params = new URLSearchParams({
-      id: String(tmdbId),
-      title: show.name,
-      type: "tv",
-      season: "1",
-      episode: "1"
-    });
-
-    window.location.href = `./watch.html?${params.toString()}`;
-  } catch (error) {
-    console.error(error);
-    alert("صرى خطأ أثناء فتح المسلسل. حاول مرة أخرى.");
-  } finally {
-    if (card) {
-      card.style.opacity = "";
-      card.style.pointerEvents = "";
-    }
-  }
-}
-
-function toggleFavorite(id) {
-  const key = String(id);
-
-  if (favorites.has(key)) favorites.delete(key);
-  else favorites.add(key);
-
-  saveFavorites();
-  updateFavoriteButtons();
-
-  if (currentFilter === "favorites") {
-    applyFilters();
-  }
-}
-
-function findShow(id) {
-  return allShows.find(show => String(show.id) === String(id)) ||
-    visibleShows.find(show => String(show.id) === String(id));
-}
-
-/* Click handling: favorite buttons and posters */
-grid.addEventListener("click", event => {
-  const favoriteButton = event.target.closest(".fav");
-
-  if (favoriteButton) {
-    event.stopPropagation();
-    toggleFavorite(favoriteButton.dataset.id);
-    return;
-  }
-
-  const card = event.target.closest(".card");
-  if (card) {
-    const show = findShow(card.dataset.cardId);
-    if (show) openWatch(show);
-  }
-});
-
-grid.addEventListener("keydown", event => {
-  if (event.target.closest("button")) return;
-  if (event.key !== "Enter" && event.key !== " ") return;
-
-  const card = event.target.closest(".card");
-  if (!card) return;
-
-  event.preventDefault();
-  const show = findShow(card.dataset.cardId);
-  if (show) openWatch(show);
-});
-
-/* Filters */
-filters.addEventListener("click", event => {
-  const button = event.target.closest("button[data-filter]");
-  if (!button) return;
-
-  currentFilter = button.dataset.filter;
-  currentSearch = "";
-  searchInput.value = "";
-  requestToken++;
-
-  setFilterButton(currentFilter);
-  setNavActive(currentFilter === "favorites" ? "favorites" : "home");
-  applyFilters();
-});
-
-/* Search form */
-searchForm.addEventListener("submit", event => {
-  event.preventDefault();
-  searchShows(searchInput.value);
-});
-
-searchInput.addEventListener("input", () => {
-  clearTimeout(searchTimer);
-  const query = searchInput.value.trim();
-
-  if (!query) {
-    requestToken++;
-    currentSearch = "";
-    currentFilter = "all";
-    setFilterButton("all");
-    applyFilters();
-    return;
-  }
-
-  searchTimer = setTimeout(() => searchShows(query), 450);
-});
-
-/* More results */
-loadMoreButton.addEventListener("click", () => {
-  currentPage++;
-  renderShows();
-});
-
-/* Header and hero navigation */
-function focusSearch() {
-  document.getElementById("searchArea").scrollIntoView({ behavior: "smooth" });
-  setTimeout(() => searchInput.focus(), 250);
-}
-
-function showFavorites() {
-  currentSearch = "";
-  searchInput.value = "";
-  currentFilter = "favorites";
-  setFilterButton("favorites");
-  setNavActive("favorites");
-  applyFilters();
-  document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
-}
-
-document.getElementById("topSearch").addEventListener("click", focusSearch);
-document.getElementById("topFavorites").addEventListener("click", showFavorites);
-document.getElementById("heroFavorites").addEventListener("click", showFavorites);
-document.getElementById("exploreBtn").addEventListener("click", () => {
-  document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
-});
-
-document.querySelectorAll(".bottom button").forEach(button => {
-  button.addEventListener("click", () => {
-    const nav = button.dataset.nav;
-
-    if (nav === "search") {
-      focusSearch();
-      setNavActive("search");
-    } else if (nav === "favorites") {
-      showFavorites();
+  async function loadCatalog(append = false) {
+    const thisRequest = ++requestId;
+    if (!append) {
+      page = 1;
+      grid.innerHTML = `<div class="loading">جاري تحميل المحتوى...</div>`;
     } else {
-      currentFilter = "all";
-      currentSearch = "";
-      searchInput.value = "";
-      setFilterButton("all");
-      setNavActive("home");
-      applyFilters();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      page++;
+      document.getElementById("loadMore").textContent = "جاري التحميل...";
+    }
+
+    try {
+      let results = [];
+
+      if (currentSearch.trim()) {
+        if (activeType === "all" || activeType === "movie") {
+          const data = await api("/search/movie", {query: currentSearch, page});
+          results.push(...(data.results || []).map(x => normalize(x, "movie")));
+        }
+        if (activeType === "all" || activeType === "tv") {
+          const data = await api("/search/tv", {query: currentSearch, page});
+          results.push(...(data.results || []).map(x => normalize(x, "tv")));
+        }
+      } else {
+        const suffix = activeFilter === "top" ? "top_rated" : "popular";
+        if (activeType === "all" || activeType === "movie") {
+          const data = await api("/movie/" + suffix, {page});
+          results.push(...(data.results || []).map(x => normalize(x, "movie")));
+        }
+        if (activeType === "all" || activeType === "tv") {
+          const data = await api("/tv/" + suffix, {page});
+          results.push(...(data.results || []).map(x => normalize(x, "tv")));
+        }
+      }
+
+      if (thisRequest !== requestId) return;
+
+      // عند فتح المكتبة العامة نضيف Venom بوضوح إلى أول النتائج
+      if (!append && !currentSearch && (activeType === "all" || activeType === "movie")) {
+        try {
+          const venom = await api("/search/movie", {query:"Venom"});
+          const match = (venom.results || []).find(x =>
+            /venom/i.test(x.title || "")
+          );
+          if (match && thisRequest === requestId) {
+            results = results.filter(x => !(x.media_type === "movie" && x.id === match.id));
+            results.unshift(normalize(match, "movie"));
+          }
+        } catch (e) {
+          // إذا تعذر البحث عن Venom، تبقى المكتبة العادية متاحة.
+        }
+      }
+
+      if (thisRequest !== requestId) return;
+      allItems = append ? allItems.concat(results) : results;
+      applyFilter();
+    } catch (error) {
+      if (thisRequest !== requestId) return;
+      if (!append) {
+        grid.innerHTML = `<div class="error">تعذّر تحميل المحتوى. تأكد من الإنترنت ومفتاح TMDB ثم أعد المحاولة.<br><button class="secondary" onclick="location.reload()">إعادة المحاولة</button></div>`;
+      }
+    } finally {
+      document.getElementById("loadMore").textContent = "تحميل المزيد";
+    }
+  }
+
+  function applyFilter() {
+    let items = [...allItems];
+    if (activeFilter === "favorites") {
+      items = items.filter(item => favorites.has(itemKey(item)));
+    } else if (activeFilter === "top") {
+      items.sort((a, b) => (b.vote_average || 0) - (a.vote_average || 0));
+    }
+    render(items);
+  }
+
+  async function openDetails(item) {
+    const isMovie = item.media_type === "movie";
+    const title = escapeHTML(getTitle(item));
+    const overview = escapeHTML(item.overview || "لا يوجد وصف متاح باللغة العربية لهذا العمل.");
+    const key = itemKey(item);
+    const poster = item.poster_path
+      ? `<img src="${IMG}${item.poster_path}" alt="${title}">`
+      : `<div class="missing">NOTWIN TV</div>`;
+
+    modalContent.innerHTML = `
+      <div class="modal-top">
+        <div>${poster}</div>
+        <div class="modal-info">
+          <span class="tag">${isMovie ? "فيلم" : "مسلسل"}</span>
+          <h2>${title}</h2>
+          <div class="meta"><span>${getYear(item)}</span>
+            <span>★ ${Number(item.vote_average || 0).toFixed(1)}</span></div>
+          <p>${overview}</p>
+          <div class="modal-actions">
+            <button class="primary" id="modalFavorite">${favorites.has(key) ? "♥ في المفضلة" : "♡ أضف للمفضلة"}</button>
+            ${isMovie
+              ? `<a class="secondary" href="https://www.themoviedb.org/movie/${encodeURIComponent(item.id)}" target="_blank" rel="noopener">صفحة الفيلم ↗</a>`
+              : `<button class="primary" id="watchSeries">فتح صفحة المشاهدة</button>`}
+          </div>
+          ${isMovie ? `<p>مشاهدة الأفلام مباشرة غير مفعّلة بعد في مشغّل الموقع الحالي.</p>` : ""}
+        </div>
+      </div>`;
+
+    modal.classList.add("open");
+
+    document.getElementById("modalFavorite").onclick = () => {
+      toggleFavorite(key);
+      document.getElementById("modalFavorite").textContent =
+        favorites.has(key) ? "♥ في المفضلة" : "♡ أضف للمفضلة";
+      applyFilter();
+    };
+
+    const watchButton = document.getElementById("watchSeries");
+    if (watchButton) {
+      watchButton.onclick = async () => {
+        watchButton.disabled = true;
+        watchButton.textContent = "جاري فتح المسلسل...";
+        try {
+          // إيجاد معرّف TMDB الصحيح بالاسم حتى يبقى watch.html الحالي متوافقاً.
+          const data = await api("/search/tv", {query: getTitle(item)});
+          const match = (data.results || []).find(x => x.name === getTitle(item)) || data.results?.[0];
+          if (match) {
+            location.href = `watch.html?id=${encodeURIComponent(match.id)}&type=tv`;
+          } else {
+            alert("ما لقيناش صفحة المشاهدة لهذا المسلسل.");
+            watchButton.disabled = false;
+            watchButton.textContent = "فتح صفحة المشاهدة";
+          }
+        } catch (e) {
+          alert("تعذر فتح المسلسل. تأكد من الإنترنت.");
+          watchButton.disabled = false;
+          watchButton.textContent = "فتح صفحة المشاهدة";
+        }
+      };
+    }
+  }
+
+  function toggleFavorite(key) {
+    if (favorites.has(key)) favorites.delete(key);
+    else favorites.add(key);
+    saveFavorites();
+  }
+
+  grid.addEventListener("click", event => {
+    const favButton = event.target.closest("[data-fav]");
+    if (favButton) {
+      event.stopPropagation();
+      const key = favButton.dataset.fav;
+      toggleFavorite(key);
+      applyFilter();
+      return;
+    }
+    const card = event.target.closest("[data-key]");
+    if (card) {
+      const item = shownItems.find(x => itemKey(x) === card.dataset.key);
+      if (item) openDetails(item);
     }
   });
-});
 
-/* Start */
-loadCatalog();
+  grid.addEventListener("keydown", event => {
+    if (event.key !== "Enter") return;
+    const card = event.target.closest("[data-key]");
+    if (!card) return;
+    const item = shownItems.find(x => itemKey(x) === card.dataset.key);
+    if (item) openDetails(item);
+  });
+
+  document.querySelectorAll(".tab").forEach(button => {
+    button.addEventListener("click", () => {
+      activeType = button.dataset.type;
+      document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === button));
+      document.querySelectorAll(".bottom button").forEach(x =>
+        x.classList.toggle("active", x.dataset.bottom === activeType)
+      );
+      document.getElementById("sectionTitle").textContent =
+        activeType === "movie" ? "الأفلام" :
+        activeType === "tv" ? "المسلسلات" : "الأكثر شهرة";
+      loadCatalog();
+    });
+  });
+
+  document.querySelectorAll(".filterbtn").forEach(button => {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter;
+      document.querySelectorAll(".filterbtn").forEach(x => x.classList.toggle("active", x === button));
+      if (activeFilter === "favorites") {
+        applyFilter();
+      } else {
+        loadCatalog();
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-bottom]").forEach(button => {
+    button.addEventListener("click", () => {
+      const value = button.dataset.bottom;
+      if (value === "favorites") {
+        activeFilter = "favorites";
+        document.querySelectorAll(".filterbtn").forEach(x =>
+          x.classList.toggle("active", x.dataset.filter === "favorites")
+        );
+        applyFilter();
+        document.getElementById("sectionTitle").textContent = "المفضلة";
+        return;
+      }
+      activeType = value;
+      activeFilter = "popular";
+      document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x.dataset.type === value));
+      document.querySelectorAll(".filterbtn").forEach(x => x.classList.toggle("active", x.dataset.filter === "popular"));
+      loadCatalog();
+    });
+  });
+
+  document.getElementById("favoritesNav").addEventListener("click", () => {
+    activeFilter = "favorites";
+    document.querySelectorAll(".filterbtn").forEach(x => x.classList.toggle("active", x.dataset.filter === "favorites"));
+    applyFilter();
+    document.getElementById("sectionTitle").textContent = "المفضلة";
+    document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+  });
+
+  searchInput.addEventListener("input", () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      currentSearch = searchInput.value.trim();
+      loadCatalog();
+    }, 450);
+  });
+
+  document.getElementById("loadMore").addEventListener("click", () => loadCatalog(true));
+  document.getElementById("exploreBtn").addEventListener("click", () =>
+    document.getElementById("catalog").scrollIntoView({behavior:"smooth"})
+  );
+  document.getElementById("closeModal").addEventListener("click", () => modal.classList.remove("open"));
+  modal.addEventListener("click", event => {
+    if (event.target === modal) modal.classList.remove("open");
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") modal.classList.remove("open");
+  });
+
+  loadCatalog();
+})();
 </script>
 </body>
-</html>
+      </html>
