@@ -8,269 +8,283 @@
 <title>NOTWIN TV</title>
 
 <style>
-:root{
+:root {
   --bg:#05050b;
-  --panel:#0b0912;
-  --player:#100e16;
+  --panel:#08060e;
+  --video:#100e16;
   --purple:#b49dff;
-  --purple2:#7061ff;
-  --text:#f2efff;
-  --muted:#aaa4bc;
+  --text:#e9e4f4;
+  --muted:#a49caf;
 }
-*{box-sizing:border-box}
-html,body{
+* { box-sizing:border-box; }
+html,body {
   margin:0;
   min-height:100%;
-  background:var(--bg);
+  background:#000;
   color:var(--text);
   font-family:Arial,Tahoma,sans-serif;
 }
-button,select{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-
-.page{
-  width:min(100%,900px);
+button,select { font:inherit; }
+button { cursor:pointer; }
+.page {
+  width:min(100%,1160px);
   min-height:100vh;
   margin:auto;
-  padding:24px 20px;
-  background:#07060d;
+  padding:24px 4%;
+  background:var(--bg);
 }
-.topbar{
+.topbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:52px;
+}
+#showTitle {
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:clamp(20px,4vw,38px);
+  font-weight:400;
+  color:#c9c2d6;
+}
+.logo {
+  flex-shrink:0;
+  color:var(--purple);
+  font-size:clamp(24px,4.5vw,40px);
+  font-weight:900;
+}
+.player-card {
+  background:#000;
+  border-radius:30px;
+  padding:24px;
+}
+.player-head {
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  margin-bottom:35px;
+  margin-bottom:38px;
 }
-#showTitle{
-  font-size:clamp(18px,4vw,30px);
-  font-weight:500;
-  color:#d5d0e2;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+#episodeLabel {
+  color:#cfc8da;
+  font-size:clamp(22px,3.5vw,36px);
 }
-.logo{
-  flex-shrink:0;
-  font-size:clamp(22px,4.5vw,34px);
-  font-weight:900;
-  color:var(--purple);
-}
-.player-card{
-  background:#000;
-  border-radius:27px;
-  padding:18px;
-  overflow:hidden;
-}
-.player-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:20px;
-}
-.episode-label{
-  font-size:clamp(17px,3.6vw,27px);
-  color:#d8d2e4;
-}
-.fullscreen{
+.fullscreen-btn {
   width:34px;
   height:34px;
   padding:0;
   display:grid;
   place-items:center;
   border:0;
-  border-radius:8px;
   background:transparent;
   color:#eee;
   font-size:24px;
-  line-height:1;
+  border-radius:7px;
 }
-.fullscreen:active{background:#21182e}
+.fullscreen-btn:active { background:#21182d; }
 
-.video-box{
+.video-box {
   width:100%;
   aspect-ratio:16/9;
   position:relative;
   overflow:hidden;
-  background:var(--player);
-  border-radius:23px;
+  border-radius:27px;
+  background:var(--video);
 }
-#videoFrame{
+#videoFrame {
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
   border:0;
-  background:var(--player);
+  background:var(--video);
 }
-.loading{
+.video-placeholder {
   position:absolute;
   inset:0;
-  z-index:1;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
-  gap:18px;
-  background:var(--player);
-  color:#bdb5ca;
-  font-size:clamp(17px,3.5vw,27px);
-  text-align:center;
-  pointer-events:none;
+  gap:24px;
+  background:var(--video);
+  color:#b5adbf;
+  font-size:clamp(21px,3.4vw,36px);
 }
-.loading.hidden{display:none}
-.play-icon{
+.video-placeholder.hidden { display:none; }
+.play-circle {
+  width:90px;
+  height:90px;
   display:grid;
   place-items:center;
-  width:68px;
-  height:68px;
   border-radius:50%;
   background:#a982e7;
   color:#100b18;
-  font-size:30px;
+  font-size:40px;
 }
-.controls{
+.controls {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px;
-  margin-top:30px;
+  gap:22px;
+  margin-top:40px;
 }
-.control{
-  min-height:125px;
+.control-btn {
+  min-width:0;
+  min-height:190px;
+  padding:20px 8px;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
-  gap:17px;
-  padding:15px 5px;
+  gap:30px;
+  border:1px solid #21152e;
+  border-radius:26px;
   background:#191025;
-  color:#e7defa;
-  border:1px solid #20152d;
-  border-radius:22px;
-  font-size:clamp(15px,3vw,23px);
+  color:#e8e0f5;
+  font-size:clamp(19px,3vw,30px);
 }
-.control svg{
-  width:35px;
-  height:35px;
+.control-btn svg {
+  width:47px;
+  height:47px;
   stroke:var(--purple);
   stroke-width:2.5;
-  fill:none;
   stroke-linecap:round;
   stroke-linejoin:round;
+  fill:none;
 }
-.control:active{background:#28183c}
-.control:disabled{opacity:.35;cursor:not-allowed}
+.control-btn:active { background:#29183b; }
+.control-btn:disabled { opacity:.35;cursor:not-allowed; }
 
-.episode-panel{
+/* نافذة المواسم والحلقات */
+.episodes-panel {
   display:none;
-  margin-top:18px;
-  padding:16px;
-  border:1px solid #282039;
-  border-radius:18px;
-  background:#0d0b14;
+  margin-top:22px;
+  padding:20px;
+  border:1px solid #30223f;
+  border-radius:20px;
+  background:#100c18;
 }
-.episode-panel.open{display:block}
-.episode-panel label{
+.episodes-panel.open { display:block; }
+.panel-title {
+  margin:0 0 18px;
+  font-size:20px;
+  color:var(--purple);
+}
+.select-row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.select-group label {
   display:block;
   margin-bottom:8px;
   color:var(--muted);
   font-size:14px;
 }
-#seasonSelect,#episodeSelect{
+.select-group select {
   width:100%;
-  padding:13px;
-  margin-bottom:12px;
-  color:var(--text);
-  background:#171121;
-  border:1px solid #302341;
+  min-width:0;
+  padding:13px 10px;
+  border:1px solid #352746;
   border-radius:12px;
+  color:var(--text);
+  background:#1a1225;
 }
-#status{
+#status {
   margin-top:12px;
   color:var(--muted);
   font-size:13px;
   line-height:1.7;
 }
-#status:empty{display:none}
-.error{color:#ff9dbb!important}
+#status:empty { display:none; }
+.error { color:#ff9dbb!important; }
 
-#videoBox:fullscreen{
+/* ملء الشاشة */
+#videoBox:fullscreen {
   width:100vw;
   height:100vh;
   aspect-ratio:auto;
+  border-radius:0;
   background:#000;
-  border-radius:0;
 }
-#videoBox:fullscreen #videoFrame{
+#videoBox:fullscreen #videoFrame {
   width:100%;
   height:100%;
 }
-#videoBox:-webkit-full-screen{
+#videoBox:-webkit-full-screen {
   width:100vw;
   height:100vh;
   aspect-ratio:auto;
   border-radius:0;
 }
-#videoBox:-webkit-full-screen #videoFrame{
+#videoBox:-webkit-full-screen #videoFrame {
   width:100%;
   height:100%;
 }
-body.fullscreen-fallback{
-  overflow:hidden;
-}
-body.fullscreen-fallback .page{
+body.fallback-fullscreen { overflow:hidden; }
+body.fallback-fullscreen .page {
   position:fixed;
   inset:0;
   z-index:9999;
   width:100%;
-  max-width:none;
   padding:0;
-  background:#000;
 }
-body.fullscreen-fallback .topbar,
-body.fullscreen-fallback .controls,
-body.fullscreen-fallback .episode-panel,
-body.fullscreen-fallback #status{
+body.fallback-fullscreen .topbar,
+body.fallback-fullscreen .controls,
+body.fallback-fullscreen .episodes-panel,
+body.fallback-fullscreen #status {
   display:none!important;
 }
-body.fullscreen-fallback .player-card{
+body.fallback-fullscreen .player-card {
   position:absolute;
   inset:0;
   padding:0;
   border-radius:0;
-  background:#000;
 }
-body.fullscreen-fallback .player-head{
+body.fallback-fullscreen .player-head {
   position:absolute;
   top:env(safe-area-inset-top,0px);
   right:12px;
   left:12px;
-  z-index:3;
+  z-index:5;
   margin:0;
 }
-body.fullscreen-fallback .video-box{
-  width:100%;
+body.fallback-fullscreen .video-box {
   height:100%;
   aspect-ratio:auto;
   border-radius:0;
-  background:#000;
 }
-body.fullscreen-fallback #videoFrame{
+body.fallback-fullscreen #videoFrame {
   width:100%;
   height:100%;
 }
 
-@media(max-width:480px){
-  .page{padding:20px 14px}
-  .topbar{margin-bottom:30px}
-  .player-card{padding:13px;border-radius:23px}
-  .player-head{margin-bottom:15px}
-  .video-box{border-radius:19px}
-  .controls{gap:10px;margin-top:23px}
-  .control{min-height:105px;border-radius:18px;gap:14px}
-  .control svg{width:30px;height:30px}
+@media(max-width:600px) {
+  .page { padding:22px 4%; }
+  .topbar { margin-bottom:38px; }
+  .player-card { padding:14px;border-radius:25px; }
+  .player-head { margin-bottom:27px; }
+  .video-box { border-radius:21px; }
+  .play-circle { width:70px;height:70px;font-size:32px; }
+  .video-placeholder { gap:17px; }
+  .controls { gap:12px;margin-top:26px; }
+  .control-btn {
+    min-height:125px;
+    padding:14px 4px;
+    gap:21px;
+    border-radius:21px;
+    font-size:clamp(17px,3.5vw,23px);
+  }
+  .control-btn svg { width:35px;height:35px; }
+  .episodes-panel { padding:14px; }
+}
+@media(max-width:360px) {
+  .page { padding:18px 10px; }
+  .player-card { padding:10px; }
+  .controls { gap:8px; }
+  .control-btn { min-height:110px; }
 }
 </style>
 </head>
@@ -284,9 +298,9 @@ body.fullscreen-fallback #videoFrame{
 
   <section class="player-card">
     <div class="player-head">
-      <button class="fullscreen" id="fullscreenBtn"
-        aria-label="ملء الشاشة بالعرض" title="ملء الشاشة">⛶</button>
-      <div class="episode-label" id="episodeLabel">الحلقة 1</div>
+      <button class="fullscreen-btn" id="fullscreenBtn"
+        type="button" aria-label="ملء الشاشة" title="ملء الشاشة">⛶</button>
+      <div id="episodeLabel">الحلقة 1</div>
     </div>
 
     <div class="video-box" id="videoBox">
@@ -296,15 +310,15 @@ body.fullscreen-fallback #videoFrame{
         allowfullscreen
         referrerpolicy="strict-origin-when-cross-origin"></iframe>
 
-      <div class="loading" id="loading">
-        <span class="play-icon">▶</span>
-        <span id="loadingText">مشغل الفيديو</span>
+      <div class="video-placeholder" id="placeholder">
+        <span class="play-circle">▶</span>
+        <span id="placeholderText">مشغل الفيديو</span>
       </div>
     </div>
   </section>
 
   <div class="controls">
-    <button class="control" id="nextBtn">
+    <button class="control-btn" id="nextBtn" type="button">
       <svg viewBox="0 0 24 24">
         <path d="M5 5v14l10-7z"></path>
         <path d="M19 5v14"></path>
@@ -312,7 +326,7 @@ body.fullscreen-fallback #videoFrame{
       <span>التالية</span>
     </button>
 
-    <button class="control" id="episodesBtn">
+    <button class="control-btn" id="episodesBtn" type="button">
       <svg viewBox="0 0 24 24">
         <path d="M4 5h16M4 11h11M4 17h11"></path>
         <path d="m17 14 4 3-4 3z"></path>
@@ -320,7 +334,7 @@ body.fullscreen-fallback #videoFrame{
       <span>الحلقات</span>
     </button>
 
-    <button class="control" id="previousBtn">
+    <button class="control-btn" id="previousBtn" type="button">
       <svg viewBox="0 0 24 24">
         <path d="M19 5v14L9 12z"></path>
         <path d="M5 5v14"></path>
@@ -329,11 +343,18 @@ body.fullscreen-fallback #videoFrame{
     </button>
   </div>
 
-  <section class="episode-panel" id="episodePanel">
-    <label for="seasonSelect">الموسم</label>
-    <select id="seasonSelect"></select>
-    <label for="episodeSelect">الحلقة</label>
-    <select id="episodeSelect"></select>
+  <section class="episodes-panel" id="episodesPanel">
+    <h2 class="panel-title">المواسم والحلقات</h2>
+    <div class="select-row">
+      <div class="select-group">
+        <label for="seasonSelect">الموسم</label>
+        <select id="seasonSelect"></select>
+      </div>
+      <div class="select-group">
+        <label for="episodeSelect">الحلقة</label>
+        <select id="episodeSelect"></select>
+      </div>
+    </div>
   </section>
 
   <div id="status"></div>
@@ -355,166 +376,153 @@ let seasons = [];
 let episodes = [];
 let seasonNumber = Number(params.get("season")) || 1;
 let episodeNumber = Number(params.get("episode")) || 1;
-let seasonRequest = 0;
+let requestNumber = 0;
 let fallbackFullscreen = false;
 
-async function api(path){
+async function tmdb(path) {
   const url = new URL(TMDB_API + path);
   url.searchParams.set("api_key", TMDB_API_KEY);
   url.searchParams.set("language", "ar-SA");
 
   const response = await fetch(url);
-  if(!response.ok){
-    throw new Error(
-      response.status === 404
-        ? "لم يتم العثور على المسلسل أو الحلقة."
-        : response.status === 401
-        ? "مفتاح TMDB غير صالح."
-        : "تعذر تحميل البيانات. تحقق من الإنترنت."
-    );
+
+  if (!response.ok) {
+    if (response.status === 401) throw new Error("مفتاح TMDB غير صالح.");
+    if (response.status === 404) throw new Error("لم يتم العثور على المحتوى.");
+    throw new Error("تعذر تحميل البيانات. تحقق من الإنترنت.");
   }
   return response.json();
 }
 
-function status(message, isError=false){
+function setStatus(message, error = false) {
   $("status").textContent = message;
-  $("status").classList.toggle("error", isError);
+  $("status").classList.toggle("error", error);
 }
 
-function setLoading(message){
-  $("loadingText").textContent = message;
-  $("loading").classList.remove("hidden");
+function setPlaceholder(message) {
+  $("placeholderText").textContent = message;
+  $("placeholder").classList.remove("hidden");
 }
 
-function updateAddress(){
+function updateLink() {
   const url = new URL(location.href);
-  url.searchParams.set("id", showId);
-  url.searchParams.set("season", seasonNumber);
-  url.searchParams.set("episode", episodeNumber);
+  url.searchParams.set("id", String(showId));
+  url.searchParams.set("season", String(seasonNumber));
+  url.searchParams.set("episode", String(episodeNumber));
   history.replaceState(null, "", url);
 }
 
-function playEpisode(){
+function playEpisode() {
   $("episodeLabel").textContent = "الحلقة " + episodeNumber;
-  setLoading("جاري تجهيز الفيديو...");
+  setPlaceholder("جاري تجهيز الفيديو...");
 
   $("videoFrame").src =
     PLAYER_URL + encodeURIComponent(String(showId)) +
     "?s=" + encodeURIComponent(String(seasonNumber)) +
     "&e=" + encodeURIComponent(String(episodeNumber));
 
-  updateAddress();
-  $("previousBtn").disabled = !hasPrevious();
-  $("nextBtn").disabled = !hasNext();
+  updateLink();
+  updateNavigation();
 }
 
-function hasPrevious(){
-  return episodes.some(ep => ep.episode_number === episodeNumber - 1)
-    || seasons.some(s => s.season_number < seasonNumber);
+function updateNavigation() {
+  const index = episodes.findIndex(
+    item => item.episode_number === episodeNumber
+  );
+  $("previousBtn").disabled = index <= 0 &&
+    !seasons.some(s => s.season_number > 0 && s.season_number < seasonNumber);
+  $("nextBtn").disabled = index < 0 ||
+    (index === episodes.length - 1 &&
+     !seasons.some(s => s.season_number > seasonNumber));
 }
 
-function hasNext(){
-  return episodes.some(ep => ep.episode_number === episodeNumber + 1)
-    || seasons.some(s => s.season_number > seasonNumber);
-}
-
-async function loadSeason(number, requestedEpisode){
-  const request = ++seasonRequest;
+async function loadSeason(number, wantedEpisode = 1) {
+  const currentRequest = ++requestNumber;
   seasonNumber = number;
-  $("episodeSelect").disabled = true;
   $("episodeSelect").replaceChildren();
-  setLoading("جاري تحميل الحلقة...");
+  $("episodeSelect").disabled = true;
+  setPlaceholder("جاري تجهيز الفيديو...");
 
-  try{
-    const data = await api("/tv/" + showId + "/season/" + number);
-    if(request !== seasonRequest) return;
+  try {
+    const data = await tmdb(
+      "/tv/" + showId + "/season/" + seasonNumber
+    );
+    if (currentRequest !== requestNumber) return;
 
     episodes = data.episodes || [];
-    if(!episodes.length){
-      throw new Error("لا توجد حلقات لهذا الموسم.");
-    }
+    if (!episodes.length) throw new Error("لا توجد حلقات في هذا الموسم.");
 
-    const selected = episodes.some(
-      ep => ep.episode_number === requestedEpisode
-    ) ? requestedEpisode : episodes[0].episode_number;
+    const found = episodes.some(
+      item => item.episode_number === wantedEpisode
+    );
+    episodeNumber = found ? wantedEpisode : episodes[0].episode_number;
 
-    episodeNumber = selected;
-
-    for(const ep of episodes){
+    for (const item of episodes) {
       const option = document.createElement("option");
-      option.value = ep.episode_number;
-      option.textContent = "الحلقة " + ep.episode_number +
-        (ep.name ? " — " + ep.name : "");
+      option.value = String(item.episode_number);
+      option.textContent = "الحلقة " + item.episode_number;
       $("episodeSelect").appendChild(option);
     }
 
     $("episodeSelect").value = String(episodeNumber);
     $("episodeSelect").disabled = false;
+    $("seasonSelect").value = String(seasonNumber);
     playEpisode();
-    status("");
-  }catch(error){
-    if(request !== seasonRequest) return;
-    setLoading("تعذر تحميل الحلقة");
-    status(error.message, true);
+    setStatus("");
+  } catch (error) {
+    if (currentRequest !== requestNumber) return;
+    setPlaceholder("تعذر تحميل الفيديو");
+    setStatus(error.message, true);
   }
 }
 
-async function changeEpisode(direction){
-  const currentIndex = episodes.findIndex(
-    ep => ep.episode_number === episodeNumber
+async function goToEpisode(direction) {
+  const index = episodes.findIndex(
+    item => item.episode_number === episodeNumber
   );
-  const target = episodes[currentIndex + direction];
+  const target = episodes[index + direction];
 
-  if(target){
+  if (target) {
     episodeNumber = target.episode_number;
     $("episodeSelect").value = String(episodeNumber);
     playEpisode();
     return;
   }
 
-  const otherSeasons = seasons
+  const validSeasons = seasons
     .filter(s => s.season_number > 0)
-    .sort((a,b) => a.season_number - b.season_number);
+    .sort((a, b) => a.season_number - b.season_number);
 
-  const currentSeasonIndex = otherSeasons.findIndex(
+  const seasonIndex = validSeasons.findIndex(
     s => s.season_number === seasonNumber
   );
-  const otherSeason = otherSeasons[currentSeasonIndex + direction];
+  const nextSeason = validSeasons[seasonIndex + direction];
 
-  if(!otherSeason) return;
+  if (!nextSeason) return;
 
-  try{
-    const data = await api(
-      "/tv/" + showId + "/season/" + otherSeason.season_number
+  try {
+    const data = await tmdb(
+      "/tv/" + showId + "/season/" + nextSeason.season_number
     );
-    const otherEpisodes = data.episodes || [];
-    if(!otherEpisodes.length) return;
+    const list = data.episodes || [];
+    if (!list.length) return;
 
-    const targetEpisode = direction > 0
-      ? otherEpisodes[0].episode_number
-      : otherEpisodes[otherEpisodes.length - 1].episode_number;
+    const nextEpisode = direction > 0
+      ? list[0].episode_number
+      : list[list.length - 1].episode_number;
 
-    await loadSeason(otherSeason.season_number, targetEpisode);
-    $("seasonSelect").value = String(seasonNumber);
-  }catch(error){
-    status(error.message, true);
+    await loadSeason(nextSeason.season_number, nextEpisode);
+  } catch (error) {
+    setStatus(error.message, true);
   }
 }
 
-$("videoFrame").addEventListener("load", () => {
-  $("loading").classList.add("hidden");
-});
-
-$("videoFrame").addEventListener("error", () => {
-  setLoading("تعذر تحميل الفيديو");
-});
-
 $("episodesBtn").addEventListener("click", () => {
-  $("episodePanel").classList.toggle("open");
+  $("episodesPanel").classList.toggle("open");
 });
 
-$("previousBtn").addEventListener("click", () => changeEpisode(-1));
-$("nextBtn").addEventListener("click", () => changeEpisode(1));
+$("previousBtn").addEventListener("click", () => goToEpisode(-1));
+$("nextBtn").addEventListener("click", () => goToEpisode(1));
 
 $("seasonSelect").addEventListener("change", event => {
   loadSeason(Number(event.target.value), 1);
@@ -525,43 +533,48 @@ $("episodeSelect").addEventListener("change", event => {
   playEpisode();
 });
 
-async function enterFullscreen(){
+$("videoFrame").addEventListener("load", () => {
+  $("placeholder").classList.add("hidden");
+});
+
+async function enterFullscreen() {
   const box = $("videoBox");
 
-  try{
-    if(box.requestFullscreen){
+  try {
+    if (box.requestFullscreen) {
       await box.requestFullscreen();
-    }else if(box.webkitRequestFullscreen){
+    } else if (box.webkitRequestFullscreen) {
       box.webkitRequestFullscreen();
-    }else{
+    } else {
       fallbackFullscreen = true;
-      document.body.classList.add("fullscreen-fallback");
+      document.body.classList.add("fallback-fullscreen");
     }
 
-    if(screen.orientation?.lock){
-      try{ await screen.orientation.lock("landscape"); }
-      catch(_){}
+    if (screen.orientation && screen.orientation.lock) {
+      try { await screen.orientation.lock("landscape"); }
+      catch (_) {}
     }
-  }catch(_){
-    status("تعذر فتح ملء الشاشة في هذا المتصفح.", true);
+  } catch (_) {
+    setStatus("ملء الشاشة غير مدعوم في هذا المتصفح.", true);
   }
 }
 
-async function leaveFullscreen(){
-  try{
-    if(document.fullscreenElement && document.exitFullscreen){
+async function exitFullscreen() {
+  try {
+    if (document.fullscreenElement && document.exitFullscreen) {
       await document.exitFullscreen();
-    }else if(document.webkitFullscreenElement &&
-             document.webkitExitFullscreen){
+    } else if (document.webkitFullscreenElement &&
+               document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
-  }catch(_){}
+  } catch (_) {}
 
   fallbackFullscreen = false;
-  document.body.classList.remove("fullscreen-fallback");
+  document.body.classList.remove("fallback-fullscreen");
 
-  if(screen.orientation?.unlock){
-    try{ screen.orientation.unlock(); }catch(_){}
+  if (screen.orientation && screen.orientation.unlock) {
+    try { screen.orientation.unlock(); }
+    catch (_) {}
   }
 }
 
@@ -569,52 +582,58 @@ $("fullscreenBtn").addEventListener("click", async () => {
   const active = document.fullscreenElement ||
     document.webkitFullscreenElement || fallbackFullscreen;
 
-  if(active) await leaveFullscreen();
+  if (active) await exitFullscreen();
   else await enterFullscreen();
 });
 
 document.addEventListener("fullscreenchange", () => {
-  if(!document.fullscreenElement && screen.orientation?.unlock){
-    try{ screen.orientation.unlock(); }catch(_){}
+  if (!document.fullscreenElement &&
+      screen.orientation && screen.orientation.unlock) {
+    try { screen.orientation.unlock(); }
+    catch (_) {}
   }
 });
 
-async function init(){
-  if(!Number.isInteger(showId) || showId <= 0){
+async function init() {
+  if (!Number.isInteger(showId) || showId <= 0) {
     $("showTitle").textContent = "NOTWIN TV";
-    setLoading("المسلسل غير محدد");
-    status("افتح المسلسل من رابط يحتوي على معرّف TMDB.", true);
+    setPlaceholder("المسلسل غير محدد");
+    setStatus("افتح صفحة المشاهدة من رابط مسلسل صحيح.", true);
     return;
   }
 
-  try{
-    show = await api("/tv/" + showId);
-    $("showTitle").textContent = show.name || show.original_name || "NOTWIN TV";
+  try {
+    show = await tmdb("/tv/" + showId);
+    $("showTitle").textContent =
+      show.name || show.original_name || "NOTWIN TV";
     document.title = $("showTitle").textContent + " | NOTWIN TV";
 
-    seasons = (show.seasons || []).filter(s => s.season_number > 0);
-    if(!seasons.length) throw new Error("لا توجد مواسم لهذا المسلسل.");
+    seasons = (show.seasons || []).filter(
+      item => item.season_number > 0
+    );
 
-    const seasonSelect = $("seasonSelect");
-    seasonSelect.replaceChildren();
+    if (!seasons.length) throw new Error("لا توجد مواسم لهذا المسلسل.");
 
-    for(const season of seasons){
+    const select = $("seasonSelect");
+    select.replaceChildren();
+
+    for (const item of seasons) {
       const option = document.createElement("option");
-      option.value = season.season_number;
-      option.textContent = season.name || "الموسم " + season.season_number;
-      seasonSelect.appendChild(option);
+      option.value = String(item.season_number);
+      option.textContent = item.name || "الموسم " + item.season_number;
+      select.appendChild(option);
     }
 
-    if(!seasons.some(s => s.season_number === seasonNumber)){
+    if (!seasons.some(s => s.season_number === seasonNumber)) {
       seasonNumber = seasons[0].season_number;
     }
 
-    seasonSelect.value = String(seasonNumber);
+    select.value = String(seasonNumber);
     await loadSeason(seasonNumber, episodeNumber);
-  }catch(error){
+  } catch (error) {
     $("showTitle").textContent = "NOTWIN TV";
-    setLoading("تعذر تحميل المسلسل");
-    status(error.message || "حدث خطأ أثناء التحميل.", true);
+    setPlaceholder("تعذر تحميل الفيديو");
+    setStatus(error.message || "حدث خطأ.", true);
   }
 }
 
