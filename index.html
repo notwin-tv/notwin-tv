@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090909">
-<title>NOTWIN TV | عالم المسلسلات والأفلام</title>
+<meta name="theme-color" content="#080808">
+<title>NOTWIN TV</title>
 <style>
 :root{
-  --bg:#090909;
-  --panel:#141414;
-  --panel2:#1c1c1c;
-  --red:#e50914;
-  --red2:#ff2934;
+  --bg:#080808;
+  --card:#121212;
+  --red:#d00018;
+  --red2:#f0182c;
   --text:#f5f5f5;
-  --muted:#a5a5a5;
+  --muted:#858585;
 }
 *{box-sizing:border-box}
 body{
@@ -23,584 +22,461 @@ body{
 button,input{font:inherit}
 button{cursor:pointer}
 header{
-  position:sticky;top:0;z-index:10;
-  background:rgba(9,9,9,.96);
-  border-bottom:1px solid #252525;
+  position:sticky;top:0;z-index:20;
+  background:#090909f5;border-bottom:1px solid #222;
   backdrop-filter:blur(12px);
 }
-.nav{
-  max-width:1250px;margin:auto;padding:14px 18px;
-  display:flex;align-items:center;gap:18px;
+.topbar{
+  max-width:1250px;margin:auto;padding:13px 18px;
+  display:flex;align-items:center;gap:16px;
 }
-.logo{font-size:25px;font-weight:900;white-space:nowrap}
+.logo{font-size:24px;font-weight:900;white-space:nowrap}
 .logo span{color:var(--red)}
-.search{flex:1;position:relative}
+.search{flex:1}
 .search input{
-  width:100%;padding:12px 15px;border-radius:10px;
-  border:1px solid #333;background:#171717;color:white;outline:none;
+  width:100%;background:#151515;border:1px solid #303030;
+  color:white;padding:12px 14px;border-radius:9px;outline:none;
 }
 .search input:focus{border-color:var(--red)}
-.navbtn,.tab,.filterbtn{
-  border:1px solid #333;background:#171717;color:#ddd;
-  padding:10px 13px;border-radius:9px;white-space:nowrap;
-}
-.navbtn:hover,.tab.active,.filterbtn.active{
-  background:var(--red);border-color:var(--red);color:white;
+.icon-btn{
+  background:#171717;border:1px solid #333;color:white;
+  padding:10px 13px;border-radius:9px;
 }
 .hero{
   max-width:1250px;margin:20px auto;padding:0 18px;
 }
-.hero-inner{
-  min-height:280px;border-radius:18px;overflow:hidden;
-  position:relative;display:flex;align-items:end;
-  background:linear-gradient(0deg,#090909 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,.08)),
-  linear-gradient(110deg,#3b080b,#161616 55%,#29090b);
-  border:1px solid #2b2020;
+.hero-box{
+  min-height:245px;border:1px solid #2a1719;border-radius:14px;
+  display:flex;align-items:center;overflow:hidden;
+  background:
+  linear-gradient(90deg,transparent,#080808 95%),
+  radial-gradient(ellipse at 20% 40%,#5d0712 0,transparent 48%),
+  linear-gradient(135deg,#1d1113,#0b0b0b 65%);
 }
 .hero-content{padding:30px;max-width:650px}
-.tag{
+.hero-label{
   display:inline-block;background:var(--red);color:white;
-  border-radius:5px;padding:5px 9px;font-size:12px;font-weight:bold;
+  padding:5px 9px;border-radius:5px;font-size:12px;font-weight:bold;
 }
-.hero h1{font-size:clamp(27px,5vw,44px);margin:14px 0 10px}
-.hero p{color:#ccc;line-height:1.8;margin:0 0 18px}
+.hero h1{font-size:clamp(28px,5vw,43px);margin:14px 0}
+.hero p{color:#bbb;line-height:1.8;margin:0 0 18px}
 .primary{
-  border:0;background:var(--red);color:white;
-  padding:12px 18px;border-radius:9px;font-weight:bold;
+  background:var(--red);color:white;border:0;
+  padding:12px 18px;border-radius:8px;font-weight:bold;
 }
 .primary:hover{background:var(--red2)}
 main{max-width:1250px;margin:auto;padding:0 18px 90px}
 .section-head{
   display:flex;align-items:center;justify-content:space-between;
-  gap:12px;flex-wrap:wrap;margin:25px 0 16px;
+  gap:12px;flex-wrap:wrap;margin:26px 0 17px;
 }
-.section-head h2{font-size:21px;margin:0}
-.section-head h2:before{
-  content:"";display:inline-block;width:4px;height:21px;
-  background:var(--red);margin-left:10px;vertical-align:middle;border-radius:3px;
+.section-head h2{font-size:23px;margin:0}
+.tabs,.filters{display:flex;gap:9px;flex-wrap:wrap}
+.tab,.filter{
+  padding:11px 16px;border-radius:13px;
+  border:1px solid #303030;background:#131313;color:#ccc;
 }
-.tabs,.filters{display:flex;gap:8px;flex-wrap:wrap}
-.filters{margin-bottom:18px}
+.tab.active,.filter.active{background:var(--red);border-color:var(--red);color:white}
+.filters{margin-bottom:20px}
 .grid{
   display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:17px;
 }
-.card{
-  min-width:0;background:var(--panel);border:1px solid #242424;
-  border-radius:12px;overflow:hidden;cursor:pointer;transition:.2s;
+.movie-card{
+  min-width:0;overflow:hidden;background:var(--card);
+  border:1px solid #292929;border-radius:13px;cursor:pointer;
+  transition:transform .2s,border-color .2s;
 }
-.card:hover{transform:translateY(-4px);border-color:#6e2024}
-.poster{
-  position:relative;aspect-ratio:2/3;background:#202020;overflow:hidden;
-}
-.poster img{width:100%;height:100%;object-fit:cover;display:block}
-.poster .missing{
-  height:100%;display:flex;align-items:center;justify-content:center;
-  padding:12px;text-align:center;color:#777;
+.movie-card:hover{transform:translateY(-3px);border-color:#84202a}
+.poster{position:relative;aspect-ratio:2/3;background:#191919;overflow:hidden}
+.poster img{display:block;width:100%;height:100%;object-fit:cover}
+.no-poster{
+  width:100%;height:100%;display:flex;align-items:center;
+  justify-content:center;color:#777;font-weight:bold;
 }
 .rating{
-  position:absolute;top:8px;right:8px;background:#000d;
-  padding:5px 7px;border-radius:5px;font-size:12px;
+  position:absolute;top:9px;right:9px;
+  background:#000c;padding:6px 8px;border-radius:7px;font-size:12px;
 }
-.kind{
-  position:absolute;bottom:8px;right:8px;background:var(--red);
-  padding:5px 7px;border-radius:5px;font-size:11px;
+.type-tag{
+  position:absolute;bottom:9px;right:9px;
+  background:var(--red);padding:6px 9px;border-radius:7px;font-size:12px;
 }
-.favorite{
-  position:absolute;top:8px;left:8px;border:0;
-  background:#000b;color:white;width:34px;height:34px;
-  border-radius:50%;font-size:18px;
+.fav{
+  position:absolute;top:9px;left:9px;width:38px;height:38px;
+  border:0;border-radius:50%;background:#000b;color:white;font-size:22px;
 }
-.favorite.on{color:#ff3440}
-.card-info{padding:11px}
+.fav.saved{color:#ff3547}
+.card-info{padding:12px}
 .card-info h3{
-  font-size:14px;margin:0 0 8px;white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis;
+  font-size:15px;margin:0 0 9px;direction:ltr;text-align:left;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.meta{color:var(--muted);font-size:12px;display:flex;gap:7px;flex-wrap:wrap}
-.empty,.loading,.error{
-  padding:35px 15px;text-align:center;color:var(--muted);
-  grid-column:1/-1;line-height:1.8;
-}
-.loadrow{text-align:center;margin:25px 0}
-footer{
-  border-top:1px solid #222;text-align:center;padding:24px 15px;
-  color:#777;font-size:13px;
-}
-.bottom{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:15;
-  background:#101010f5;border-top:1px solid #303030;
-  padding:9px 6px calc(9px + env(safe-area-inset-bottom));
-  justify-content:space-around;
-}
-.bottom button{
-  background:none;border:0;color:#aaa;font-size:12px;
-  display:flex;flex-direction:column;gap:4px;align-items:center;
-}
-.bottom button.active{color:var(--red)}
-.modal{
-  display:none;position:fixed;inset:0;z-index:30;
-  background:#000d;overflow:auto;padding:22px;
-  align-items:center;justify-content:center;
-}
-.modal.open{display:flex}
-.modal-box{
-  width:min(700px,100%);background:#151515;border:1px solid #333;
-  border-radius:15px;overflow:hidden;position:relative;
-}
-.modal-top{display:grid;grid-template-columns:170px 1fr;gap:20px;padding:22px}
-.modal-top img{width:100%;border-radius:9px}
-.modal-info h2{margin:8px 0}
-.modal-info p{color:#ccc;line-height:1.8;font-size:14px}
-.close{
-  position:absolute;top:10px;left:10px;background:#000b;color:white;
-  border:1px solid #555;border-radius:50%;width:35px;height:35px;font-size:20px;
-}
-.modal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.meta{display:flex;gap:9px;color:var(--muted);font-size:12px;flex-wrap:wrap}
+.message{grid-column:1/-1;text-align:center;color:#aaa;padding:38px 12px;line-height:1.9}
+.more-row{text-align:center;padding:26px}
 .secondary{
-  background:#252525;color:white;border:1px solid #444;
-  padding:11px 14px;border-radius:8px;text-decoration:none;
+  background:#191919;border:1px solid #393939;color:white;
+  border-radius:9px;padding:12px 18px;
 }
+.bottom-nav{
+  position:fixed;z-index:25;bottom:0;left:0;right:0;
+  display:flex;justify-content:space-around;
+  background:#0b0b0bf5;border-top:1px solid #292929;
+  padding:9px 5px calc(9px + env(safe-area-inset-bottom));
+}
+.bottom-nav button{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  background:none;border:0;color:#999;font-size:12px;min-width:58px;
+}
+.bottom-nav button.active{color:var(--red)}
+.bottom-nav .nav-icon{font-size:20px}
+footer{text-align:center;color:#666;padding:20px 15px 100px;font-size:12px}
 @media(max-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:700px){
-  .nav{gap:10px;padding:12px}
-  .logo{font-size:21px}
-  .navbtn{display:none}
-  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-  main{padding:0 12px 95px}
-  .hero{padding:0 12px}
-  .hero-inner{min-height:245px}
-  .hero-content{padding:20px}
+  .topbar{padding:11px 12px;gap:9px}
+  .logo{font-size:20px}
+  .search input{padding:10px;font-size:13px}
+  .icon-btn{display:none}
+  .hero{padding:0 12px;margin-top:13px}
+  .hero-box{min-height:220px}
+  .hero-content{padding:21px}
   .hero p{font-size:13px}
-  .card-info{padding:8px}
-  .card-info h3{font-size:12px}
-  .meta{font-size:11px}
-  .bottom{display:flex}
-  .modal{padding:10px}
-  .modal-top{grid-template-columns:105px 1fr;gap:13px;padding:16px}
-  .modal-info h2{font-size:18px}
-  .modal-info p{font-size:12px}
+  main{padding:0 12px 25px}
+  .section-head h2{font-size:21px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .card-info{padding:10px}
+  .card-info h3{font-size:13px}
+  .tab,.filter{padding:10px 12px;font-size:14px}
 }
-@media(max-width:370px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header>
-  <div class="nav">
+  <div class="topbar">
     <div class="logo">NOTWIN <span>TV</span></div>
     <div class="search">
-      <input id="searchInput" type="search" placeholder="ابحث عن فيلم أو مسلسل..." autocomplete="off">
+      <input id="searchInput" type="search" placeholder="Search movies & series..." autocomplete="off">
     </div>
-    <button class="navbtn" id="favoritesNav">♥ المفضلة</button>
+    <button class="icon-btn" id="favoritesButton">♥ Favorites</button>
   </div>
 </header>
 
 <section class="hero">
-  <div class="hero-inner">
+  <div class="hero-box">
     <div class="hero-content">
-      <span class="tag">NOTWIN TV ORIGINAL EXPERIENCE</span>
-      <h1>عالمك من الأفلام والمسلسلات</h1>
-      <p>اكتشف أعمالًا جديدة، تصفّح الأفلام والمسلسلات، وابحث عن المفضلة تاعك في مكان واحد.</p>
-      <button class="primary" id="exploreBtn">اكتشف المكتبة ←</button>
+      <span class="hero-label">WELCOME TO NOTWIN TV</span>
+      <h1>Movies & Series</h1>
+      <p>Discover popular movies and series, explore new stories, and find your next favorite.</p>
+      <button class="primary" id="exploreButton">Explore Library ←</button>
     </div>
   </div>
 </section>
 
-<main id="catalog">
+<main id="library">
   <div class="section-head">
-    <h2 id="sectionTitle">الأكثر شهرة</h2>
+    <h2 id="sectionTitle">Most Popular</h2>
     <div class="tabs">
-      <button class="tab active" data-type="all">الكل</button>
-      <button class="tab" data-type="movie">أفلام</button>
-      <button class="tab" data-type="tv">مسلسلات</button>
+      <button class="tab active" data-type="all">All</button>
+      <button class="tab" data-type="movie">Movies</button>
+      <button class="tab" data-type="tv">Series</button>
     </div>
   </div>
 
   <div class="filters">
-    <button class="filterbtn active" data-filter="popular">الأكثر شهرة</button>
-    <button class="filterbtn" data-filter="top">الأعلى تقييماً</button>
-    <button class="filterbtn" data-filter="favorites">المفضلة ♥</button>
+    <button class="filter active" data-filter="popular">Popular</button>
+    <button class="filter" data-filter="top">Top Rated</button>
+    <button class="filter" data-filter="favorites">♥ Favorites</button>
   </div>
 
   <div id="grid" class="grid">
-    <div class="loading">جاري تحميل مكتبة NOTWIN TV...</div>
+    <div class="message">Loading NOTWIN TV...</div>
   </div>
-  <div class="loadrow">
-    <button id="loadMore" class="secondary">تحميل المزيد</button>
+  <div class="more-row">
+    <button class="secondary" id="loadMore">Load More</button>
   </div>
 </main>
 
-<footer>NOTWIN TV © <span id="year"></span> — مكتبتك الترفيهية</footer>
+<footer>NOTWIN TV © <span id="year"></span></footer>
 
-<nav class="bottom">
-  <button class="active" data-bottom="all"><span>⌂</span>الرئيسية</button>
-  <button data-bottom="movie"><span>▣</span>أفلام</button>
-  <button data-bottom="tv"><span>▤</span>مسلسلات</button>
-  <button data-bottom="favorites"><span>♥</span>المفضلة</button>
+<nav class="bottom-nav">
+  <button class="active" data-bottom="home"><span class="nav-icon">⌂</span>Home</button>
+  <button data-bottom="movie"><span class="nav-icon">▣</span>Movies</button>
+  <button data-bottom="tv"><span class="nav-icon">▤</span>Series</button>
+  <button data-bottom="favorites"><span class="nav-icon">♥</span>Favorites</button>
 </nav>
-
-<div class="modal" id="detailsModal">
-  <div class="modal-box">
-    <button class="close" id="closeModal" aria-label="إغلاق">×</button>
-    <div id="modalContent"></div>
-  </div>
-</div>
 
 <script>
 (() => {
   "use strict";
 
-  // مفتاح TMDB الذي وضعته في نسختك السابقة
-  const TMDB_KEY = "26c5ad9f51818e110945285552c11a75";
-  const TMDB = "https://api.themoviedb.org/3";
-  const IMG = "https://image.tmdb.org/t/p/w500";
-  const ORIGINAL = "https://image.tmdb.org/t/p/original";
+  const API_KEY = "26c5ad9f51818e110945285552c11a75";
+  const API = "https://api.themoviedb.org/3";
+  const IMAGE = "https://image.tmdb.org/t/p/w500";
 
   const grid = document.getElementById("grid");
   const searchInput = document.getElementById("searchInput");
-  const modal = document.getElementById("detailsModal");
-  const modalContent = document.getElementById("modalContent");
 
-  let activeType = "all";
-  let activeFilter = "popular";
+  let type = "all";
+  let filter = "popular";
   let page = 1;
-  let allItems = [];
-  let shownItems = [];
-  let searchTimer = null;
-  let requestId = 0;
-  let currentSearch = "";
+  let items = [];
+  let displayed = [];
+  let query = "";
+  let timer;
+  let requestNumber = 0;
 
-  const favorites = new Set(
-    JSON.parse(localStorage.getItem("notwin_favorites") || "[]")
-  );
+  let favorites = new Set();
+  try {
+    favorites = new Set(JSON.parse(localStorage.getItem("notwin_favorites") || "[]"));
+  } catch (e) {}
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  function saveFavorites() {
-    localStorage.setItem("notwin_favorites", JSON.stringify([...favorites]));
+  function titleOf(item) {
+    return item.title || item.name || "Unknown Title";
   }
 
-  function escapeHTML(value = "") {
-    return String(value).replace(/[&<>"']/g, ch => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    }[ch]));
-  }
-
-  function getTitle(item) {
-    return item.title || item.name || "بدون عنوان";
-  }
-
-  function getYear(item) {
-    const date = item.release_date || item.first_air_date || "";
-    return date ? date.slice(0, 4) : "غير معروف";
-  }
-
-  function itemKey(item) {
+  function keyOf(item) {
     return item.media_type + "-" + item.id;
   }
 
+  function yearOf(item) {
+    const date = item.release_date || item.first_air_date || "";
+    return date.slice(0, 4) || "—";
+  }
+
+  function safe(value) {
+    return String(value ?? "").replace(/[&<>"']/g, c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[c]));
+  }
+
   async function api(path, params = {}) {
-    const url = new URL(TMDB + path);
-    url.searchParams.set("api_key", TMDB_KEY);
-    url.searchParams.set("language", "ar");
-    Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined && value !== null && value !== "") {
-        url.searchParams.set(key, value);
-      }
-    });
+    const url = new URL(API + path);
+    url.searchParams.set("api_key", API_KEY);
+    url.searchParams.set("language", "en-US");
+    Object.entries(params).forEach(([k,v]) => url.searchParams.set(k, v));
     const response = await fetch(url);
-    if (!response.ok) throw new Error("TMDB API error: " + response.status);
+    if (!response.ok) throw new Error("API request failed");
     return response.json();
   }
 
-  function normalize(item, type) {
-    return {...item, media_type: type};
-  }
+  function card(item) {
+    const key = keyOf(item);
+    const title = safe(titleOf(item));
+    const score = Number(item.vote_average || 0).toFixed(1);
+    const label = item.media_type === "movie" ? "Movie" : "Series";
+    const poster = item.poster_path
+      ? `<img loading="lazy" src="${IMAGE}${item.poster_path}" alt="${title}">`
+      : `<div class="no-poster">NOTWIN TV</div>`;
 
-  function posterHTML(item) {
-    if (item.poster_path) {
-      return `<img loading="lazy" src="${IMG}${item.poster_path}"
-        alt="${escapeHTML(getTitle(item))}"
-        onerror="this.parentElement.innerHTML='<div class=&quot;missing&quot;>لا توجد صورة</div>'">`;
-    }
-    return `<div class="missing">NOTWIN TV</div>`;
-  }
-
-  function cardHTML(item) {
-    const key = itemKey(item);
-    const title = escapeHTML(getTitle(item));
-    const rating = Number(item.vote_average || 0).toFixed(1);
-    const typeName = item.media_type === "movie" ? "فيلم" : "مسلسل";
     return `
-      <article class="card" data-key="${escapeHTML(key)}" tabindex="0"
-        aria-label="${title}">
+      <article class="movie-card" data-key="${safe(key)}" tabindex="0">
         <div class="poster">
-          ${posterHTML(item)}
-          <span class="rating">★ ${rating}</span>
-          <span class="kind">${typeName}</span>
-          <button class="favorite ${favorites.has(key) ? "on" : ""}"
-            data-fav="${escapeHTML(key)}" aria-label="إضافة للمفضلة">
-            ${favorites.has(key) ? "♥" : "♡"}
-          </button>
+          ${poster}
+          <span class="rating">★ ${score}</span>
+          <span class="type-tag">${label}</span>
+          <button class="fav ${favorites.has(key) ? "saved" : ""}"
+            data-fav="${safe(key)}" aria-label="Favorite">${favorites.has(key) ? "♥" : "♡"}</button>
         </div>
         <div class="card-info">
-          <h3>${title}</h3>
-          <div class="meta"><span>${getYear(item)}</span><span>★ ${rating}</span></div>
+          <h3 lang="en">${title}</h3>
+          <div class="meta"><span>${yearOf(item)}</span><span>★ ${score}</span></div>
         </div>
       </article>`;
   }
 
-  function render(items) {
-    shownItems = items;
-    if (!items.length) {
-      grid.innerHTML = `<div class="empty">ما لقيناش نتائج هنا. جرّب كلمة بحث أخرى.</div>`;
+  function render(list) {
+    displayed = list;
+    if (!list.length) {
+      grid.innerHTML = `<div class="message">No results found. Try another search.</div>`;
       return;
     }
-    grid.innerHTML = items.map(cardHTML).join("");
+    grid.innerHTML = list.map(card).join("");
   }
 
-  async function loadCatalog(append = false) {
-    const thisRequest = ++requestId;
+  function applyFilter() {
+    let result = [...items];
+    if (filter === "favorites") {
+      result = result.filter(item => favorites.has(keyOf(item)));
+    }
+    if (filter === "top") {
+      result.sort((a,b) => (b.vote_average || 0) - (a.vote_average || 0));
+    }
+    render(result);
+  }
+
+  async function load(append = false) {
+    const current = ++requestNumber;
     if (!append) {
       page = 1;
-      grid.innerHTML = `<div class="loading">جاري تحميل المحتوى...</div>`;
+      grid.innerHTML = `<div class="message">Loading movies and series...</div>`;
     } else {
       page++;
-      document.getElementById("loadMore").textContent = "جاري التحميل...";
     }
 
     try {
       let results = [];
+      const ranking = filter === "top" ? "top_rated" : "popular";
 
-      if (currentSearch.trim()) {
-        if (activeType === "all" || activeType === "movie") {
-          const data = await api("/search/movie", {query: currentSearch, page});
-          results.push(...(data.results || []).map(x => normalize(x, "movie")));
+      if (query) {
+        if (type === "all" || type === "movie") {
+          const data = await api("/search/movie", {query, page});
+          results.push(...(data.results || []).map(x => ({...x, media_type:"movie"})));
         }
-        if (activeType === "all" || activeType === "tv") {
-          const data = await api("/search/tv", {query: currentSearch, page});
-          results.push(...(data.results || []).map(x => normalize(x, "tv")));
+        if (type === "all" || type === "tv") {
+          const data = await api("/search/tv", {query, page});
+          results.push(...(data.results || []).map(x => ({...x, media_type:"tv"})));
         }
       } else {
-        const suffix = activeFilter === "top" ? "top_rated" : "popular";
-        if (activeType === "all" || activeType === "movie") {
-          const data = await api("/movie/" + suffix, {page});
-          results.push(...(data.results || []).map(x => normalize(x, "movie")));
+        if (type === "all" || type === "movie") {
+          const data = await api("/movie/" + ranking, {page});
+          results.push(...(data.results || []).map(x => ({...x, media_type:"movie"})));
         }
-        if (activeType === "all" || activeType === "tv") {
-          const data = await api("/tv/" + suffix, {page});
-          results.push(...(data.results || []).map(x => normalize(x, "tv")));
+        if (type === "all" || type === "tv") {
+          const data = await api("/tv/" + ranking, {page});
+          results.push(...(data.results || []).map(x => ({...x, media_type:"tv"})));
         }
       }
 
-      if (thisRequest !== requestId) return;
+      if (current !== requestNumber) return;
 
-      // عند فتح المكتبة العامة نضيف Venom بوضوح إلى أول النتائج
-      if (!append && !currentSearch && (activeType === "all" || activeType === "movie")) {
+      // Prioritize Venom in the mixed movie/series library.
+      if (!append && !query && (type === "all" || type === "movie")) {
         try {
-          const venom = await api("/search/movie", {query:"Venom"});
-          const match = (venom.results || []).find(x =>
-            /venom/i.test(x.title || "")
-          );
-          if (match && thisRequest === requestId) {
-            results = results.filter(x => !(x.media_type === "movie" && x.id === match.id));
-            results.unshift(normalize(match, "movie"));
+          const data = await api("/search/movie", {query:"Venom"});
+          const venom = (data.results || []).find(x => /venom/i.test(x.title || ""));
+          if (venom && current === requestNumber) {
+            results = results.filter(x => !(x.media_type === "movie" && x.id === venom.id));
+            results.unshift({...venom, media_type:"movie"});
           }
-        } catch (e) {
-          // إذا تعذر البحث عن Venom، تبقى المكتبة العادية متاحة.
-        }
+        } catch (e) {}
       }
 
-      if (thisRequest !== requestId) return;
-      allItems = append ? allItems.concat(results) : results;
+      if (current !== requestNumber) return;
+      items = append ? items.concat(results) : results;
       applyFilter();
-    } catch (error) {
-      if (thisRequest !== requestId) return;
-      if (!append) {
-        grid.innerHTML = `<div class="error">تعذّر تحميل المحتوى. تأكد من الإنترنت ومفتاح TMDB ثم أعد المحاولة.<br><button class="secondary" onclick="location.reload()">إعادة المحاولة</button></div>`;
+    } catch (e) {
+      if (current === requestNumber) {
+        grid.innerHTML = `<div class="message">Could not load the library. Check your connection and try again.<br><button class="secondary" onclick="location.reload()">Retry</button></div>`;
       }
-    } finally {
-      document.getElementById("loadMore").textContent = "تحميل المزيد";
     }
   }
 
-  function applyFilter() {
-    let items = [...allItems];
-    if (activeFilter === "favorites") {
-      items = items.filter(item => favorites.has(itemKey(item)));
-    } else if (activeFilter === "top") {
-      items.sort((a, b) => (b.vote_average || 0) - (a.vote_average || 0));
-    }
-    render(items);
-  }
-
-  async function openDetails(item) {
-    const isMovie = item.media_type === "movie";
-    const title = escapeHTML(getTitle(item));
-    const overview = escapeHTML(item.overview || "لا يوجد وصف متاح باللغة العربية لهذا العمل.");
-    const key = itemKey(item);
-    const poster = item.poster_path
-      ? `<img src="${IMG}${item.poster_path}" alt="${title}">`
-      : `<div class="missing">NOTWIN TV</div>`;
-
-    modalContent.innerHTML = `
-      <div class="modal-top">
-        <div>${poster}</div>
-        <div class="modal-info">
-          <span class="tag">${isMovie ? "فيلم" : "مسلسل"}</span>
-          <h2>${title}</h2>
-          <div class="meta"><span>${getYear(item)}</span>
-            <span>★ ${Number(item.vote_average || 0).toFixed(1)}</span></div>
-          <p>${overview}</p>
-          <div class="modal-actions">
-            <button class="primary" id="modalFavorite">${favorites.has(key) ? "♥ في المفضلة" : "♡ أضف للمفضلة"}</button>
-            ${isMovie
-              ? `<a class="secondary" href="https://www.themoviedb.org/movie/${encodeURIComponent(item.id)}" target="_blank" rel="noopener">صفحة الفيلم ↗</a>`
-              : `<button class="primary" id="watchSeries">فتح صفحة المشاهدة</button>`}
-          </div>
-          ${isMovie ? `<p>مشاهدة الأفلام مباشرة غير مفعّلة بعد في مشغّل الموقع الحالي.</p>` : ""}
-        </div>
-      </div>`;
-
-    modal.classList.add("open");
-
-    document.getElementById("modalFavorite").onclick = () => {
-      toggleFavorite(key);
-      document.getElementById("modalFavorite").textContent =
-        favorites.has(key) ? "♥ في المفضلة" : "♡ أضف للمفضلة";
-      applyFilter();
-    };
-
-    const watchButton = document.getElementById("watchSeries");
-    if (watchButton) {
-      watchButton.onclick = async () => {
-        watchButton.disabled = true;
-        watchButton.textContent = "جاري فتح المسلسل...";
-        try {
-          // إيجاد معرّف TMDB الصحيح بالاسم حتى يبقى watch.html الحالي متوافقاً.
-          const data = await api("/search/tv", {query: getTitle(item)});
-          const match = (data.results || []).find(x => x.name === getTitle(item)) || data.results?.[0];
-          if (match) {
-            location.href = `watch.html?id=${encodeURIComponent(match.id)}&type=tv`;
-          } else {
-            alert("ما لقيناش صفحة المشاهدة لهذا المسلسل.");
-            watchButton.disabled = false;
-            watchButton.textContent = "فتح صفحة المشاهدة";
-          }
-        } catch (e) {
-          alert("تعذر فتح المسلسل. تأكد من الإنترنت.");
-          watchButton.disabled = false;
-          watchButton.textContent = "فتح صفحة المشاهدة";
-        }
-      };
-    }
+  function saveFavorites() {
+    localStorage.setItem("notwin_favorites", JSON.stringify([...favorites]));
   }
 
   function toggleFavorite(key) {
     if (favorites.has(key)) favorites.delete(key);
     else favorites.add(key);
     saveFavorites();
+    applyFilter();
   }
 
   grid.addEventListener("click", event => {
-    const favButton = event.target.closest("[data-fav]");
-    if (favButton) {
+    const fav = event.target.closest("[data-fav]");
+    if (fav) {
       event.stopPropagation();
-      const key = favButton.dataset.fav;
-      toggleFavorite(key);
-      applyFilter();
+      toggleFavorite(fav.dataset.fav);
       return;
     }
-    const card = event.target.closest("[data-key]");
-    if (card) {
-      const item = shownItems.find(x => itemKey(x) === card.dataset.key);
-      if (item) openDetails(item);
-    }
+
+    const article = event.target.closest("[data-key]");
+    if (!article) return;
+    const item = displayed.find(x => keyOf(x) === article.dataset.key);
+    if (!item) return;
+
+    // Send the selected movie/series to the existing watch page.
+    // watch.html must later be updated to handle both types correctly.
+    location.href = `watch.html?id=${encodeURIComponent(item.id)}&type=${encodeURIComponent(item.media_type)}`;
   });
 
   grid.addEventListener("keydown", event => {
     if (event.key !== "Enter") return;
-    const card = event.target.closest("[data-key]");
-    if (!card) return;
-    const item = shownItems.find(x => itemKey(x) === card.dataset.key);
-    if (item) openDetails(item);
+    const article = event.target.closest("[data-key]");
+    if (!article) return;
+    const item = displayed.find(x => keyOf(x) === article.dataset.key);
+    if (item) {
+      location.href = `watch.html?id=${encodeURIComponent(item.id)}&type=${encodeURIComponent(item.media_type)}`;
+    }
   });
 
   document.querySelectorAll(".tab").forEach(button => {
     button.addEventListener("click", () => {
-      activeType = button.dataset.type;
+      type = button.dataset.type;
       document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === button));
-      document.querySelectorAll(".bottom button").forEach(x =>
-        x.classList.toggle("active", x.dataset.bottom === activeType)
+      document.querySelectorAll(".bottom-nav button").forEach(x =>
+        x.classList.toggle("active",
+          (type === "all" && x.dataset.bottom === "home") || x.dataset.bottom === type
+        )
       );
       document.getElementById("sectionTitle").textContent =
-        activeType === "movie" ? "الأفلام" :
-        activeType === "tv" ? "المسلسلات" : "الأكثر شهرة";
-      loadCatalog();
+        type === "movie" ? "Popular Movies" :
+        type === "tv" ? "Popular Series" : "Most Popular";
+      load();
     });
   });
 
-  document.querySelectorAll(".filterbtn").forEach(button => {
+  document.querySelectorAll(".filter").forEach(button => {
     button.addEventListener("click", () => {
-      activeFilter = button.dataset.filter;
-      document.querySelectorAll(".filterbtn").forEach(x => x.classList.toggle("active", x === button));
-      if (activeFilter === "favorites") {
-        applyFilter();
-      } else {
-        loadCatalog();
-      }
+      filter = button.dataset.filter;
+      document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x === button));
+      if (filter === "favorites") applyFilter();
+      else load();
     });
   });
 
-  document.querySelectorAll("[data-bottom]").forEach(button => {
+  document.querySelectorAll(".bottom-nav button").forEach(button => {
     button.addEventListener("click", () => {
-      const value = button.dataset.bottom;
-      if (value === "favorites") {
-        activeFilter = "favorites";
-        document.querySelectorAll(".filterbtn").forEach(x =>
-          x.classList.toggle("active", x.dataset.filter === "favorites")
-        );
+      const target = button.dataset.bottom;
+      document.querySelectorAll(".bottom-nav button").forEach(x => x.classList.toggle("active", x === button));
+
+      if (target === "favorites") {
+        filter = "favorites";
+        document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x.dataset.filter === "favorites"));
+        document.getElementById("sectionTitle").textContent = "Favorites";
         applyFilter();
-        document.getElementById("sectionTitle").textContent = "المفضلة";
         return;
       }
-      activeType = value;
-      activeFilter = "popular";
-      document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x.dataset.type === value));
-      document.querySelectorAll(".filterbtn").forEach(x => x.classList.toggle("active", x.dataset.filter === "popular"));
-      loadCatalog();
+
+      type = target === "home" ? "all" : target;
+      filter = "popular";
+      document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x.dataset.type === type));
+      document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x.dataset.filter === "popular"));
+      document.getElementById("sectionTitle").textContent =
+        type === "movie" ? "Popular Movies" :
+        type === "tv" ? "Popular Series" : "Most Popular";
+      load();
     });
   });
 
-  document.getElementById("favoritesNav").addEventListener("click", () => {
-    activeFilter = "favorites";
-    document.querySelectorAll(".filterbtn").forEach(x => x.classList.toggle("active", x.dataset.filter === "favorites"));
+  document.getElementById("favoritesButton").addEventListener("click", () => {
+    filter = "favorites";
+    document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x.dataset.filter === "favorites"));
+    document.getElementById("sectionTitle").textContent = "Favorites";
     applyFilter();
-    document.getElementById("sectionTitle").textContent = "المفضلة";
-    document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+    document.getElementById("library").scrollIntoView({behavior:"smooth"});
   });
 
   searchInput.addEventListener("input", () => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => {
-      currentSearch = searchInput.value.trim();
-      loadCatalog();
-    }, 450);
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      query = searchInput.value.trim();
+      load();
+    }, 400);
   });
 
-  document.getElementById("loadMore").addEventListener("click", () => loadCatalog(true));
-  document.getElementById("exploreBtn").addEventListener("click", () =>
-    document.getElementById("catalog").scrollIntoView({behavior:"smooth"})
-  );
-  document.getElementById("closeModal").addEventListener("click", () => modal.classList.remove("open"));
-  modal.addEventListener("click", event => {
-    if (event.target === modal) modal.classList.remove("open");
-  });
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") modal.classList.remove("open");
+  document.getElementById("loadMore").addEventListener("click", () => {
+    if (filter !== "favorites") load(true);
   });
 
-  loadCatalog();
+  document.getElementById("exploreButton").addEventListener("click", () => {
+    document.getElementById("library").scrollIntoView({behavior:"smooth"});
+  });
+
+  load();
 })();
 </script>
 </body>
-      </html>
+  </html>
