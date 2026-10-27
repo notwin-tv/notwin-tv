@@ -1,482 +1,508 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080808">
-<title>NOTWIN TV</title>
+<meta name="theme-color" content="#090909">
+<meta name="description" content="NOTWIN TV - اكتشف عالم الأفلام والمسلسلات">
+<title>NOTWIN TV | عالم المشاهدة</title>
 <style>
-:root{
-  --bg:#080808;
-  --card:#121212;
-  --red:#d00018;
-  --red2:#f0182c;
-  --text:#f5f5f5;
-  --muted:#858585;
-}
+:root{--bg:#090909;--card:#141112;--red:#c62838;--red2:#f04b58;--text:#f8f5f5;--muted:#a99d9e}
 *{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,Tahoma,sans-serif;
-}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Tahoma,sans-serif}
 button,input{font:inherit}
 button{cursor:pointer}
-header{
-  position:sticky;top:0;z-index:20;
-  background:#090909f5;border-bottom:1px solid #222;
-  backdrop-filter:blur(12px);
-}
-.topbar{
-  max-width:1250px;margin:auto;padding:13px 18px;
-  display:flex;align-items:center;gap:16px;
-}
-.logo{font-size:24px;font-weight:900;white-space:nowrap}
-.logo span{color:var(--red)}
-.search{flex:1}
-.search input{
-  width:100%;background:#151515;border:1px solid #303030;
-  color:white;padding:12px 14px;border-radius:9px;outline:none;
-}
-.search input:focus{border-color:var(--red)}
-.icon-btn{
-  background:#171717;border:1px solid #333;color:white;
-  padding:10px 13px;border-radius:9px;
-}
-.hero{
-  max-width:1250px;margin:20px auto;padding:0 18px;
-}
-.hero-box{
-  min-height:245px;border:1px solid #2a1719;border-radius:14px;
-  display:flex;align-items:center;overflow:hidden;
-  background:
-  linear-gradient(90deg,transparent,#080808 95%),
-  radial-gradient(ellipse at 20% 40%,#5d0712 0,transparent 48%),
-  linear-gradient(135deg,#1d1113,#0b0b0b 65%);
-}
-.hero-content{padding:30px;max-width:650px}
-.hero-label{
-  display:inline-block;background:var(--red);color:white;
-  padding:5px 9px;border-radius:5px;font-size:12px;font-weight:bold;
-}
-.hero h1{font-size:clamp(28px,5vw,43px);margin:14px 0}
-.hero p{color:#bbb;line-height:1.8;margin:0 0 18px}
-.primary{
-  background:var(--red);color:white;border:0;
-  padding:12px 18px;border-radius:8px;font-weight:bold;
-}
-.primary:hover{background:var(--red2)}
-main{max-width:1250px;margin:auto;padding:0 18px 90px}
-.section-head{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;flex-wrap:wrap;margin:26px 0 17px;
-}
-.section-head h2{font-size:23px;margin:0}
-.tabs,.filters{display:flex;gap:9px;flex-wrap:wrap}
-.tab,.filter{
-  padding:11px 16px;border-radius:13px;
-  border:1px solid #303030;background:#131313;color:#ccc;
-}
-.tab.active,.filter.active{background:var(--red);border-color:var(--red);color:white}
-.filters{margin-bottom:20px}
-.grid{
-  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:17px;
-}
-.movie-card{
-  min-width:0;overflow:hidden;background:var(--card);
-  border:1px solid #292929;border-radius:13px;cursor:pointer;
-  transition:transform .2s,border-color .2s;
-}
-.movie-card:hover{transform:translateY(-3px);border-color:#84202a}
-.poster{position:relative;aspect-ratio:2/3;background:#191919;overflow:hidden}
-.poster img{display:block;width:100%;height:100%;object-fit:cover}
-.no-poster{
-  width:100%;height:100%;display:flex;align-items:center;
-  justify-content:center;color:#777;font-weight:bold;
-}
-.rating{
-  position:absolute;top:9px;right:9px;
-  background:#000c;padding:6px 8px;border-radius:7px;font-size:12px;
-}
-.type-tag{
-  position:absolute;bottom:9px;right:9px;
-  background:var(--red);padding:6px 9px;border-radius:7px;font-size:12px;
-}
-.fav{
-  position:absolute;top:9px;left:9px;width:38px;height:38px;
-  border:0;border-radius:50%;background:#000b;color:white;font-size:22px;
-}
-.fav.saved{color:#ff3547}
-.card-info{padding:12px}
-.card-info h3{
-  font-size:15px;margin:0 0 9px;direction:ltr;text-align:left;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.meta{display:flex;gap:9px;color:var(--muted);font-size:12px;flex-wrap:wrap}
-.message{grid-column:1/-1;text-align:center;color:#aaa;padding:38px 12px;line-height:1.9}
-.more-row{text-align:center;padding:26px}
-.secondary{
-  background:#191919;border:1px solid #393939;color:white;
-  border-radius:9px;padding:12px 18px;
-}
-.bottom-nav{
-  position:fixed;z-index:25;bottom:0;left:0;right:0;
-  display:flex;justify-content:space-around;
-  background:#0b0b0bf5;border-top:1px solid #292929;
-  padding:9px 5px calc(9px + env(safe-area-inset-bottom));
-}
-.bottom-nav button{
-  display:flex;flex-direction:column;align-items:center;gap:4px;
-  background:none;border:0;color:#999;font-size:12px;min-width:58px;
-}
-.bottom-nav button.active{color:var(--red)}
-.bottom-nav .nav-icon{font-size:20px}
-footer{text-align:center;color:#666;padding:20px 15px 100px;font-size:12px}
-@media(max-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:700px){
-  .topbar{padding:11px 12px;gap:9px}
-  .logo{font-size:20px}
-  .search input{padding:10px;font-size:13px}
-  .icon-btn{display:none}
-  .hero{padding:0 12px;margin-top:13px}
-  .hero-box{min-height:220px}
-  .hero-content{padding:21px}
-  .hero p{font-size:13px}
-  main{padding:0 12px 25px}
-  .section-head h2{font-size:21px}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .card-info{padding:10px}
-  .card-info h3{font-size:13px}
-  .tab,.filter{padding:10px 12px;font-size:14px}
-}
+header{position:sticky;top:0;z-index:10;background:#090909ee;backdrop-filter:blur(14px);border-bottom:1px solid #ffffff12;padding:13px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;white-space:nowrap}
+.logo{background:linear-gradient(135deg,#ef4352,#650d18);padding:10px 11px;border-radius:10px;color:white}
+.brand span:last-child{color:var(--red2)}
+.header-btn{background:#171314;border:1px solid #ffffff18;color:white;padding:10px 12px;border-radius:10px}
+main{max-width:1500px;margin:auto;padding:24px 5% 100px}
+.hero{position:relative;overflow:hidden;border:1px solid #a51f2b45;border-radius:20px;padding:clamp(28px,5vw,58px);min-height:330px;display:flex;align-items:center;background:radial-gradient(ellipse at 80% 35%,#55141d 0%,#211013 28%,#0c0a0b 68%)}
+.hero:after{content:"NOTWIN";position:absolute;left:-15px;bottom:-45px;font-size:clamp(65px,15vw,180px);font-weight:900;color:#ffffff06;pointer-events:none}
+.hero-content{max-width:580px;position:relative;z-index:1}
+.tag{color:#ff9ca4;background:#b91e2c22;border:1px solid #c52b3a66;border-radius:30px;padding:8px 12px;font-size:12px}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.15;margin:22px 0 12px}
+h1 span{color:var(--red2)}
+.hero p{line-height:1.9;color:#d2c6c7;max-width:480px}
+.primary{display:inline-block;background:linear-gradient(135deg,#d33141,#79111e);border:0;border-radius:10px;padding:13px 19px;color:white;font-weight:bold;margin-top:10px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:30px 0 16px}
+.section-head h2{font-size:21px;margin:0}
+.section-head small{color:var(--muted)}
+.search-wrap{display:flex;gap:9px;margin:25px 0 15px}
+.search-wrap input{min-width:0;flex:1;background:#151213;color:white;border:1px solid #ffffff17;border-radius:12px;padding:15px;outline:none}
+.search-wrap input:focus{border-color:var(--red)}
+.search-wrap button{background:var(--red);color:white;border:0;border-radius:12px;padding:0 20px;font-weight:bold}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0 22px}
+.chip{border:1px solid #ffffff18;background:#151213;color:#cfc5c5;padding:9px 13px;border-radius:30px}
+.chip.active,.chip:hover{background:#8d1724;border-color:#d33745;color:white}
+.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
+.card{min-width:0;cursor:pointer;position:relative;overflow:hidden;border-radius:12px;background:var(--card);border:1px solid #ffffff0c;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-5px);border-color:#b52a38}
+.poster{position:relative;aspect-ratio:2/3;background:#201a1b;overflow:hidden}
+.poster img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.card:hover .poster img{transform:scale(1.04)}
+.poster-fallback{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:10px;color:#9b8587;font-size:13px}
+.poster img:not([src=""])+.poster-fallback{display:none}
+.rating{position:absolute;top:8px;left:8px;background:#080808d9;border-radius:6px;padding:5px 7px;font-size:11px;color:#ffd36b}
+.type-label{position:absolute;right:8px;top:8px;background:#a71e2bdf;border-radius:5px;padding:5px 7px;font-size:10px}
+.fav{position:absolute;bottom:9px;left:9px;background:#080808d9;color:white;border:1px solid #ffffff30;border-radius:50%;width:34px;height:34px;font-size:18px}
+.fav.saved{color:#ff5365}
+.info{padding:11px}
+.title{font-size:14px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:ltr;text-align:right}
+.meta{display:flex;justify-content:space-between;gap:4px;color:var(--muted);font-size:11px;margin-top:8px}
+.empty{grid-column:1/-1;text-align:center;padding:45px 12px;color:var(--muted);line-height:2}
+.status{color:var(--muted);font-size:13px;margin:15px 0}
+footer{border-top:1px solid #ffffff12;text-align:center;color:#897d7e;padding:25px 12px;font-size:12px;line-height:2}
+nav.bottom{position:fixed;z-index:15;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#0c0b0bed;backdrop-filter:blur(15px);border-top:1px solid #ffffff15;padding:10px 5% calc(10px + env(safe-area-inset-bottom))}
+nav.bottom button{background:none;border:0;color:#a99d9e;font-size:12px;display:grid;gap:5px;justify-items:center}
+nav.bottom button b{font-size:19px}
+nav.bottom button.active{color:#ff6571}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}}
+@media(max-width:650px){header{padding:11px 4%}.brand{font-size:17px}.logo{padding:9px}.header-btn{padding:9px;font-size:12px}main{padding:16px 4% 95px}.hero{min-height:310px;padding:25px 20px}.hero p{font-size:13px}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.info{padding:8px}.title{font-size:12px}.meta{font-size:10px}.search-wrap button{padding:0 14px}.section-head h2{font-size:18px}}
+@media(max-width:360px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header>
-  <div class="topbar">
-    <div class="logo">NOTWIN <span>TV</span></div>
-    <div class="search">
-      <input id="searchInput" type="search" placeholder="Search movies & series..." autocomplete="off">
-    </div>
-    <button class="icon-btn" id="favoritesButton">♥ Favorites</button>
-  </div>
+  <a href="./" class="brand" aria-label="NOTWIN TV الرئيسية">
+    <span class="logo">N</span>
+    <span>NOTWIN <span>TV</span></span>
+  </a>
+  <button class="header-btn" id="headerFav">♡ المفضلة</button>
 </header>
 
-<section class="hero">
-  <div class="hero-box">
+<main>
+  <section class="hero">
     <div class="hero-content">
-      <span class="hero-label">WELCOME TO NOTWIN TV</span>
-      <h1>Movies & Series</h1>
-      <p>Discover popular movies and series, explore new stories, and find your next favorite.</p>
-      <button class="primary" id="exploreButton">Explore Library ←</button>
+      <span class="tag">YOUR NEXT OBSESSION</span>
+      <h1>عالمك،<br><span>بلا حدود.</span></h1>
+      <p>اكتشف عالماً من الأفلام والمسلسلات. ابحث على العمل اللي تحبّه، اكتشف أعمال جديدة، واجمع مفضلاتك في مكان واحد.</p>
+      <button class="primary" id="exploreBtn">اكتشف المكتبة ←</button>
     </div>
-  </div>
-</section>
+  </section>
 
-<main id="library">
-  <div class="section-head">
-    <h2 id="sectionTitle">Most Popular</h2>
-    <div class="tabs">
-      <button class="tab active" data-type="all">All</button>
-      <button class="tab" data-type="movie">Movies</button>
-      <button class="tab" data-type="tv">Series</button>
+  <section id="library">
+    <div class="section-head">
+      <h2 id="sectionTitle">✦ اكتشف الأعمال</h2>
+      <small id="count"></small>
     </div>
-  </div>
 
-  <div class="filters">
-    <button class="filter active" data-filter="popular">Popular</button>
-    <button class="filter" data-filter="top">Top Rated</button>
-    <button class="filter" data-filter="favorites">♥ Favorites</button>
-  </div>
+    <form class="search-wrap" id="searchForm">
+      <input id="searchInput" type="search" placeholder="ابحث باسم الفيلم أو المسلسل..." autocomplete="off" aria-label="البحث عن فيلم أو مسلسل">
+      <button type="submit">بحث</button>
+    </form>
 
-  <div id="grid" class="grid">
-    <div class="message">Loading NOTWIN TV...</div>
-  </div>
-  <div class="more-row">
-    <button class="secondary" id="loadMore">Load More</button>
-  </div>
+    <div class="tools" id="genres">
+      <button class="chip active" data-genre="all">الكل</button>
+      <button class="chip" data-genre="28">أكشن</button>
+      <button class="chip" data-genre="10749">رومانسي</button>
+      <button class="chip" data-genre="35">كوميديا</button>
+      <button class="chip" data-genre="27">رعب</button>
+      <button class="chip" data-genre="53">تشويق</button>
+      <button class="chip" data-genre="878">خيال علمي</button>
+      <button class="chip" data-genre="16">أنيميشن</button>
+      <button class="chip" data-genre="80">جريمة</button>
+      <button class="chip" data-genre="18">دراما</button>
+    </div>
+
+    <div class="status" id="status" role="status">جاري تحميل الأعمال...</div>
+    <div class="grid" id="catalog"></div>
+    <div style="text-align:center;margin-top:25px">
+      <button class="primary" id="loadMore" hidden>عرض المزيد</button>
+    </div>
+  </section>
 </main>
 
-<footer>NOTWIN TV © <span id="year"></span></footer>
+<footer>
+  <strong>NOTWIN TV</strong><br>
+  اكتشف أعمالك المفضلة في مكان واحد.<br>
+  معلومات الأعمال والأغلفة مقدمة عبر TMDB. هذا الموقع غير تابع لـ TMDB.
+</footer>
 
-<nav class="bottom-nav">
-  <button class="active" data-bottom="home"><span class="nav-icon">⌂</span>Home</button>
-  <button data-bottom="movie"><span class="nav-icon">▣</span>Movies</button>
-  <button data-bottom="tv"><span class="nav-icon">▤</span>Series</button>
-  <button data-bottom="favorites"><span class="nav-icon">♥</span>Favorites</button>
+<nav class="bottom">
+  <button class="active" id="navHome"><b>⌂</b>الرئيسية</button>
+  <button id="navSearch"><b>⌕</b>البحث</button>
+  <button id="navFav"><b>♡</b>المفضلة</button>
 </nav>
 
 <script>
-(() => {
-  "use strict";
+"use strict";
 
-  const API_KEY = "26c5ad9f51818e110945285552c11a75";
-  const API = "https://api.themoviedb.org/3";
-  const IMAGE = "https://image.tmdb.org/t/p/w500";
+/* استعمل مفتاح TMDB الخاص بك هنا */
+const TMDB_KEY = "26c5ad9f51818e110945285552c11a75";
+const API = "https://api.themoviedb.org/3";
+const IMG = "https://image.tmdb.org/t/p/w500";
 
-  const grid = document.getElementById("grid");
-  const searchInput = document.getElementById("searchInput");
+const catalog = document.getElementById("catalog");
+const statusBox = document.getElementById("status");
+const searchInput = document.getElementById("searchInput");
+const countBox = document.getElementById("count");
+const titleBox = document.getElementById("sectionTitle");
+const loadMoreBtn = document.getElementById("loadMore");
 
-  let type = "all";
-  let filter = "popular";
-  let page = 1;
-  let items = [];
-  let displayed = [];
-  let query = "";
-  let timer;
-  let requestNumber = 0;
+let currentItems = [];
+let currentPage = 1;
+let currentMode = "home";
+let currentGenre = "all";
+let currentQuery = "";
+let busy = false;
+let requestNumber = 0;
 
-  let favorites = new Set();
+const favoritesKey = "notwin_tv_favorites_v2";
+
+function readFavorites(){
   try {
-    favorites = new Set(JSON.parse(localStorage.getItem("notwin_favorites") || "[]"));
-  } catch (e) {}
-
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  function titleOf(item) {
-    return item.title || item.name || "Unknown Title";
+    const value = JSON.parse(localStorage.getItem(favoritesKey) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
   }
+}
 
-  function keyOf(item) {
-    return item.media_type + "-" + item.id;
-  }
+let favorites = readFavorites();
 
-  function yearOf(item) {
-    const date = item.release_date || item.first_air_date || "";
-    return date.slice(0, 4) || "—";
-  }
+function saveFavorites(){
+  try {
+    localStorage.setItem(favoritesKey, JSON.stringify(favorites));
+  } catch {}
+}
 
-  function safe(value) {
-    return String(value ?? "").replace(/[&<>"']/g, c => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    }[c]));
-  }
+function escapeHTML(value){
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[ch]);
+}
 
-  async function api(path, params = {}) {
-    const url = new URL(API + path);
-    url.searchParams.set("api_key", API_KEY);
-    url.searchParams.set("language", "en-US");
-    Object.entries(params).forEach(([k,v]) => url.searchParams.set(k, v));
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("API request failed");
-    return response.json();
-  }
+function getTitle(item){
+  return item.title || item.name || item.original_title || item.original_name || "Untitled";
+}
 
-  function card(item) {
-    const key = keyOf(item);
-    const title = safe(titleOf(item));
-    const score = Number(item.vote_average || 0).toFixed(1);
-    const label = item.media_type === "movie" ? "Movie" : "Series";
-    const poster = item.poster_path
-      ? `<img loading="lazy" src="${IMAGE}${item.poster_path}" alt="${title}">`
-      : `<div class="no-poster">NOTWIN TV</div>`;
+function getDate(item){
+  return item.release_date || item.first_air_date || "";
+}
 
-    return `
-      <article class="movie-card" data-key="${safe(key)}" tabindex="0">
-        <div class="poster">
-          ${poster}
-          <span class="rating">★ ${score}</span>
-          <span class="type-tag">${label}</span>
-          <button class="fav ${favorites.has(key) ? "saved" : ""}"
-            data-fav="${safe(key)}" aria-label="Favorite">${favorites.has(key) ? "♥" : "♡"}</button>
-        </div>
-        <div class="card-info">
-          <h3 lang="en">${title}</h3>
-          <div class="meta"><span>${yearOf(item)}</span><span>★ ${score}</span></div>
-        </div>
-      </article>`;
-  }
+function getType(item){
+  return item.media_type || (item.title || item.release_date ? "movie" : "tv");
+}
 
-  function render(list) {
-    displayed = list;
-    if (!list.length) {
-      grid.innerHTML = `<div class="message">No results found. Try another search.</div>`;
-      return;
+function itemKey(item){
+  return getType(item) + "-" + item.id;
+}
+
+async function api(path, params = {}){
+  const url = new URL(API + path);
+  url.searchParams.set("api_key", TMDB_KEY);
+  url.searchParams.set("language", "en-US");
+
+  Object.entries(params).forEach(([key,value]) => {
+    if(value !== undefined && value !== null && value !== ""){
+      url.searchParams.set(key, value);
     }
-    grid.innerHTML = list.map(card).join("");
+  });
+
+  const response = await fetch(url.toString());
+  if(!response.ok){
+    if(response.status === 401) throw new Error("مفتاح TMDB غير صالح. راجع API Key.");
+    if(response.status === 429) throw new Error("طلبات كثيرة. استنى شوية وعاود.");
+    throw new Error("تعذر الاتصال بـ TMDB (" + response.status + ").");
+  }
+  return response.json();
+}
+
+function getWatchURL(item){
+  const type = getType(item);
+  const id = encodeURIComponent(item.id);
+  return "watch.html?id=" + id + "&type=" + encodeURIComponent(type);
+}
+
+function render(items, append = false){
+  if(!append) catalog.innerHTML = "";
+
+  const validItems = (items || []).filter(item =>
+    item && item.id && ["movie","tv"].includes(getType(item))
+  );
+
+  if(!validItems.length && !append){
+    catalog.innerHTML = '<div class="empty">ما لقينا حتى عمل هنا.<br>جرّب اسم آخر أو اختار تصنيفاً مختلفاً.</div>';
+    countBox.textContent = "0 عمل";
+    return;
   }
 
-  function applyFilter() {
-    let result = [...items];
-    if (filter === "favorites") {
-      result = result.filter(item => favorites.has(keyOf(item)));
-    }
-    if (filter === "top") {
-      result.sort((a,b) => (b.vote_average || 0) - (a.vote_average || 0));
-    }
-    render(result);
-  }
+  const fragment = document.createDocumentFragment();
 
-  async function load(append = false) {
-    const current = ++requestNumber;
-    if (!append) {
-      page = 1;
-      grid.innerHTML = `<div class="message">Loading movies and series...</div>`;
-    } else {
-      page++;
-    }
+  validItems.forEach(item => {
+    const type = getType(item);
+    const title = getTitle(item);
+    const poster = item.poster_path ? IMG + item.poster_path : "";
+    const year = getDate(item).slice(0,4);
+    const rating = Number(item.vote_average || 0).toFixed(1);
+    const saved = favorites.includes(itemKey(item));
 
-    try {
-      let results = [];
-      const ranking = filter === "top" ? "top_rated" : "popular";
+    const article = document.createElement("article");
+    article.className = "card";
+    article.tabIndex = 0;
+    article.setAttribute("role","link");
+    article.setAttribute("aria-label","افتح " + title);
+    article.innerHTML = `
+      <div class="poster">
+        ${poster ? `<img loading="lazy" src="${escapeHTML(poster)}" alt="${escapeHTML(title)}" onerror="this.style.display='none'">` : ""}
+        <div class="poster-fallback">${escapeHTML(title)}</div>
+        <span class="type-label">${type === "movie" ? "MOVIE" : "SERIES"}</span>
+        <span class="rating">★ ${rating}</span>
+        <button class="fav ${saved ? "saved" : ""}" type="button" aria-label="${saved ? "إزالة من" : "إضافة إلى"} المفضلة" aria-pressed="${saved}">${saved ? "♥" : "♡"}</button>
+      </div>
+      <div class="info">
+        <div class="title" title="${escapeHTML(title)}" dir="auto">${escapeHTML(title)}</div>
+        <div class="meta"><span>${escapeHTML(year || "—")}</span><span>${type === "movie" ? "فيلم" : "مسلسل"}</span></div>
+      </div>`;
 
-      if (query) {
-        if (type === "all" || type === "movie") {
-          const data = await api("/search/movie", {query, page});
-          results.push(...(data.results || []).map(x => ({...x, media_type:"movie"})));
-        }
-        if (type === "all" || type === "tv") {
-          const data = await api("/search/tv", {query, page});
-          results.push(...(data.results || []).map(x => ({...x, media_type:"tv"})));
-        }
-      } else {
-        if (type === "all" || type === "movie") {
-          const data = await api("/movie/" + ranking, {page});
-          results.push(...(data.results || []).map(x => ({...x, media_type:"movie"})));
-        }
-        if (type === "all" || type === "tv") {
-          const data = await api("/tv/" + ranking, {page});
-          results.push(...(data.results || []).map(x => ({...x, media_type:"tv"})));
-        }
+    const openItem = () => {
+      window.location.href = getWatchURL(item);
+    };
+
+    article.addEventListener("click", event => {
+      if(event.target.closest(".fav")) return;
+      openItem();
+    });
+
+    article.addEventListener("keydown", event => {
+      if(event.target === article && (event.key === "Enter" || event.key === " ")){
+        event.preventDefault();
+        openItem();
       }
+    });
 
-      if (current !== requestNumber) return;
-
-      // Prioritize Venom in the mixed movie/series library.
-      if (!append && !query && (type === "all" || type === "movie")) {
-        try {
-          const data = await api("/search/movie", {query:"Venom"});
-          const venom = (data.results || []).find(x => /venom/i.test(x.title || ""));
-          if (venom && current === requestNumber) {
-            results = results.filter(x => !(x.media_type === "movie" && x.id === venom.id));
-            results.unshift({...venom, media_type:"movie"});
-          }
-        } catch (e) {}
-      }
-
-      if (current !== requestNumber) return;
-      items = append ? items.concat(results) : results;
-      applyFilter();
-    } catch (e) {
-      if (current === requestNumber) {
-        grid.innerHTML = `<div class="message">Could not load the library. Check your connection and try again.<br><button class="secondary" onclick="location.reload()">Retry</button></div>`;
-      }
-    }
-  }
-
-  function saveFavorites() {
-    localStorage.setItem("notwin_favorites", JSON.stringify([...favorites]));
-  }
-
-  function toggleFavorite(key) {
-    if (favorites.has(key)) favorites.delete(key);
-    else favorites.add(key);
-    saveFavorites();
-    applyFilter();
-  }
-
-  grid.addEventListener("click", event => {
-    const fav = event.target.closest("[data-fav]");
-    if (fav) {
+    article.querySelector(".fav").addEventListener("click", event => {
       event.stopPropagation();
-      toggleFavorite(fav.dataset.fav);
-      return;
-    }
-
-    const article = event.target.closest("[data-key]");
-    if (!article) return;
-    const item = displayed.find(x => keyOf(x) === article.dataset.key);
-    if (!item) return;
-
-    // Send the selected movie/series to the existing watch page.
-    // watch.html must later be updated to handle both types correctly.
-    location.href = `watch.html?id=${encodeURIComponent(item.id)}&type=${encodeURIComponent(item.media_type)}`;
-  });
-
-  grid.addEventListener("keydown", event => {
-    if (event.key !== "Enter") return;
-    const article = event.target.closest("[data-key]");
-    if (!article) return;
-    const item = displayed.find(x => keyOf(x) === article.dataset.key);
-    if (item) {
-      location.href = `watch.html?id=${encodeURIComponent(item.id)}&type=${encodeURIComponent(item.media_type)}`;
-    }
-  });
-
-  document.querySelectorAll(".tab").forEach(button => {
-    button.addEventListener("click", () => {
-      type = button.dataset.type;
-      document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === button));
-      document.querySelectorAll(".bottom-nav button").forEach(x =>
-        x.classList.toggle("active",
-          (type === "all" && x.dataset.bottom === "home") || x.dataset.bottom === type
-        )
-      );
-      document.getElementById("sectionTitle").textContent =
-        type === "movie" ? "Popular Movies" :
-        type === "tv" ? "Popular Series" : "Most Popular";
-      load();
-    });
-  });
-
-  document.querySelectorAll(".filter").forEach(button => {
-    button.addEventListener("click", () => {
-      filter = button.dataset.filter;
-      document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x === button));
-      if (filter === "favorites") applyFilter();
-      else load();
-    });
-  });
-
-  document.querySelectorAll(".bottom-nav button").forEach(button => {
-    button.addEventListener("click", () => {
-      const target = button.dataset.bottom;
-      document.querySelectorAll(".bottom-nav button").forEach(x => x.classList.toggle("active", x === button));
-
-      if (target === "favorites") {
-        filter = "favorites";
-        document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x.dataset.filter === "favorites"));
-        document.getElementById("sectionTitle").textContent = "Favorites";
-        applyFilter();
-        return;
+      const key = itemKey(item);
+      if(favorites.includes(key)){
+        favorites = favorites.filter(value => value !== key);
+      } else {
+        favorites.push(key);
       }
+      saveFavorites();
 
-      type = target === "home" ? "all" : target;
-      filter = "popular";
-      document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x.dataset.type === type));
-      document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x.dataset.filter === "popular"));
-      document.getElementById("sectionTitle").textContent =
-        type === "movie" ? "Popular Movies" :
-        type === "tv" ? "Popular Series" : "Most Popular";
-      load();
+      const button = event.currentTarget;
+      const nowSaved = favorites.includes(key);
+      button.classList.toggle("saved", nowSaved);
+      button.textContent = nowSaved ? "♥" : "♡";
+      button.setAttribute("aria-pressed", String(nowSaved));
+      button.setAttribute("aria-label", nowSaved ? "إزالة من المفضلة" : "إضافة إلى المفضلة");
+
+      if(currentMode === "favorites" && !nowSaved){
+        showFavorites();
+      }
     });
+
+    fragment.appendChild(article);
   });
 
-  document.getElementById("favoritesButton").addEventListener("click", () => {
-    filter = "favorites";
-    document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x.dataset.filter === "favorites"));
-    document.getElementById("sectionTitle").textContent = "Favorites";
-    applyFilter();
-    document.getElementById("library").scrollIntoView({behavior:"smooth"});
-  });
+  catalog.appendChild(fragment);
+}
 
-  searchInput.addEventListener("input", () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      query = searchInput.value.trim();
-      load();
-    }, 400);
+function setActiveGenre(){
+  document.querySelectorAll(".chip").forEach(button => {
+    button.classList.toggle("active", button.dataset.genre === currentGenre);
   });
+}
 
-  document.getElementById("loadMore").addEventListener("click", () => {
-    if (filter !== "favorites") load(true);
-  });
+function setStatus(message){
+  statusBox.textContent = message;
+}
 
-  document.getElementById("exploreButton").addEventListener("click", () => {
-    document.getElementById("library").scrollIntoView({behavior:"smooth"});
-  });
+function setLoading(loading){
+  busy = loading;
+  loadMoreBtn.disabled = loading;
+  loadMoreBtn.textContent = loading ? "جاري التحميل..." : "عرض المزيد";
+}
 
-  load();
-})();
+async function loadHome(append = false){
+  if(busy) return;
+  const thisRequest = ++requestNumber;
+  setLoading(true);
+  currentMode = "home";
+  currentQuery = "";
+  searchInput.value = "";
+  titleBox.textContent = "✦ اكتشف الأعمال";
+  setStatus("جاري تحميل الأفلام والمسلسلات...");
+  loadMoreBtn.hidden = true;
+
+  if(!append) currentPage = 1;
+  const page = currentPage;
+
+  try{
+    const data = await api("/trending/all/week", {page});
+    if(thisRequest !== requestNumber) return;
+
+    const items = (data.results || []).filter(item =>
+      ["movie","tv"].includes(item.media_type) &&
+      (currentGenre === "all" || (item.genre_ids || []).includes(Number(currentGenre)))
+    );
+
+    currentItems = append ? currentItems.concat(items) : items;
+    render(items, append);
+    countBox.textContent = currentItems.length + " عمل";
+    setStatus(currentItems.length ? "الأفلام والمسلسلات في مكتبة واحدة." : "ما لقينا نتائج لهذا التصنيف.");
+    currentPage = page + 1;
+    loadMoreBtn.hidden = page >= (data.total_pages || 1);
+  } catch(error){
+    if(thisRequest !== requestNumber) return;
+    if(!append) catalog.innerHTML = "";
+    setStatus(error.message + " تأكد من الإنترنت ومفتاح TMDB.");
+  } finally {
+    if(thisRequest === requestNumber) setLoading(false);
+  }
+}
+
+async function searchWorks(append = false){
+  const query = searchInput.value.trim();
+  if(!query){
+    currentGenre = "all";
+    setActiveGenre();
+    loadHome(false);
+    return;
+  }
+  if(busy) return;
+
+  const thisRequest = ++requestNumber;
+  setLoading(true);
+  currentMode = "search";
+  currentQuery = query;
+  titleBox.textContent = "⌕ نتائج البحث";
+  setStatus("نبحث على الأفلام والمسلسلات...");
+  loadMoreBtn.hidden = true;
+  if(!append) currentPage = 1;
+  const page = currentPage;
+
+  try{
+    const data = await api("/search/multi", {
+      query,
+      page,
+      include_adult: "false"
+    });
+
+    if(thisRequest !== requestNumber) return;
+
+    const items = (data.results || []).filter(item =>
+      ["movie","tv"].includes(item.media_type) &&
+      (currentGenre === "all" || (item.genre_ids || []).includes(Number(currentGenre)))
+    );
+
+    currentItems = append ? currentItems.concat(items) : items;
+    render(items, append);
+    countBox.textContent = currentItems.length + " نتيجة";
+    setStatus(currentItems.length ? "النتائج تشمل الأفلام والمسلسلات معاً." : "ما لقينا نتيجة. جرّب الاسم بالإنجليزية.");
+    currentPage = page + 1;
+    loadMoreBtn.hidden = page >= (data.total_pages || 1);
+  } catch(error){
+    if(thisRequest !== requestNumber) return;
+    if(!append) catalog.innerHTML = "";
+    setStatus(error.message);
+  } finally {
+    if(thisRequest === requestNumber) setLoading(false);
+  }
+}
+
+async function showFavorites(){
+  ++requestNumber;
+  currentMode = "favorites";
+  currentQuery = "";
+  titleBox.textContent = "♥ مفضلتي";
+  countBox.textContent = favorites.length + " عمل";
+  loadMoreBtn.hidden = true;
+  setStatus("أعمالك المحفوظة على هذا الجهاز.");
+
+  const keys = [...favorites];
+  if(!keys.length){
+    currentItems = [];
+    render([]);
+    setStatus("ما زدت حتى عمل للمفضلة. اضغط على ♡ في أي ملصق باش تحفظه.");
+    return;
+  }
+
+  setLoading(true);
+  catalog.innerHTML = "";
+  const items = [];
+
+  try{
+    for(const key of keys){
+      const splitAt = key.indexOf("-");
+      const type = key.slice(0,splitAt);
+      const id = key.slice(splitAt + 1);
+      if(!["movie","tv"].includes(type) || !id) continue;
+
+      try{
+        const item = await api("/" + type + "/" + encodeURIComponent(id));
+        item.media_type = type;
+        items.push(item);
+      }catch{}
+    }
+
+    currentItems = items;
+    render(items);
+    countBox.textContent = items.length + " عمل";
+    if(!items.length) setStatus("تعذر تحميل المفضلة. تحقق من الإنترنت.");
+  } finally {
+    setLoading(false);
+  }
+}
+
+document.getElementById("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  searchWorks(false);
+});
+
+let searchTimer;
+searchInput.addEventListener("input", () => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    if(searchInput.value.trim()) searchWorks(false);
+    else if(currentMode === "search") loadHome(false);
+  }, 450);
+});
+
+document.getElementById("genres").addEventListener("click", event => {
+  const button = event.target.closest("[data-genre]");
+  if(!button) return;
+  currentGenre = button.dataset.genre;
+  setActiveGenre();
+
+  if(currentMode === "favorites"){
+    showFavorites();
+  } else if(searchInput.value.trim()){
+    searchWorks(false);
+  } else {
+    loadHome(false);
+  }
+});
+
+document.getElementById("exploreBtn").addEventListener("click", () => {
+  document.getElementById("library").scrollIntoView({behavior:"smooth"});
+});
+
+document.getElementById("headerFav").addEventListener("click", showFavorites);
+document.getElementById("navFav").addEventListener("click", showFavorites);
+
+document.getElementById("navHome").addEventListener("click", () => {
+  currentGenre = "all";
+  setActiveGenre();
+  loadHome(false);
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+document.getElementById("navSearch").addEventListener("click", () => {
+  document.getElementById("library").scrollIntoView({behavior:"smooth"});
+  searchInput.focus();
+});
+
+loadMoreBtn.addEventListener("click", () => {
+  if(currentMode === "search") searchWorks(true);
+  else if(currentMode === "home") loadHome(true);
+});
+
+loadHome(false);
 </script>
 </body>
-        </html>
+</html>
