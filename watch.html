@@ -3,7 +3,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#05050b">
 <title>المشاهدة | NOTWIN TV</title>
 
@@ -11,78 +11,254 @@
 :root {
   --bg:#05050b;
   --card:#0d0d18;
-  --card2:#111121;
   --purple:#7061ff;
   --light:#b49dff;
   --text:#f4f1ff;
   --muted:#a5a0bc;
   --border:#25213a;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,Tahoma,sans-serif
+* { box-sizing:border-box; }
+
+html,body {
+  margin:0;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Tahoma,sans-serif;
 }
-a{color:inherit;text-decoration:none}
-button,select{
-  font:inherit;color:var(--text);background:var(--card2);
-  border:1px solid var(--border);border-radius:11px;padding:11px 13px
+body { padding-bottom:20px; }
+a { color:inherit;text-decoration:none; }
+button,select {
+  font:inherit;
+  color:var(--text);
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
 }
-button{cursor:pointer}
-button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
-button:hover:not(:disabled){border-color:var(--purple)}
-header{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;padding:16px 5%;background:#090811;
-  border-bottom:1px solid var(--border)
+button { cursor:pointer; }
+button:focus-visible,select:focus-visible {
+  outline:2px solid var(--light);
+  outline-offset:2px;
 }
-.logo{font-size:24px;font-weight:900}
-.logo span{color:var(--light)}
-main{max-width:1100px;margin:auto;padding:22px 15px 40px}
-.details{display:flex;gap:16px;align-items:flex-start;margin-bottom:22px}
-.poster{
-  width:105px;min-width:105px;height:150px;object-fit:cover;
-  border-radius:13px;background:var(--card)
+header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:17px 5%;
+  background:#090811;
+  border-bottom:1px solid var(--border);
 }
-h1{font-size:23px;margin:0 0 9px}
-h2{font-size:19px}
-.muted{color:var(--muted);font-size:13px;line-height:1.9}
-.player-card{
-  padding:12px;border:1px solid var(--border);
-  border-radius:16px;background:var(--card)
+.logo { font-size:23px;font-weight:900; }
+.logo span { color:var(--light); }
+.home { color:var(--muted);font-size:14px; }
+
+main {
+  width:min(100%,1000px);
+  margin:auto;
+  padding:20px 14px;
 }
-#player{
-  width:100%;aspect-ratio:16/9;background:#000;
-  border-radius:10px;overflow:hidden
+.heading { margin-bottom:14px; }
+h1 { font-size:21px;margin:0 0 7px; }
+#meta { color:var(--muted);font-size:12px; }
+
+.player-card {
+  background:#000;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:8px;
+  overflow:hidden;
 }
-#player iframe{width:100%;height:100%;border:0}
-.player-message{
-  height:100%;min-height:200px;display:grid;place-items:center;
-  padding:20px;text-align:center;color:var(--muted);line-height:1.9
+.player-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:4px 3px 10px;
 }
-.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
-label{display:block;color:var(--muted);margin-bottom:7px;font-size:13px}
-select{width:100%}
-.navigation{display:flex;justify-content:space-between;gap:10px}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin-top:25px}
-.episodes{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}
-.episode{background:var(--card);text-align:right;min-height:82px;overflow-wrap:anywhere}
-.episode.active{border-color:var(--purple);background:#17132b}
-.episode strong{display:block;color:var(--light);margin-bottom:8px}
-.episode span{font-size:12px;color:var(--muted)}
-#status{padding:12px 0;color:var(--muted);line-height:1.9}
-.error{color:#ff9dbb!important}
-.notice{
-  background:#0b0a13;border:1px solid var(--border);border-radius:12px;
-  padding:12px;margin-top:16px;color:var(--muted);font-size:12px;line-height:1.9
+#episodeLabel { font-size:14px;color:var(--muted); }
+.fullscreen-btn {
+  width:42px;
+  height:38px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  background:#171121;
+  color:var(--light);
+  border:1px solid #33254b;
+  font-size:22px;
 }
-footer{text-align:center;padding:22px;color:var(--muted);font-size:12px;border-top:1px solid var(--border)}
-@media(max-width:520px){
-  header{padding:14px}main{padding:18px 12px 32px}
-  .poster{width:85px;min-width:85px;height:125px}
-  h1{font-size:19px}
-  .episodes{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .player-card{padding:7px}
+#player {
+  width:100%;
+  aspect-ratio:16/9;
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+  background:#100e16;
+}
+#player iframe {
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#100e16;
+}
+.player-message {
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:20px;
+  text-align:center;
+  color:var(--muted);
+  line-height:1.8;
+}
+.play-icon {
+  display:grid;
+  place-items:center;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:var(--light);
+  color:#100b1b;
+  font-size:26px;
+}
+.player-note {
+  margin:10px 3px 3px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+}
+.selectors {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+.field label {
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+select { width:100%;min-width:0; }
+#status {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+  margin-top:14px;
+}
+.error { color:#ff9dbb!important; }
+
+.details {
+  margin-top:18px;
+  padding:15px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+.details h2 { font-size:16px;margin:0 0 8px; }
+#overview {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.9;
+  margin:0;
+}
+footer {
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  padding:20px 10px;
+}
+
+/* واجهة المشاهدة الأفقية */
+#player:fullscreen {
+  width:100vw;
+  height:100vh;
+  max-width:none;
+  max-height:none;
+  aspect-ratio:auto;
+  border-radius:0;
+  background:#000;
+}
+#player:fullscreen iframe {
+  width:100%;
+  height:100%;
+}
+#player:fullscreen .player-message {
+  background:#000;
+}
+#player:-webkit-full-screen {
+  width:100vw;
+  height:100vh;
+  aspect-ratio:auto;
+  border-radius:0;
+}
+#player:-webkit-full-screen iframe {
+  width:100%;
+  height:100%;
+}
+
+@media(max-width:520px) {
+  header { padding:14px; }
+  main { padding:15px 10px; }
+  h1 { font-size:19px; }
+  .player-card { padding:6px; }
+  .selectors { gap:8px; }
+  select { padding:11px 7px;font-size:13px; }
+}
+
+/* أثناء ملء الشاشة نخفي كل ما هو خارج الفيديو */
+body.watching-fullscreen header,
+body.watching-fullscreen main > .heading,
+body.watching-fullscreen main > .selectors,
+body.watching-fullscreen main > #status,
+body.watching-fullscreen main > .details,
+body.watching-fullscreen footer {
+  display:none!important;
+}
+body.watching-fullscreen main {
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+}
+body.watching-fullscreen .player-card {
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:#000;
+}
+body.watching-fullscreen .player-top {
+  position:absolute;
+  top:env(safe-area-inset-top, 0px);
+  right:12px;
+  left:12px;
+  z-index:2;
+  pointer-events:none;
+}
+body.watching-fullscreen .player-top > * {
+  pointer-events:auto;
+}
+body.watching-fullscreen #player {
+  width:100%;
+  height:100%;
+  aspect-ratio:auto;
+  border-radius:0;
+}
+body.watching-fullscreen #player iframe {
+  width:100%;
+  height:100%;
+}
+body.watching-fullscreen .player-note {
+  display:none;
 }
 </style>
 </head>
@@ -90,74 +266,74 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px;border-t
 <body>
 <header>
   <a class="logo" href="./index.html">NOTWIN <span>TV</span></a>
-  <a href="./index.html">الرئيسية ←</a>
+  <a class="home" href="./index.html">الرئيسية ←</a>
 </header>
 
 <main>
-  <section class="details">
-    <img id="poster" class="poster" alt="غلاف المسلسل">
-    <div>
-      <h1 id="title">جاري تحميل المسلسل...</h1>
-      <div id="meta" class="muted"></div>
-      <p id="overview" class="muted"></p>
-    </div>
+  <section class="heading">
+    <h1 id="title">جاري تحميل المسلسل...</h1>
+    <div id="meta"></div>
   </section>
 
-  <section class="player-card">
+  <section class="player-card" id="playerCard">
+    <div class="player-top">
+      <span id="episodeLabel">الحلقة 1</span>
+      <button
+        class="fullscreen-btn"
+        id="fullscreenBtn"
+        type="button"
+        aria-label="ملء الشاشة بالعرض"
+        title="ملء الشاشة بالعرض">⛶</button>
+    </div>
+
     <div id="player">
-      <div class="player-message">جاري تجهيز المشغّل...</div>
-    </div>
-
-    <div class="controls">
-      <div>
-        <label for="season">الموسم</label>
-        <select id="season" disabled></select>
-      </div>
-      <div>
-        <label for="episode">الحلقة</label>
-        <select id="episode" disabled></select>
+      <div class="player-message">
+        <span class="play-icon">▶</span>
+        <span>جاري تجهيز مشغّل الفيديو...</span>
       </div>
     </div>
 
-    <div class="navigation">
-      <button id="prev" disabled>→ السابقة</button>
-      <button id="next" disabled>التالية ←</button>
+    <p class="player-note">
+      إذا لم يبدأ الفيديو، انتظر قليلًا أو تحقق من اتصال الإنترنت.
+    </p>
+  </section>
+
+  <section class="selectors">
+    <div class="field">
+      <label for="season">الموسم</label>
+      <select id="season" disabled>
+        <option>تحميل...</option>
+      </select>
     </div>
 
-    <div class="notice">
-      معلومات المسلسل والحلقات من TMDB. تشغيل الفيديو يعتمد على توفر
-      المشغّل الخارجي وحقوق العرض.
+    <div class="field">
+      <label for="episode">الحلقة</label>
+      <select id="episode" disabled>
+        <option>تحميل...</option>
+      </select>
     </div>
   </section>
 
-  <section>
-    <div class="section-title">
-      <h2>حلقات الموسم</h2>
-      <span id="count" class="muted"></span>
-    </div>
-    <div id="status">جاري الاتصال بـ TMDB...</div>
-    <div id="episodes" class="episodes"></div>
-  </section>
+  <div id="status">جاري الاتصال...</div>
 
-  <div class="notice">
-    This product uses the TMDB API but is not endorsed or certified by TMDB.
-    <br>
-    <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDB</a>
-  </div>
+  <section class="details">
+    <h2>عن المسلسل</h2>
+    <p id="overview">جاري تحميل المعلومات...</p>
+  </section>
 </main>
 
-<footer>NOTWIN TV © <span id="year"></span></footer>
+<footer>
+  NOTWIN TV © <span id="year"></span>
+  <br>
+  معلومات المسلسلات من TMDB. الموقع غير معتمد من TMDB.
+</footer>
 
 <script>
 "use strict";
 
-// TMDB API KEY
 const TMDB_API_KEY = "26c5ad9f51818e110945285552c11a75";
-
 const TMDB_API = "https://api.themoviedb.org/3";
 const TMDB_IMAGES = "https://image.tmdb.org/t/p/w500";
-
-// تحقق من عنوان CineSrc الحالي إذا لم يعمل المشغل.
 const CINESRC_PLAYER = "https://cinesrc.st/embed/tv/";
 
 const $ = id => document.getElementById(id);
@@ -169,12 +345,13 @@ let episodeNumber = Number(params.get("episode")) || 1;
 let show = null;
 let seasonData = null;
 let loadVersion = 0;
+let fullscreenActive = false;
 
 $("year").textContent = new Date().getFullYear();
 
-function setStatus(message, isError = false) {
+function setStatus(message, error = false) {
   $("status").textContent = message;
-  $("status").classList.toggle("error", isError);
+  $("status").classList.toggle("error", error);
 }
 
 async function tmdb(path) {
@@ -186,15 +363,15 @@ async function tmdb(path) {
 
   if (!response.ok) {
     if (response.status === 401) {
-      throw new Error("مفتاح TMDB غير صحيح أو غير صالح.");
+      throw new Error("مفتاح TMDB غير صالح.");
     }
     if (response.status === 404) {
       throw new Error("المسلسل أو الموسم غير موجود.");
     }
     if (response.status === 429) {
-      throw new Error("طلبات كثيرة. حاول مجدداً بعد قليل.");
+      throw new Error("طلبات كثيرة. حاول بعد قليل.");
     }
-    throw new Error("فشل الاتصال بـ TMDB: " + response.status);
+    throw new Error("تعذر الاتصال. رمز الخطأ: " + response.status);
   }
 
   return response.json();
@@ -208,7 +385,27 @@ function updateURL() {
   history.replaceState(null, "", url);
 }
 
+function showPlayerMessage(message) {
+  const player = $("player");
+  player.replaceChildren();
+
+  const box = document.createElement("div");
+  box.className = "player-message";
+
+  const icon = document.createElement("span");
+  icon.className = "play-icon";
+  icon.textContent = "▶";
+
+  const text = document.createElement("span");
+  text.textContent = message;
+
+  box.append(icon, text);
+  player.appendChild(box);
+}
+
 function renderPlayer() {
+  if (!show) return;
+
   const player = $("player");
   player.replaceChildren();
 
@@ -221,62 +418,25 @@ function renderPlayer() {
   iframe.title = "مشغل المسلسل";
   iframe.allow = "fullscreen; autoplay; picture-in-picture";
   iframe.allowFullscreen = true;
+  iframe.loading = "eager";
   iframe.referrerPolicy = "strict-origin-when-cross-origin";
 
   player.appendChild(iframe);
+
+  $("episodeLabel").textContent =
+    "الموسم " + seasonNumber + " · الحلقة " + episodeNumber;
+
   updateURL();
-  renderEpisodes();
-  updateNavigation();
-}
-
-function renderEpisodes() {
-  const list = $("episodes");
-  list.replaceChildren();
-
-  const episodes = seasonData?.episodes || [];
-  $("count").textContent = episodes.length + " حلقة";
-
-  for (const item of episodes) {
-    const button = document.createElement("button");
-    button.className = "episode" +
-      (item.episode_number === episodeNumber ? " active" : "");
-
-    const name = document.createElement("strong");
-    name.textContent = "الحلقة " + item.episode_number;
-
-    const title = document.createElement("span");
-    title.textContent = item.name || "بدون عنوان";
-
-    button.append(name, title);
-
-    button.addEventListener("click", () => {
-      episodeNumber = item.episode_number;
-      $("episode").value = String(episodeNumber);
-      renderPlayer();
-    });
-
-    list.appendChild(button);
-  }
-}
-
-function updateNavigation() {
-  const episodes = seasonData?.episodes || [];
-  const index = episodes.findIndex(
-    item => item.episode_number === episodeNumber
-  );
-
-  $("prev").disabled = index <= 0;
-  $("next").disabled = index < 0 || index >= episodes.length - 1;
 }
 
 async function loadSeason(number) {
   const version = ++loadVersion;
   seasonNumber = number;
 
-  $("episodes").replaceChildren();
   $("episode").disabled = true;
-  $("prev").disabled = true;
-  $("next").disabled = true;
+  $("episode").replaceChildren();
+  showPlayerMessage("جاري تحميل بيانات الحلقات...");
+
   setStatus("جاري تحميل الحلقات...");
 
   try {
@@ -287,22 +447,9 @@ async function loadSeason(number) {
     const episodes = data.episodes || [];
     const select = $("episode");
 
-    select.replaceChildren();
-
-    for (const item of episodes) {
-      const option = document.createElement("option");
-      option.value = String(item.episode_number);
-      option.textContent =
-        "الحلقة " + item.episode_number + " — " +
-        (item.name || "بدون عنوان");
-      select.appendChild(option);
-    }
-
     if (!episodes.length) {
-      $("player").innerHTML =
-        '<div class="player-message">لا توجد حلقات في هذا الموسم.</div>';
-      $("count").textContent = "0 حلقة";
-      setStatus("لم يتم العثور على حلقات لهذا الموسم.");
+      showPlayerMessage("لا توجد حلقات لهذا الموسم.");
+      setStatus("لم يتم العثور على حلقات.");
       return;
     }
 
@@ -310,23 +457,32 @@ async function loadSeason(number) {
       episodeNumber = episodes[0].episode_number;
     }
 
+    for (const item of episodes) {
+      const option = document.createElement("option");
+      option.value = String(item.episode_number);
+      option.textContent =
+        "الحلقة " + item.episode_number +
+        (item.name ? " — " + item.name : "");
+      select.appendChild(option);
+    }
+
     select.value = String(episodeNumber);
     select.disabled = false;
 
-    setStatus("تم تحميل " + episodes.length + " حلقة.");
     renderPlayer();
+    setStatus("تم تحميل بيانات الحلقات.");
   } catch (error) {
     if (version !== loadVersion) return;
-    setStatus(error.message || "تعذر تحميل الحلقات.", true);
+    showPlayerMessage("تعذر تحميل بيانات الحلقات.");
+    setStatus(error.message || "حدث خطأ أثناء التحميل.", true);
   }
 }
 
 async function init() {
   if (!Number.isSafeInteger(showId) || showId <= 0) {
     $("title").textContent = "المسلسل غير محدد";
-    $("player").innerHTML =
-      '<div class="player-message">افتح الصفحة برابط يحتوي على معرّف TMDB، مثال: watch.html?id=1399</div>';
-    setStatus("رابط غير صحيح: معرّف المسلسل مفقود.", true);
+    showPlayerMessage("الرابط لا يحتوي على معرّف TMDB صحيح.");
+    setStatus("افتح المسلسل من الصفحة الرئيسية.", true);
     return;
   }
 
@@ -337,50 +493,47 @@ async function init() {
     $("overview").textContent =
       show.overview || "لا يتوفر وصف باللغة العربية.";
 
-    $("poster").src = show.poster_path
-      ? TMDB_IMAGES + show.poster_path
-      : "";
-
     const year = show.first_air_date
       ? show.first_air_date.slice(0, 4)
-      : "غير معروف";
+      : "—";
 
     $("meta").textContent =
-      year + " · " + (show.number_of_seasons || 0) +
-      " موسم · التقييم " +
-      (show.vote_average ? show.vote_average.toFixed(1) : "غير متوفر");
+      year + " · " +
+      (show.number_of_seasons || 0) + " موسم · التقييم " +
+      (show.vote_average ? show.vote_average.toFixed(1) : "—");
 
-    document.title = (show.name || "المشاهدة") + " | NOTWIN TV";
+    document.title = $("title").textContent + " | NOTWIN TV";
 
-    const select = $("season");
-    select.replaceChildren();
+    const seasonSelect = $("season");
+    seasonSelect.replaceChildren();
 
     const seasons = (show.seasons || []).filter(
       item => item.season_number > 0
     );
+
+    if (!seasons.length) {
+      throw new Error("لم يتم العثور على مواسم لهذا المسلسل.");
+    }
 
     for (const item of seasons) {
       const option = document.createElement("option");
       option.value = String(item.season_number);
       option.textContent =
         item.name || "الموسم " + item.season_number;
-      select.appendChild(option);
-    }
-
-    if (!seasons.length) {
-      throw new Error("لم يتم العثور على مواسم لهذا المسلسل.");
+      seasonSelect.appendChild(option);
     }
 
     if (!seasons.some(item => item.season_number === seasonNumber)) {
       seasonNumber = seasons[0].season_number;
     }
 
-    select.value = String(seasonNumber);
-    select.disabled = false;
+    seasonSelect.value = String(seasonNumber);
+    seasonSelect.disabled = false;
 
     await loadSeason(seasonNumber);
   } catch (error) {
     $("title").textContent = "تعذر تحميل المسلسل";
+    showPlayerMessage("تحقق من الإنترنت وحاول مجددًا.");
     setStatus(error.message || "حدث خطأ غير متوقع.", true);
   }
 }
@@ -395,30 +548,87 @@ $("episode").addEventListener("change", event => {
   renderPlayer();
 });
 
-$("prev").addEventListener("click", () => {
-  const episodes = seasonData?.episodes || [];
-  const index = episodes.findIndex(
-    item => item.episode_number === episodeNumber
-  );
+/*
+  ملء الشاشة:
+  نحاول تدوير الهاتف إلى العرض إذا كان المتصفح يدعم ذلك.
+  بعض الهواتف والمتصفحات لا تسمح بقفل الاتجاه من صفحة ويب.
+*/
+async function enterFullscreen() {
+  const player = $("player");
 
-  if (index > 0) {
-    episodeNumber = episodes[index - 1].episode_number;
-    $("episode").value = String(episodeNumber);
-    renderPlayer();
+  try {
+    if (!document.fullscreenElement) {
+      if (player.requestFullscreen) {
+        await player.requestFullscreen();
+      } else if (player.webkitRequestFullscreen) {
+        player.webkitRequestFullscreen();
+      } else {
+        document.body.classList.add("watching-fullscreen");
+        fullscreenActive = true;
+      }
+    }
+
+    if (screen.orientation && screen.orientation.lock) {
+      try {
+        await screen.orientation.lock("landscape");
+      } catch (_) {
+        // بعض المتصفحات تمنع تدوير الشاشة تلقائيًا.
+      }
+    }
+  } catch (_) {
+    setStatus(
+      "إذا لم يفتح ملء الشاشة، استعمل زر التكبير داخل مشغّل الفيديو."
+    );
+  }
+}
+
+async function exitFullscreen() {
+  try {
+    if (document.fullscreenElement && document.exitFullscreen) {
+      await document.exitFullscreen();
+    } else if (document.webkitFullscreenElement &&
+               document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  } catch (_) {}
+
+  document.body.classList.remove("watching-fullscreen");
+  fullscreenActive = false;
+
+  if (screen.orientation && screen.orientation.unlock) {
+    try {
+      screen.orientation.unlock();
+    } catch (_) {}
+  }
+}
+
+$("fullscreenBtn").addEventListener("click", async () => {
+  const isFullscreen =
+    Boolean(document.fullscreenElement) ||
+    Boolean(document.webkitFullscreenElement) ||
+    fullscreenActive;
+
+  if (isFullscreen) {
+    await exitFullscreen();
+  } else {
+    await enterFullscreen();
   }
 });
 
-$("next").addEventListener("click", () => {
-  const episodes = seasonData?.episodes || [];
-  const index = episodes.findIndex(
-    item => item.episode_number === episodeNumber
-  );
+document.addEventListener("fullscreenchange", () => {
+  const active = Boolean(document.fullscreenElement);
+  document.body.classList.toggle("watching-fullscreen", active);
 
-  if (index >= 0 && index < episodes.length - 1) {
-    episodeNumber = episodes[index + 1].episode_number;
-    $("episode").value = String(episodeNumber);
-    renderPlayer();
+  if (!active && screen.orientation && screen.orientation.unlock) {
+    try {
+      screen.orientation.unlock();
+    } catch (_) {}
   }
+});
+
+document.addEventListener("webkitfullscreenchange", () => {
+  const active = Boolean(document.webkitFullscreenElement);
+  document.body.classList.toggle("watching-fullscreen", active);
 });
 
 init();
