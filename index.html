@@ -10,23 +10,28 @@
 :root{--bg:#080610;--panel:#120e20;--purple:#9b6cff;--text:#f7f1ff;--muted:#a99dbb;--line:#ffffff14}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Tahoma,sans-serif}
-button,input{font:inherit}button{cursor:pointer}
+button,input{font:inherit}
+button{cursor:pointer}
 header{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:12px 5%;background:#080610ed;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;text-decoration:none;color:white}
 .logo{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(140deg,#b18aff,#5222a0)}
 .brand span{color:var(--purple)}
 .btn,.secondary{border:1px solid var(--line);background:#ffffff08;color:white;padding:10px 14px;border-radius:12px}
 .primary{background:linear-gradient(135deg,#a87aff,#7046cf);border:0;color:white;padding:13px 18px;border-radius:12px;font-weight:bold}
-button:disabled{opacity:.55;cursor:wait}
+button:disabled{opacity:.6;cursor:wait}
 main{max-width:1250px;margin:auto;padding:22px 5% 95px}
 .hero{min-height:320px;padding:28px;display:flex;align-items:center;border:1px solid #a477ff25;border-radius:24px;background:linear-gradient(90deg,#080610ef,#10091c88),linear-gradient(0deg,#080610,transparent),url("sakura-bg.png") center/cover no-repeat}
-.hero>div{max-width:570px}.eyebrow,.pill{font-size:12px;color:#d5bdff;border:1px solid #9b6cff45;background:#9b6cff19;border-radius:99px;padding:7px 11px}
-.hero h1{font-size:clamp(32px,6vw,56px);margin:18px 0 12px}.hero h1 span{color:#b99aff}
+.hero>div{max-width:570px}
+.eyebrow,.pill{font-size:12px;color:#d5bdff;border:1px solid #9b6cff45;background:#9b6cff19;border-radius:99px;padding:7px 11px}
+.hero h1{font-size:clamp(32px,6vw,56px);margin:18px 0 12px}
+.hero h1 span{color:#b99aff}
 .hero p{color:#d0c5dc;line-height:1.9}
 .search{display:flex;gap:8px;margin:22px 0}
 .search input{flex:1;min-width:0;background:#130e20;border:1px solid var(--line);border-radius:13px;padding:14px;color:white}
-.section{margin-top:28px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.section-head h2{font-size:21px;margin:0}.section-head p{font-size:12px;color:var(--muted)}
+.section{margin-top:28px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.section-head h2{font-size:21px;margin:0}
+.section-head p{font-size:12px;color:var(--muted)}
 .filters{display:flex;gap:8px;overflow-x:auto;padding:10px 0 15px}
 .filters button{white-space:nowrap;background:#ffffff08;border:1px solid var(--line);color:#c8bdd6;border-radius:99px;padding:9px 14px}
 .filters button.active{background:#8e5df32b;border-color:var(--purple);color:white}
@@ -37,19 +42,21 @@ main{max-width:1250px;margin:auto;padding:22px 5% 95px}
 .poster{aspect-ratio:2/2.8;background:#201530}
 .poster img{width:100%;height:100%;object-fit:cover;display:block}
 .placeholder{height:100%;min-height:150px;display:grid;place-items:center;color:#b99aff;font-size:38px}
-.info{padding:10px}.title{font-size:13px;line-height:1.5;font-weight:bold;min-height:39px}
+.info{padding:10px}
+.title{font-size:13px;line-height:1.5;font-weight:bold;min-height:39px}
 .meta,.rating{font-size:11px;color:var(--muted);margin-top:7px}
 .rating{color:#f4cf83}
 .description{font-size:11px;color:#c9bdd7;line-height:1.6;margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .fav{position:absolute;top:7px;left:7px;z-index:2;border:1px solid #ffffff25;background:#080610df;color:white;border-radius:50%;width:33px;height:33px;font-size:18px}
-.fav.saved{color:#ff78ad}.lang{position:absolute;right:7px;top:7px;background:#080610df;border-radius:7px;padding:5px;font-size:10px}
+.fav.saved{color:#ff78ad}
+.lang{position:absolute;right:7px;top:7px;background:#080610df;border-radius:7px;padding:5px;font-size:10px}
 .status{text-align:center;color:var(--muted);padding:30px 10px;line-height:1.9}
 .status strong{display:block;color:white}
-.load{text-align:center;margin:20px}.bottom{position:fixed;bottom:0;left:0;right:0;z-index:9;display:flex;justify-content:center;background:#080610ed;border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom))}
+.load{text-align:center;margin:20px}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:9;display:flex;justify-content:center;background:#080610ed;border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom))}
 .bottom button{flex:1;max-width:180px;background:transparent;border:0;color:var(--muted);padding:9px}
 .bottom button.active{color:#d8c6ff;background:#9b6cff1d;border-radius:10px}
 footer{text-align:center;color:#786b89;font-size:11px;margin:28px 0}
-footer a{color:#b99aff}
 @media(max-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:700px){header{padding:10px 4%}main{padding:15px 4% 90px}.hero{min-height:285px;padding:20px}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.info{padding:8px}.title{font-size:12px}.search{flex-wrap:wrap}.search .primary{width:100%}}
 @media(max-width:390px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -60,14 +67,17 @@ footer a{color:#b99aff}
 <a class="brand" href="#" id="homeLink">
 <div class="logo">NT</div><div>NOTWIN <span>TV</span></div>
 </a>
-<div><button class="btn" id="searchTop" aria-label="البحث">⌕</button> <button class="btn" id="favTop" aria-label="المفضلة">♡</button></div>
+<div>
+<button class="btn" id="searchTop" aria-label="البحث">⌕</button>
+<button class="btn" id="favTop" aria-label="المفضلة">♡</button>
+</div>
 </header>
 
 <main>
 <section class="hero"><div>
 <span class="eyebrow">YOUR NEXT STORY STARTS HERE</span>
 <h1>عالمك، <span>قصتك.</span></h1>
-<p>اكتشف المسلسلات والأفلام الآسيوية، وابدأ من صفحة المسلسل بضغطة واحدة.</p>
+<p>اكتشف المسلسلات والأعمال الآسيوية، وتعرّف على قصصها وتفاصيلها.</p>
 <button class="primary" id="discover">اكتشف المسلسلات ←</button>
 </div></section>
 
@@ -78,7 +88,10 @@ footer a{color:#b99aff}
 
 <section class="section">
 <div class="section-head">
-<div><h2 id="heading">اكتشف المسلسلات</h2><p id="subheading">بيانات من مكتبة TVmaze</p></div>
+<div>
+<h2 id="heading">اكتشف المسلسلات</h2>
+<p id="subheading">اكتشف أعمالك الآسيوية المفضلة</p>
+</div>
 <span class="pill" id="count">جاهز</span>
 </div>
 
@@ -103,7 +116,7 @@ footer a{color:#b99aff}
 </div>
 </section>
 
-<footer>معلومات المسلسلات من <a href="https://www.tvmaze.com/api" target="_blank" rel="noopener">TVmaze</a>. معرّفات المسلسلات من TMDB. التوفر يعتمد على المصادر الخارجية.</footer>
+<footer>NOTWIN TV — عالمك، قصتك.</footer>
 </main>
 
 <nav class="bottom">
@@ -115,23 +128,24 @@ footer a{color:#b99aff}
 <script>
 "use strict";
 
-const API="https://api.tvmaze.com";
+const TV_API="https://api.tvmaze.com";
 const TMDB_API="https://api.themoviedb.org/3";
-
-/*
-  ملاحظة:
-  مفتاح TMDB في كود الموقع العام سيكون مرئيًا للزوار.
-  لا تضع هنا أي مفتاح سري أو كلمة مرور.
-*/
 const TMDB_KEY="26c5ad9f51818e110945285552c11a75";
 const MAX_PAGES=40;
 const $=id=>document.getElementById(id);
 
-let shows=[],page=0,filter="all",mode="library",results=[];
-let loading=false,end=false,searchToken=0,categoryToken=0;
-let favs=new Set();
-let watchCache=new Map();
+let shows=[];
+let page=0;
+let filter="all";
+let mode="library";
+let results=[];
+let loading=false;
+let end=false;
+let searchToken=0;
+let categoryToken=0;
 let openingShowId=null;
+let favs=new Set();
+const watchCache=new Map();
 
 try{
   favs=new Set(JSON.parse(localStorage.getItem("notwin-tv-saved-v6")||"[]").map(Number));
@@ -166,67 +180,74 @@ function languageName(language){
 }
 
 async function api(path){
-  const r=await fetch(API+path);
-  if(!r.ok)throw Error("TVmaze HTTP "+r.status);
-  return r.json();
+  const response=await fetch(TV_API+path);
+  if(!response.ok)throw Error("تعذر تحميل البيانات.");
+  return response.json();
 }
 
-function normalize(item){return item?.show||item}
+function normalize(item){
+  return item?.show||item;
+}
 
 function merge(items){
-  const m=new Map(shows.map(s=>[s.id,s]));
-  items.map(normalize).filter(s=>s?.id).forEach(s=>m.set(s.id,s));
-  shows=[...m.values()];
+  const map=new Map(shows.map(show=>[show.id,show]));
+  items.map(normalize).filter(show=>show?.id).forEach(show=>map.set(show.id,show));
+  shows=[...map.values()];
 }
 
-function matches(s,f){
-  if(["Korean","Japanese","Chinese"].includes(f))
-    return String(s.language||"").toLowerCase()===f.toLowerCase();
+function matches(show,category){
+  if(["Korean","Japanese","Chinese"].includes(category)){
+    return String(show.language||"").toLowerCase()===category.toLowerCase();
+  }
 
-  if(f==="School")
-    return (s.genres||[]).some(g=>/school|teen|youth/i.test(g))||
-      /school|high school|teen|youth/i.test(plain((s.name||"")+" "+(s.summary||"")));
+  if(category==="School"){
+    return (show.genres||[]).some(g=>/school|teen|youth/i.test(g))||
+      /school|high school|teen|youth/i.test(plain((show.name||"")+" "+(show.summary||"")));
+  }
 
-  if(f==="all")return true;
-  return (s.genres||[]).some(g=>g.toLowerCase()===f.toLowerCase());
+  if(category==="all")return true;
+  return (show.genres||[]).some(g=>g.toLowerCase()===category.toLowerCase());
 }
 
 function filtered(list){
-  let a=list.filter(s=>filter==="all"||matches(s,filter));
-  if(mode==="favorites")a=a.filter(s=>favs.has(s.id));
-  return a;
+  let items=list.filter(show=>filter==="all"||matches(show,filter));
+  if(mode==="favorites")items=items.filter(show=>favs.has(show.id));
+  return items;
 }
 
-function setStatus(title,msg=""){
-  const b=$("status");
-  b.hidden=false;
-  b.replaceChildren();
-  const st=document.createElement("strong");
-  st.textContent=title;
-  b.append(st,document.createTextNode(msg));
+function setStatus(title,message=""){
+  const area=$("status");
+  area.hidden=false;
+  area.replaceChildren();
+  const strong=document.createElement("strong");
+  strong.textContent=title;
+  area.append(strong,document.createTextNode(message));
 }
 
-function hideStatus(){$("status").hidden=true}
+function hideStatus(){
+  $("status").hidden=true;
+}
 
 function render(list=shows){
   const items=filtered(list);
   $("grid").replaceChildren();
 
   if(!items.length){
-    setStatus(mode==="favorites"?"المفضلة فارغة":"ما لقيناش نتائج",
-      " جرّب تصنيفًا آخر أو ابحث باسم المسلسل.");
+    setStatus(
+      mode==="favorites"?"المفضلة فارغة":"ما لقيناش نتائج",
+      " جرّب تصنيفًا آخر أو ابحث باسم المسلسل."
+    );
     $("count").textContent="0 نتيجة";
     return;
   }
 
   hideStatus();
-  const frag=document.createDocumentFragment();
-  items.forEach(s=>frag.appendChild(makeCard(s)));
-  $("grid").appendChild(frag);
+  const fragment=document.createDocumentFragment();
+  items.forEach(show=>fragment.appendChild(makeCard(show)));
+  $("grid").appendChild(fragment);
   $("count").textContent=items.length+" نتيجة";
 }
 
-/* تطبيع الأسماء لتسهيل مطابقة نتائج TMDB */
 function normalizeName(value){
   return String(value||"")
     .toLowerCase()
@@ -237,49 +258,66 @@ function normalizeName(value){
 }
 
 /*
-  تحويل مسلسل TVmaze إلى معرّف TMDB.
-  لا نستعمل رقم TVmaze كأنه رقم TMDB.
+  نبحث عن العمل في TMDB بدل استعمال رقم TVmaze.
+  نفضّل مطابقة الاسم الأصلي أو الاسم المعروض.
+  إذا كانت النتائج غير واضحة، نطلب التحقق بدل فتح عمل خاطئ.
 */
 async function findTmdbShow(show){
-  if(watchCache.has(show.id))return watchCache.get(show.id);
+  if(watchCache.has(show.id)){
+    return watchCache.get(show.id);
+  }
 
   const task=(async()=>{
-    const url=new URL(TMDB_API+"/search/tv");
-    url.searchParams.set("api_key",TMDB_KEY);
-    url.searchParams.set("query",show.name||"");
-    if(show.language==="Korean")url.searchParams.set("language","en-US");
+    const params=new URLSearchParams({
+      api_key:TMDB_KEY,
+      query:show.name||"",
+      include_adult:"false"
+    });
 
-    const response=await fetch(url.toString());
+    const response=await fetch(TMDB_API+"/search/tv?"+params.toString());
+
     if(!response.ok){
-      if(response.status===401)throw Error("مفتاح TMDB غير صالح أو غير مفعّل.");
-      throw Error("تعذر الاتصال بـ TMDB ("+response.status+").");
+      if(response.status===401){
+        throw Error("مفتاح TMDB غير صالح أو غير مفعّل.");
+      }
+      throw Error("تعذر البحث عن المسلسل. حاول مجددًا.");
     }
 
     const data=await response.json();
     const candidates=data.results||[];
-    if(!candidates.length)throw Error("لم نجد هذا المسلسل في TMDB.");
+
+    if(!candidates.length){
+      throw Error("لم نجد هذا المسلسل في قاعدة بيانات المشاهدة.");
+    }
 
     const wanted=normalizeName(show.name);
-    const exact=candidates.find(item=>
+    const exact=candidates.filter(item=>
       normalizeName(item.name)===wanted||
       normalizeName(item.original_name)===wanted
     );
 
-    /*
-      إذا لم توجد مطابقة واضحة، لا نختار نتيجة عشوائية
-      عندما تكون هناك عدة نتائج متشابهة.
-    */
-    const chosen=exact||(candidates.length===1?candidates[0]:null);
+    let chosen=null;
+
+    if(exact.length===1){
+      chosen=exact[0];
+    }else if(exact.length>1){
+      const original=exact.filter(item=>
+        normalizeName(item.original_name)===wanted
+      );
+      if(original.length===1)chosen=original[0];
+    }else if(candidates.length===1){
+      chosen=candidates[0];
+    }
 
     if(!chosen){
-      throw Error("وجدنا عدة أعمال متشابهة. يلزم ربط هذا المسلسل بمعرّف TMDB يدويًا.");
+      throw Error(
+        "ما قدرناش نحدد العمل الصحيح تلقائيًا بسبب تشابه الأسماء. يلزم ربطه بمعرّف TMDB الصحيح."
+      );
     }
 
     return {
       id:chosen.id,
-      name:chosen.name||show.name,
-      original_name:chosen.original_name||"",
-      poster_path:chosen.poster_path||null
+      name:chosen.name||show.name
     };
   })();
 
@@ -297,15 +335,18 @@ async function openWatch(show){
   if(openingShowId!==null)return;
 
   openingShowId=show.id;
-  const card=[...document.querySelectorAll(".card")]
-    .find(el=>el.getAttribute("aria-label")==="شاهد "+(show.name||"المسلسل"));
+  $("count").textContent="جارٍ تجهيز الرابط...";
+
+  const cards=[...document.querySelectorAll(".card")];
+  const card=cards.find(item=>
+    item.getAttribute("aria-label")==="شاهد "+(show.name||"المسلسل")
+  );
 
   if(card){
     card.style.opacity=".65";
     card.setAttribute("aria-busy","true");
   }
 
-  $("count").textContent="جارٍ الربط...";
   try{
     const tmdb=await findTmdbShow(show);
 
@@ -319,11 +360,9 @@ async function openWatch(show){
 
     window.location.href="./watch.html?"+params.toString();
   }catch(error){
-    console.error("NOTWIN TV TMDB link error:",error);
-    alert(
-      (error.message||"تعذر إيجاد معرّف المسلسل.")+
-      "\n\nيمكنك تجربة مسلسل آخر أو إضافة معرّف TMDB الصحيح لهذا العمل."
-    );
+    console.error("NOTWIN TV:",error);
+    alert((error.message||"تعذر تجهيز رابط المشاهدة.")+
+      "\n\nجرّب عملًا آخر. بعض الأعمال تحتاج إلى معرّف TMDB صحيح.");
     $("count").textContent="جاهز";
   }finally{
     openingShowId=null;
@@ -349,7 +388,9 @@ function makeCard(show){
     <button class="fav ${saved?"saved":""}" aria-label="${saved?"إزالة من المفضلة":"إضافة للمفضلة"}">${saved?"♥":"♡"}</button>
     <span class="lang">${esc(languageName(show.language))}</span>
     <div class="poster">
-      ${image?`<img loading="lazy" alt="${esc(show.name||"غلاف المسلسل")}" src="${esc(image)}">`:'<div class="placeholder">NT</div>'}
+      ${image
+        ?`<img loading="lazy" alt="${esc(show.name||"غلاف المسلسل")}" src="${esc(image)}">`
+        :'<div class="placeholder">NT</div>'}
     </div>
     <div class="info">
       <div class="title">${esc(show.name||"بدون عنوان")}</div>
@@ -359,20 +400,21 @@ function makeCard(show){
     </div>`;
 
   const img=card.querySelector("img");
-  if(img)img.onerror=()=>{
-    const p=img.parentElement;
-    p.innerHTML='<div class="placeholder">NT</div>';
-  };
+  if(img){
+    img.onerror=()=>{
+      img.parentElement.innerHTML='<div class="placeholder">NT</div>';
+    };
+  }
 
-  card.querySelector(".fav").onclick=e=>{
-    e.stopPropagation();
+  card.querySelector(".fav").onclick=event=>{
+    event.stopPropagation();
     toggleFavorite(show);
   };
 
   card.onclick=()=>openWatch(show);
-  card.onkeydown=e=>{
-    if(e.key==="Enter"||e.key===" "){
-      e.preventDefault();
+  card.onkeydown=event=>{
+    if(event.key==="Enter"||event.key===" "){
+      event.preventDefault();
       openWatch(show);
     }
   };
@@ -399,9 +441,12 @@ async function loadLibrary(reset=false){
   $("loadMore").textContent="جارٍ التحميل...";
 
   if(reset){
-    page=0;end=false;shows=[];results=[];
+    page=0;
+    end=false;
+    shows=[];
+    results=[];
     $("grid").replaceChildren();
-    setStatus("جارٍ تحميل المكتبة..."," يتم جلب المسلسلات.");
+    setStatus("جارٍ تحميل المكتبة..."," لحظة من فضلك.");
   }
 
   try{
@@ -421,13 +466,16 @@ async function loadLibrary(reset=false){
     results=[];
     $("loadWrap").hidden=false;
     $("heading").textContent="اكتشف المسلسلات";
-    $("subheading").textContent="حمّل صفحات إضافية لتوسيع المكتبة";
+    $("subheading").textContent="اكتشف أعمالك الآسيوية المفضلة";
     render(shows);
     $("loadText").textContent="تم تحميل "+shows.length+" مسلسل";
-  }catch(e){
-    console.error(e);
-    if(!shows.length)setStatus("تعذّر الاتصال بالمكتبة"," تحقق من الإنترنت وحاول مجددًا.");
-    else render(shows);
+  }catch(error){
+    console.error(error);
+    if(!shows.length){
+      setStatus("تعذّر تحميل المكتبة"," تحقق من الإنترنت وحاول مجددًا.");
+    }else{
+      render(shows);
+    }
   }finally{
     loading=false;
     $("loadMore").disabled=false;
@@ -436,51 +484,61 @@ async function loadLibrary(reset=false){
 }
 
 async function searchShows(){
-  const q=$("query").value.trim();
+  const query=$("query").value.trim();
   const token=++searchToken;
 
-  if(!q){goHome();return}
+  if(!query){
+    goHome();
+    return;
+  }
 
   categoryToken++;
   mode="search";
   filter="all";
   results=[];
   $("heading").textContent="نتائج البحث";
-  $("subheading").textContent="نتائج من TVmaze";
+  $("subheading").textContent="الأعمال التي تطابق بحثك";
   $("loadWrap").hidden=true;
   $("grid").replaceChildren();
-  setStatus("جارٍ البحث..."," نبحث عن المسلسلات.");
+  setStatus("جارٍ البحث..."," نبحث عن الأعمال.");
 
   try{
-    const data=await api("/search/shows?q="+encodeURIComponent(q));
+    const data=await api("/search/shows?q="+encodeURIComponent(query));
     if(token!==searchToken)return;
 
     results=data.map(normalize).filter(Boolean);
     merge(results);
     render(results);
-  }catch(e){
-    if(token===searchToken)setStatus("فشل البحث"," تحقق من الإنترنت وجرب مجددًا.");
+  }catch(error){
+    console.error(error);
+    if(token===searchToken){
+      setStatus("فشل البحث"," تحقق من الإنترنت وجرب مجددًا.");
+    }
   }
 }
 
-async function loadCategory(f){
+async function loadCategory(category){
   const token=++categoryToken;
   searchToken++;
-  filter=f;
+  filter=category;
   mode="category";
   results=[];
   $("loadWrap").hidden=true;
 
   const names={
-    Korean:"المسلسلات الكورية",Japanese:"المسلسلات اليابانية",
-    Chinese:"المسلسلات الصينية",Drama:"مسلسلات الدراما",
-    Romance:"المسلسلات الرومانسية",Action:"مسلسلات الأكشن",
-    Thriller:"مسلسلات التشويق",Fantasy:"مسلسلات الخيال",
+    Korean:"المسلسلات الكورية",
+    Japanese:"المسلسلات اليابانية",
+    Chinese:"المسلسلات الصينية",
+    Drama:"مسلسلات الدراما",
+    Romance:"المسلسلات الرومانسية",
+    Action:"مسلسلات الأكشن",
+    Thriller:"مسلسلات التشويق",
+    Fantasy:"مسلسلات الخيال",
     School:"المسلسلات المدرسية"
   };
 
-  $("heading").textContent=names[f]||"المسلسلات";
-  $("subheading").textContent="البحث في مكتبة TVmaze";
+  $("heading").textContent=names[category]||"المسلسلات";
+  $("subheading").textContent="نتائج حسب التصنيف";
   $("grid").replaceChildren();
   setStatus("جارٍ البحث في المكتبة..."," قد يستغرق ذلك بعض الوقت.");
 
@@ -495,8 +553,8 @@ async function loadCategory(f){
       if(!Array.isArray(data)||!data.length)break;
       checked++;
 
-      for(const s of data){
-        if(matches(s,f))found.set(s.id,s);
+      for(const show of data){
+        if(matches(show,category))found.set(show.id,show);
       }
 
       $("count").textContent=found.size+" نتيجة";
@@ -523,7 +581,8 @@ async function loadCategory(f){
 
     $("loadWrap").hidden=false;
     $("loadMore").textContent="العودة إلى المكتبة";
-  }catch(e){
+  }catch(error){
+    console.error(error);
     if(token===categoryToken){
       setStatus("تعذّر تحميل التصنيف"," تحقق من الإنترنت وجرب مجددًا.");
       $("loadWrap").hidden=false;
@@ -546,20 +605,28 @@ async function showFavorites(){
   $("loadWrap").hidden=true;
   render(shows);
 
-  const missing=[...favs].filter(id=>!shows.some(s=>s.id===id)).slice(0,40);
+  const missing=[...favs]
+    .filter(id=>!shows.some(show=>show.id===id))
+    .slice(0,40);
 
   if(missing.length){
     setStatus("جارٍ استرجاع المفضلة...","");
-    const got=await Promise.allSettled(missing.map(id=>api("/shows/"+id)));
-    merge(got.filter(x=>x.status==="fulfilled").map(x=>x.value));
+    const responses=await Promise.allSettled(
+      missing.map(id=>api("/shows/"+id))
+    );
+
+    merge(responses
+      .filter(item=>item.status==="fulfilled")
+      .map(item=>item.value));
+
     if(mode==="favorites")render(shows);
   }
 }
 
 function setNav(id){
-  ["navHome","navSearch","navFav"].forEach(n=>
-    $(n).classList.toggle("active",n===id)
-  );
+  ["navHome","navSearch","navFav"].forEach(name=>{
+    $(name).classList.toggle("active",name===id);
+  });
 }
 
 function goHome(){
@@ -570,14 +637,14 @@ function goHome(){
   results=[];
   $("query").value="";
   $("heading").textContent="اكتشف المسلسلات";
-  $("subheading").textContent="بيانات من مكتبة TVmaze";
+  $("subheading").textContent="اكتشف أعمالك الآسيوية المفضلة";
   $("loadWrap").hidden=false;
   $("loadMore").textContent="تحميل المزيد";
   setNav("navHome");
 
-  document.querySelectorAll("[data-f]").forEach(b=>
-    b.classList.toggle("active",b.dataset.f==="all")
-  );
+  document.querySelectorAll("[data-f]").forEach(button=>{
+    button.classList.toggle("active",button.dataset.f==="all");
+  });
 
   render(shows);
   window.scrollTo({top:0,behavior:"smooth"});
@@ -590,29 +657,37 @@ function focusSearch(){
 }
 
 $("searchBtn").onclick=searchShows;
-$("query").addEventListener("keydown",e=>{
-  if(e.key==="Enter")searchShows();
+
+$("query").addEventListener("keydown",event=>{
+  if(event.key==="Enter")searchShows();
 });
 
 let searchTimer;
 $("query").addEventListener("input",()=>{
   clearTimeout(searchTimer);
   searchTimer=setTimeout(()=>{
-    if($("query").value.trim().length>=3)searchShows();
-    else if(!$("query").value.trim()&&mode==="search")goHome();
+    if($("query").value.trim().length>=3){
+      searchShows();
+    }else if(!$("query").value.trim()&&mode==="search"){
+      goHome();
+    }
   },650);
 });
 
-$("filters").onclick=async e=>{
-  const b=e.target.closest("[data-f]");
-  if(!b)return;
+$("filters").onclick=async event=>{
+  const button=event.target.closest("[data-f]");
+  if(!button)return;
 
-  document.querySelectorAll("[data-f]").forEach(x=>
-    x.classList.toggle("active",x===b)
-  );
+  document.querySelectorAll("[data-f]").forEach(item=>{
+    item.classList.toggle("active",item===button);
+  });
 
-  if(b.dataset.f==="all"){goHome();return}
-  await loadCategory(b.dataset.f);
+  if(button.dataset.f==="all"){
+    goHome();
+    return;
+  }
+
+  await loadCategory(button.dataset.f);
 };
 
 $("loadMore").onclick=()=>{
@@ -623,7 +698,11 @@ $("loadMore").onclick=()=>{
   loadLibrary(false);
 };
 
-$("homeLink").onclick=e=>{e.preventDefault();goHome()};
+$("homeLink").onclick=event=>{
+  event.preventDefault();
+  goHome();
+};
+
 $("navHome").onclick=goHome;
 $("navSearch").onclick=focusSearch;
 $("navFav").onclick=showFavorites;
