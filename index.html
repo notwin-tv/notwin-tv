@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -5,876 +6,214 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#080610">
 <title>NOTWIN TV</title>
-
 <style>
-:root {
-  --bg: #080610;
-  --panel: #120e20;
-  --purple: #9b6cff;
-  --text: #f7f1ff;
-  --muted: #a99dbb;
-  --line: #ffffff14;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, Tahoma, sans-serif;
-}
-button, input { font: inherit; }
-button { cursor: pointer; }
-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 5%;
-  background: #080610ed;
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(14px);
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 900;
-  font-size: 19px;
-  text-decoration: none;
-}
-.logo {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 13px;
-  background: linear-gradient(140deg, #b18aff, #5222a0);
-}
-.brand span { color: var(--purple); }
-.btn, .secondary {
-  border: 1px solid var(--line);
-  background: #ffffff08;
-  color: white;
-  padding: 10px 14px;
-  border-radius: 12px;
-}
-.primary {
-  background: linear-gradient(135deg, #a87aff, #7046cf);
-  border: 0;
-  color: white;
-  padding: 13px 18px;
-  border-radius: 12px;
-  font-weight: bold;
-}
-main {
-  max-width: 1250px;
-  margin: auto;
-  padding: 22px 5% 95px;
-}
-.hero {
-  min-height: 320px;
-  padding: 28px;
-  display: flex;
-  align-items: center;
-  border: 1px solid #a477ff25;
-  border-radius: 24px;
-  background:
-    linear-gradient(90deg, #080610ef, #10091c88),
-    linear-gradient(0deg, #080610, transparent),
-    url("sakura-bg.png") center/cover no-repeat;
-}
-.hero > div { max-width: 570px; }
-.eyebrow, .pill {
-  font-size: 12px;
-  color: #d5bdff;
-  border: 1px solid #9b6cff45;
-  background: #9b6cff19;
-  border-radius: 99px;
-  padding: 7px 11px;
-}
-.hero h1 {
-  font-size: clamp(32px, 6vw, 56px);
-  margin: 18px 0 12px;
-}
-.hero h1 span { color: #b99aff; }
-.hero p { color: #d0c5dc; line-height: 1.9; }
-.search {
-  display: flex;
-  gap: 8px;
-  margin: 22px 0;
-}
-.search input {
-  flex: 1;
-  min-width: 0;
-  background: #130e20;
-  border: 1px solid var(--line);
-  border-radius: 13px;
-  padding: 14px;
-  color: white;
-}
-.section { margin-top: 28px; }
-.section-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-.section-head h2 { font-size: 21px; margin: 0; }
-.section-head p { font-size: 12px; color: var(--muted); }
-.filters {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 10px 0 15px;
-}
-.filters button {
-  white-space: nowrap;
-  background: #ffffff08;
-  border: 1px solid var(--line);
-  color: #c8bdd6;
-  border-radius: 99px;
-  padding: 9px 14px;
-}
-.filters button.active {
-  background: #8e5df32b;
-  border-color: var(--purple);
-  color: white;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 15px;
-}
-.card {
-  min-width: 0;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  background: var(--panel);
-  cursor: pointer;
-}
-.poster {
-  aspect-ratio: 2/2.8;
-  background: #201530;
-}
-.poster img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.placeholder {
-  height: 100%;
-  display: grid;
-  place-items: center;
-  color: #b99aff;
-  font-size: 38px;
-}
-.info { padding: 10px; }
-.title {
-  font-size: 13px;
-  line-height: 1.5;
-  font-weight: bold;
-  min-height: 39px;
-}
-.meta, .rating {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 7px;
-}
-.rating { color: #f4cf83; }
-.fav {
-  position: absolute;
-  top: 7px;
-  left: 7px;
-  z-index: 2;
-  border: 1px solid #ffffff25;
-  background: #080610df;
-  color: white;
-  border-radius: 50%;
-  width: 33px;
-  height: 33px;
-  font-size: 18px;
-}
-.fav.saved { color: #ff78ad; }
-.lang {
-  position: absolute;
-  right: 7px;
-  top: 7px;
-  background: #080610df;
-  border-radius: 7px;
-  padding: 5px;
-  font-size: 10px;
-}
-.status {
-  text-align: center;
-  color: var(--muted);
-  padding: 30px 10px;
-  line-height: 1.9;
-}
-.status strong { display: block; color: white; }
-.load { text-align: center; margin: 20px; }
-.bottom {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 9;
-  display: flex;
-  justify-content: center;
-  background: #080610ed;
-  border-top: 1px solid var(--line);
-  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-}
-.bottom button {
-  flex: 1;
-  max-width: 180px;
-  background: transparent;
-  border: 0;
-  color: var(--muted);
-  padding: 9px;
-}
-.bottom button.active {
-  color: #d8c6ff;
-  background: #9b6cff1d;
-  border-radius: 10px;
-}
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 30;
-  background: #05030bdd;
-  padding: 14px;
-  overflow: auto;
-}
-.modal.open { display: flex; }
-.box {
-  position: relative;
-  margin: auto;
-  width: min(760px, 100%);
-  background: #100c1b;
-  border: 1px solid #9b6cff35;
-  border-radius: 20px;
-  overflow: hidden;
-}
-.close {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 2;
-  border: 0;
-  border-radius: 50%;
-  background: #080610dd;
-  color: white;
-  font-size: 25px;
-  width: 40px;
-  height: 40px;
-}
-.banner img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-  opacity: .75;
-}
-.body { padding: 20px; }
-.body p { line-height: 1.9; color: #d3c9de; }
-.muted { color: var(--muted); font-size: 13px; line-height: 1.9; }
-.episode {
-  background: #ffffff08;
-  border: 1px solid var(--line);
-  padding: 12px;
-  border-radius: 12px;
-  margin-top: 10px;
-}
-.episode p { font-size: 12px; }
-.notice {
-  margin-top: 15px;
-  padding: 12px;
-  background: #9b6cff0d;
-  border: 1px solid #9b6cff26;
-  border-radius: 12px;
-  color: #cbb8ef;
-  font-size: 12px;
-  line-height: 1.8;
-}
-footer {
-  text-align: center;
-  color: #786b89;
-  font-size: 11px;
-  margin: 28px 0;
-}
-footer a { color: #bba0ff; }
-@media(max-width:1000px) {
-  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-}
-@media(max-width:700px) {
-  header { padding: 10px 4%; }
-  main { padding: 15px 4% 90px; }
-  .hero { min-height: 285px; padding: 20px; }
-  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
-  .info { padding: 8px; }
-  .title { font-size: 12px; }
-  .search { flex-wrap: wrap; }
-  .search .primary { width: 100%; }
-}
-@media(max-width:390px) {
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+:root{--bg:#080610;--panel:#120e20;--purple:#9b6cff;--text:#f7f1ff;--muted:#a99dbb;--line:#ffffff14}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Tahoma,sans-serif}
+button,input{font:inherit}button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:12px 5%;background:#080610ed;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;text-decoration:none;color:white}
+.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(140deg,#b18aff,#5222a0)}
+.brand span{color:var(--purple)}a{color:#c5a0ff;text-decoration:none}
+.btn,.secondary{border:1px solid var(--line);background:#ffffff08;color:white;padding:10px 14px;border-radius:12px}
+.primary{background:linear-gradient(135deg,#a87aff,#7046cf);border:0;color:white;padding:13px 18px;border-radius:12px;font-weight:bold}
+main{max-width:1250px;margin:auto;padding:22px 5% 95px}
+.hero{min-height:320px;padding:28px;display:flex;align-items:center;border:1px solid #a477ff25;border-radius:24px;background:linear-gradient(90deg,#080610ef,#10091c88),linear-gradient(0deg,#080610,transparent),url("sakura-bg.png") center/cover no-repeat}
+.hero>div{max-width:570px}.eyebrow,.pill{font-size:12px;color:#d5bdff;border:1px solid #9b6cff45;background:#9b6cff19;border-radius:99px;padding:7px 11px}
+.hero h1{font-size:clamp(32px,6vw,56px);margin:18px 0 12px}.hero h1 span{color:#b99aff}
+.hero p{color:#d0c5dc;line-height:1.9}
+.search{display:flex;gap:8px;margin:22px 0}.search input{flex:1;min-width:0;background:#130e20;border:1px solid var(--line);border-radius:13px;padding:14px;color:white}
+.section{margin-top:28px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.section-head h2{font-size:21px;margin:0}.section-head p{font-size:12px;color:var(--muted)}
+.filters{display:flex;gap:8px;overflow-x:auto;padding:10px 0 15px}.filters button{white-space:nowrap;background:#ffffff08;border:1px solid var(--line);color:#c8bdd6;border-radius:99px;padding:9px 14px}
+.filters button.active{background:#8e5df32b;border-color:var(--purple);color:white}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:15px}
+.card{min-width:0;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:var(--panel);cursor:pointer;transition:transform .18s,border-color .18s}
+.card:hover{transform:translateY(-3px);border-color:#9b6cff80}
+.poster{aspect-ratio:2/2.8;background:#201530}.poster img{width:100%;height:100%;object-fit:cover;display:block}
+.placeholder{height:100%;display:grid;place-items:center;color:#b99aff;font-size:38px}
+.info{padding:10px}.title{font-size:13px;line-height:1.5;font-weight:bold;min-height:39px}
+.meta,.rating{font-size:11px;color:var(--muted);margin-top:7px}.rating{color:#f4cf83}
+.description{font-size:11px;color:#c9bdd7;line-height:1.6;margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.fav{position:absolute;top:7px;left:7px;z-index:2;border:1px solid #ffffff25;background:#080610df;color:white;border-radius:50%;width:33px;height:33px;font-size:18px}
+.fav.saved{color:#ff78ad}.lang{position:absolute;right:7px;top:7px;background:#080610df;border-radius:7px;padding:5px;font-size:10px}
+.status{text-align:center;color:var(--muted);padding:30px 10px;line-height:1.9}.status strong{display:block;color:white}
+.load{text-align:center;margin:20px}.bottom{position:fixed;bottom:0;left:0;right:0;z-index:9;display:flex;justify-content:center;background:#080610ed;border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom))}
+.bottom button{flex:1;max-width:180px;background:transparent;border:0;color:var(--muted);padding:9px}.bottom button.active{color:#d8c6ff;background:#9b6cff1d;border-radius:10px}
+.modal{display:none;position:fixed;inset:0;z-index:30;background:#05030bdd;padding:14px;overflow:auto}.modal.open{display:flex}
+.box{position:relative;margin:auto;width:min(760px,100%);background:#100c1b;border:1px solid #9b6cff35;border-radius:20px;overflow:hidden}
+.close{position:absolute;top:10px;left:10px;z-index:2;border:0;border-radius:50%;background:#080610dd;color:white;font-size:25px;width:40px;height:40px}
+.banner img{width:100%;height:240px;object-fit:cover;opacity:.75}.body{padding:20px}.body p{line-height:1.9;color:#d3c9de}
+.muted{color:var(--muted);font-size:13px;line-height:1.9}.episode{background:#ffffff08;border:1px solid var(--line);padding:12px;border-radius:12px;margin-top:10px}
+.notice{margin-top:15px;padding:12px;background:#9b6cff0d;border:1px solid #9b6cff26;border-radius:12px;color:#cbb8ef;font-size:12px;line-height:1.8}
+footer{text-align:center;color:#786b89;font-size:11px;margin:28px 0}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:700px){header{padding:10px 4%}main{padding:15px 4% 90px}.hero{min-height:285px;padding:20px}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.info{padding:8px}.title{font-size:12px}.search{flex-wrap:wrap}.search .primary{width:100%}}
+@media(max-width:390px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header>
-  <a class="brand" href="#" id="homeLink">
-    <div class="logo">NT</div><div>NOTWIN <span>TV</span></div>
-  </a>
-  <div>
-    <button class="btn" id="searchTop">⌕</button>
-    <button class="btn" id="favTop">♡</button>
-  </div>
+<a class="brand" href="#" id="homeLink"><div class="logo">NT</div><div>NOTWIN <span>TV</span></div></a>
+<div><button class="btn" id="searchTop">⌕</button> <button class="btn" id="favTop">♡</button></div>
 </header>
-
 <main>
-  <section class="hero">
-    <div>
-      <span class="eyebrow">YOUR NEXT STORY STARTS HERE</span>
-      <h1>عالمك، <span>قصتك.</span></h1>
-      <p>اكتشف المسلسلات، شوف معلومات المواسم والحلقات، واحفظ المفضلة تاعك.</p>
-      <button class="primary" id="discover">اكتشف المسلسلات ←</button>
-    </div>
-  </section>
-
-  <div class="search" id="searchArea">
-    <input id="query" type="search" placeholder="ابحث عن مسلسل باسمه...">
-    <button class="primary" id="searchBtn">بحث</button>
-  </div>
-
-  <section class="section">
-    <div class="section-head">
-      <div><h2 id="heading">اكتشف المسلسلات</h2><p id="subheading">بيانات من مكتبة TVmaze</p></div>
-      <span class="pill" id="count">جاهز</span>
-    </div>
-
-    <div class="filters" id="filters">
-      <button class="active" data-f="all">الكل</button>
-      <button data-f="Korean">كوري</button>
-      <button data-f="Japanese">ياباني</button>
-      <button data-f="Chinese">صيني</button>
-      <button data-f="Drama">دراما</button>
-      <button data-f="Romance">رومانسي</button>
-      <button data-f="Action">أكشن</button>
-      <button data-f="Thriller">تشويق</button>
-      <button data-f="Fantasy">خيال</button>
-      <button data-f="School">مدرسي</button>
-    </div>
-
-    <div id="status" class="status"><strong>جارٍ تحميل المكتبة...</strong>لحظة من فضلك.</div>
-    <div id="grid" class="grid"></div>
-    <div class="load" id="loadWrap" hidden>
-      <button class="secondary" id="loadMore">تحميل المزيد</button>
-      <p id="loadText" class="muted"></p>
-    </div>
-  </section>
-
-  <footer>معلومات المسلسلات من <a href="https://www.tvmaze.com/api" target="_blank" rel="noopener">TVmaze</a>. الموقع لا يستضيف الفيديوهات.</footer>
-</main>
-
-<nav class="bottom">
-  <button class="active" id="navHome">⌂<br>الرئيسية</button>
-  <button id="navSearch">⌕<br>اكتشف</button>
-  <button id="navFav">♡<br>المفضلة</button>
-</nav>
-
-<div class="modal" id="modal">
-  <div class="box">
-    <button class="close" id="close">×</button>
-    <div class="banner" id="banner"></div>
-    <div class="body">
-      <h2 id="modalTitle"></h2>
-      <div id="modalMeta" class="muted"></div>
-      <p id="summary"></p>
-      <div id="actions"></div>
-      <h3>المواسم والحلقات</h3>
-      <div id="seasonStatus" class="muted">جارٍ التحميل...</div>
-      <div id="seasonList"></div>
-      <div class="notice">بيانات الحلقات من TVmaze؛ لا توجد روابط تشغيل فيديو داخل هذا الموقع.</div>
-    </div>
-  </div>
+<section class="hero"><div>
+<span class="eyebrow">YOUR NEXT STORY STARTS HERE</span>
+<h1>عالمك، <span>قصتك.</span></h1>
+<p>اكتشف المسلسلات، شوف معلومات المواسم والحلقات، واحفظ المفضلة تاعك.</p>
+<button class="primary" id="discover">اكتشف المسلسلات ←</button>
+</div></section>
+<div class="search" id="searchArea"><input id="query" type="search" placeholder="ابحث عن مسلسل باسمه..."><button class="primary" id="searchBtn">بحث</button></div>
+<section class="section">
+<div class="section-head"><div><h2 id="heading">اكتشف المسلسلات</h2><p id="subheading">بيانات من مكتبة TVmaze</p></div><span class="pill" id="count">جاهز</span></div>
+<div class="filters" id="filters">
+<button class="active" data-f="all">الكل</button><button data-f="Korean">كوري</button><button data-f="Japanese">ياباني</button><button data-f="Chinese">صيني</button><button data-f="Drama">دراما</button><button data-f="Romance">رومانسي</button><button data-f="Action">أكشن</button><button data-f="Thriller">تشويق</button><button data-f="Fantasy">خيال</button><button data-f="School">مدرسي</button>
 </div>
-
+<div id="status" class="status"><strong>جارٍ تحميل المكتبة...</strong>لحظة من فضلك.</div>
+<div id="grid" class="grid"></div>
+<div class="load" id="loadWrap" hidden><button class="secondary" id="loadMore">تحميل المزيد</button><p id="loadText" class="muted"></p></div>
+</section>
+<footer>معلومات المسلسلات من <a href="https://www.tvmaze.com/api" target="_blank" rel="noopener">TVmaze</a>. التوفر والروابط الخارجية قد تختلف.</footer>
+</main>
+<nav class="bottom"><button class="active" id="navHome">⌂<br>الرئيسية</button><button id="navSearch">⌕<br>اكتشف</button><button id="navFav">♡<br>المفضلة</button></nav>
+<div class="modal" id="modal"><div class="box">
+<button class="close" id="close">×</button><div class="banner" id="banner"></div>
+<div class="body"><h2 id="modalTitle"></h2><div id="modalMeta" class="muted"></div><p id="summary"></p><div id="actions"></div>
+<h3>المواسم والحلقات</h3><div id="seasonStatus" class="muted">جارٍ التحميل...</div><div id="seasonList"></div>
+<div class="notice">المعلومات من TVmaze. المشاهدة تعتمد على توفر المصدر الخارجي ومعرّف العمل الصحيح.</div>
+</div></div></div>
 <script>
 "use strict";
+const API="https://api.tvmaze.com";
+const MAX_PAGES=40;
+const $=id=>document.getElementById(id);
+let shows=[],page=0,filter="all",mode="library",results=[],loading=false,end=false,active=null,searchToken=0,categoryToken=0;
+let favs=new Set();
+try{favs=new Set(JSON.parse(localStorage.getItem("notwin-tv-saved-v6")||"[]").map(Number))}catch(e){}
 
-const API = "https://api.tvmaze.com";
-const MAX_PAGES = 40; // حتى 10,000 سجل كحد أقصى، إذا كانت متاحة
-
-const $ = id => document.getElementById(id);
-let shows = [], page = 0, filter = "all", mode = "library";
-let results = [], loading = false, end = false, active = null;
-let searchToken = 0, categoryToken = 0;
-
-let favs = new Set();
-try {
-  favs = new Set(JSON.parse(localStorage.getItem("notwin-tv-saved-v5") || "[]").map(Number));
-} catch (e) {}
-
-function esc(value) {
-  return String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-  })[c]);
-}
-function plain(html) {
-  const div = document.createElement("div");
-  div.innerHTML = html || "";
-  return (div.textContent || "").trim();
-}
-function imageOf(show) {
-  return show?.image?.medium || show?.image?.original || "";
-}
-function yearOf(show) {
-  return show?.premiered?.slice(0, 4) || "غير معروف";
-}
-function languageName(language) {
-  return ({
-    Korean:"كوري", Japanese:"ياباني", Chinese:"صيني",
-    English:"إنجليزي", Turkish:"تركي", Spanish:"إسباني",
-    Arabic:"عربي", French:"فرنسي", Hindi:"هندي"
-  })[language] || language || "غير محدد";
-}
-async function api(path) {
-  const response = await fetch(API + path);
-  if (!response.ok) throw new Error("HTTP " + response.status);
-  return response.json();
-}
-function normalize(item) {
-  return item?.show || item;
-}
-function merge(items) {
-  const map = new Map(shows.map(show => [show.id, show]));
-  items.map(normalize).filter(show => show?.id).forEach(show => map.set(show.id, show));
-  shows = [...map.values()];
-}
-function matches(show, selectedFilter) {
-  if (["Korean", "Japanese", "Chinese"].includes(selectedFilter)) {
-    return String(show.language || "").toLowerCase() === selectedFilter.toLowerCase();
-  }
-  if (selectedFilter === "School") {
-    return (show.genres || []).some(g => /school|teen|youth/i.test(g)) ||
-      /school|high school|teen|youth/i.test(plain((show.name || "") + " " + (show.summary || "")));
-  }
-  if (selectedFilter === "all") return true;
-  return (show.genres || []).some(g => g.toLowerCase() === selectedFilter.toLowerCase());
-}
-function filtered(list) {
-  let output = list.filter(show => filter === "all" || matches(show, filter));
-  if (mode === "favorites") output = output.filter(show => favs.has(show.id));
-  return output;
-}
-function setStatus(title, message = "") {
-  const box = $("status");
-  box.hidden = false;
-  box.replaceChildren();
-  const strong = document.createElement("strong");
-  strong.textContent = title;
-  box.append(strong, document.createTextNode(message));
-}
-function hideStatus() { $("status").hidden = true; }
-
-function render(list = shows) {
-  const items = filtered(list);
-  $("grid").replaceChildren();
-
-  if (!items.length) {
-    setStatus(mode === "favorites" ? "المفضلة فارغة" : "ما لقيناش نتائج",
-      " جرّب تصنيفًا آخر أو ابحث باسم المسلسل.");
-    $("count").textContent = "0 نتيجة";
-    return;
-  }
-
-  hideStatus();
-  const fragment = document.createDocumentFragment();
-  items.forEach(show => fragment.appendChild(makeCard(show)));
-  $("grid").appendChild(fragment);
-  $("count").textContent = items.length + " نتيجة";
-}
-
-function makeCard(show) {
-  const card = document.createElement("article");
-  card.className = "card";
-  card.tabIndex = 0;
-
-  const image = imageOf(show);
-  const saved = favs.has(show.id);
-  const genres = (show.genres || []).slice(0, 2).join(" • ") || languageName(show.language);
-
-  card.innerHTML = `
-    <button class="fav ${saved ? "saved" : ""}" aria-label="المفضلة">${saved ? "♥" : "♡"}</button>
-    <span class="lang">${esc(languageName(show.language))}</span>
-    <div class="poster">${image
-      ? `<img loading="lazy" alt="" src="${esc(image)}">`
-      : '<div class="placeholder">NT</div>'}</div>
-    <div class="info">
-      <div class="title">${esc(show.name || "بدون عنوان")}</div>
-      <div class="meta">${esc(yearOf(show))} • ${esc(genres)}</div>
-      <div class="rating">★ ${esc(show.rating?.average ?? "—")}</div>
-    </div>`;
-
-  const img = card.querySelector("img");
-  if (img) img.onerror = () => {
-    img.parentElement.innerHTML = '<div class="placeholder">NT</div>';
-  };
-
-  card.querySelector(".fav").onclick = event => {
-    event.stopPropagation();
-    toggleFavorite(show);
-  };
-  card.onclick = () => openDetails(show);
-  card.onkeydown = event => {
-    if (event.key === "Enter") openDetails(show);
-  };
-  return card;
-}
-
-function toggleFavorite(show) {
-  if (favs.has(show.id)) favs.delete(show.id);
-  else favs.add(show.id);
-
-  try {
-    localStorage.setItem("notwin-tv-saved-v5", JSON.stringify([...favs]));
-  } catch (e) {}
-
-  render(mode === "search" || mode === "category" ? results : shows);
-  updateModalFavoriteButton();
-}
-function updateModalFavoriteButton() {
-  const button = $("modalFav");
-  if (button && active) {
-    button.textContent = favs.has(active.id) ? "♥ إزالة من المفضلة" : "♡ إضافة للمفضلة";
-  }
-}
-
-async function loadLibrary(reset = false) {
-  if (loading || (end && !reset)) return;
-  loading = true;
-  $("loadMore").disabled = true;
-  $("loadMore").textContent = "جارٍ التحميل...";
-
-  if (reset) {
-    page = 0; end = false; shows = []; results = [];
-    $("grid").replaceChildren();
-    setStatus("جارٍ تحميل المكتبة...", " يتم جلب المسلسلات.");
-  }
-
-  try {
-    const data = await api("/shows?page=" + page);
-    if (!Array.isArray(data) || !data.length) {
-      end = true;
-      setStatus("وصلنا لنهاية البيانات");
-      return;
-    }
-
-    merge(data);
-    page++;
-    mode = "library";
-    filter = "all";
-    results = [];
-    $("loadWrap").hidden = false;
-    $("heading").textContent = "اكتشف المسلسلات";
-    $("subheading").textContent = "حمّل صفحات إضافية لتوسيع المكتبة";
-    render(shows);
-    $("loadText").textContent = "تم تحميل " + shows.length + " مسلسل";
-  } catch (error) {
-    console.error(error);
-    setStatus("تعذّر الاتصال بالمكتبة", "تحقق من الإنترنت وحاول مجددًا.");
-  } finally {
-    loading = false;
-    $("loadMore").disabled = end;
-    $("loadMore").textContent = end ? "انتهت البيانات" : "تحميل المزيد";
-  }
-}
-
-async function searchShows() {
-  const query = $("query").value.trim();
-  const token = ++searchToken;
-  if (!query) { goHome(); return; }
-
-  categoryToken++;
-  mode = "search";
-  results = [];
-  $("heading").textContent = "نتائج البحث";
-  $("subheading").textContent = "نتائج من TVmaze";
-  $("loadWrap").hidden = true;
-  setStatus("جارٍ البحث...", "نبحث عن المسلسلات.");
-
-  try {
-    const data = await api("/search/shows?q=" + encodeURIComponent(query));
-    if (token !== searchToken) return;
-    results = data.map(normalize).filter(Boolean);
-    merge(results);
-    render(results);
-  } catch (error) {
-    if (token === searchToken) setStatus("فشل البحث", "تحقق من الإنترنت وجرب مجددًا.");
-  }
-}
-
-async function loadCategory(selectedFilter) {
-  const token = ++categoryToken;
-  searchToken++;
-  filter = selectedFilter;
-  mode = "category";
-  results = [];
-  $("loadWrap").hidden = true;
-
-  const names = {
-    Korean:"المسلسلات الكورية", Japanese:"المسلسلات اليابانية",
-    Chinese:"المسلسلات الصينية", Drama:"مسلسلات الدراما",
-    Romance:"المسلسلات الرومانسية", Action:"مسلسلات الأكشن",
-    Thriller:"مسلسلات التشويق", Fantasy:"مسلسلات الخيال",
-    School:"المسلسلات المدرسية"
-  };
-
-  $("heading").textContent = names[selectedFilter] || "المسلسلات";
-  $("subheading").textContent = "نبحث في صفحات المكتبة؛ قد يستغرق ذلك بعض الوقت";
-  $("grid").replaceChildren();
-  setStatus("جارٍ البحث في المكتبة...", "قد يفحص البحث حتى 10,000 سجل.");
-
-  const found = new Map();
-  let checked = 0;
-
-  try {
-    for (let p = 0; p < MAX_PAGES; p++) {
-      if (token !== categoryToken) return;
-
-      const data = await api("/shows?page=" + p);
-      if (!Array.isArray(data) || data.length === 0) break;
-      checked++;
-
-      for (const show of data) {
-        if (matches(show, selectedFilter)) found.set(show.id, show);
-      }
-
-      $("count").textContent = found.size + " نتيجة";
-      $("loadText").textContent = "فحص " + checked + " صفحة • " + found.size + " نتيجة";
-
-      if (found.size) {
-        merge([...found.values()]);
-        results = [...found.values()];
-        render(results);
-      }
-
-      if (found.size >= 60) break;
-    }
-
-    if (token !== categoryToken) return;
-    results = [...found.values()];
-
-    if (results.length) {
-      render(results);
-      $("subheading").textContent = "تم البحث في " + checked + " صفحة";
-      $("loadText").textContent = "لقينا " + results.length + " نتيجة؛ قد توجد نتائج أخرى.";
-    } else {
-      setStatus("ما لقيناش نتائج في الصفحات المفحوصة",
-        "جرّب البحث باسم مسلسل أو أعد المحاولة لاحقًا.");
-    }
-
-    $("loadWrap").hidden = false;
-    $("loadMore").textContent = "العودة إلى المكتبة";
-    $("loadMore").disabled = false;
-  } catch (error) {
-    console.error(error);
-    if (token === categoryToken) setStatus("تعذّر تحميل التصنيف",
-      "تحقق من الاتصال بالإنترنت وجرب مرة أخرى.");
-    $("loadWrap").hidden = false;
-    $("loadMore").textContent = "إعادة المحاولة";
-    $("loadMore").disabled = false;
-  }
-}
-
-async function showFavorites() {
-  categoryToken++;
-  searchToken++;
-  mode = "favorites";
-  filter = "all";
-  results = [];
-  setNav("navFav");
-  $("heading").textContent = "المفضلة";
-  $("subheading").textContent = "المسلسلات المحفوظة على هذا الجهاز";
-  $("loadWrap").hidden = true;
-  render(shows);
-
-  const missing = [...favs].filter(id => !shows.some(show => show.id === id)).slice(0, 40);
-  if (missing.length) {
-    setStatus("جارٍ استرجاع المفضلة...", "");
-    const fetched = await Promise.allSettled(missing.map(id => api("/shows/" + id)));
-    merge(fetched.filter(item => item.status === "fulfilled").map(item => item.value));
-    if (mode === "favorites") render(shows);
-  }
-}
-
-function setNav(id) {
-  ["navHome", "navSearch", "navFav"].forEach(nav =>
-    $(nav).classList.toggle("active", nav === id));
-}
-function goHome() {
-  categoryToken++;
-  searchToken++;
-  mode = "library";
-  filter = "all";
-  results = [];
-  $("query").value = "";
-  $("heading").textContent = "اكتشف المسلسلات";
-  $("subheading").textContent = "بيانات من مكتبة TVmaze";
-  $("loadWrap").hidden = false;
-  setNav("navHome");
-  document.querySelectorAll("[data-f]").forEach(button =>
-    button.classList.toggle("active", button.dataset.f === "all"));
-  render(shows);
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-function focusSearch() {
-  setNav("navSearch");
-  $("searchArea").scrollIntoView({ behavior: "smooth", block: "center" });
-  setTimeout(() => $("query").focus(), 200);
-}
-
-function openDetails(show) {
-  active = show;
-  $("modalTitle").textContent = show.name || "بدون عنوان";
-  $("modalMeta").textContent = languageName(show.language) + " • " + yearOf(show) +
-    " • " + (show.genres || []).join("، ") + " • التقييم: " +
-    (show.rating?.average ?? "غير متوفر");
-  $("summary").textContent = plain(show.summary) || "لا يوجد وصف متاح.";
-
-  const banner = $("banner");
-  banner.replaceChildren();
-  if (imageOf(show)) {
-    const image = document.createElement("img");
-    image.src = imageOf(show);
-    image.alt = "";
-    image.onerror = () => image.remove();
-    banner.appendChild(image);
-  }
-
-  $("actions").innerHTML = '<button class="primary" id="modalFav"></button>' +
-    (show.url ? '<a class="secondary" href="' + esc(show.url) +
-      '" target="_blank" rel="noopener">صفحة TVmaze ↗</a>' : "");
-  $("modalFav").onclick = () => toggleFavorite(active);
-  updateModalFavoriteButton();
-
-  $("seasonStatus").textContent = "جارٍ تحميل المواسم...";
-  $("seasonList").replaceChildren();
-  $("modal").classList.add("open");
-  document.body.style.overflow = "hidden";
-  loadSeasons(show.id);
-}
-
-async function loadSeasons(showId) {
-  try {
-    const seasons = await api("/shows/" + showId + "/seasons");
-    $("seasonStatus").textContent = seasons.length ? seasons.length + " موسم" : "لا توجد معلومات مواسم.";
-
-    for (const season of seasons) {
-      const row = document.createElement("div");
-      row.className = "episode";
-      row.innerHTML = '<strong>الموسم ' + esc(season.number ?? "خاص") +
-        '</strong><p>' + esc(season.premiereDate || "تاريخ غير معروف") +
-        ' • ' + esc(season.endDate || "") +
-        '</p><button class="secondary">عرض الحلقات</button><div hidden></div>';
-
-      const button = row.querySelector("button");
-      const list = row.querySelector("div[hidden]");
-      let loaded = false;
-
-      button.onclick = async () => {
-        if (loaded) {
-          list.hidden = !list.hidden;
-          button.textContent = list.hidden ? "عرض الحلقات" : "إخفاء الحلقات";
-          return;
-        }
-
-        button.disabled = true;
-        button.textContent = "جارٍ التحميل...";
-
-        try {
-          const episodes = await api("/seasons/" + season.id + "/episodes");
-          list.replaceChildren();
-
-          if (!episodes.length) list.textContent = "لا توجد حلقات مسجلة.";
-          for (const episode of episodes) {
-            const item = document.createElement("div");
-            item.className = "episode";
-            item.innerHTML = '<strong>' + esc("الحلقة " +
-              (episode.number ?? "خاص") + ": " + (episode.name || "بدون عنوان")) +
-              '</strong><p>' + esc(episode.airdate || "تاريخ غير معروف") +
-              '</p><p>' + esc(plain(episode.summary) || "لا يوجد ملخص.") + '</p>';
-            list.appendChild(item);
-          }
-
-          loaded = true;
-          list.hidden = false;
-          button.textContent = "إخفاء الحلقات";
-        } catch (error) {
-          button.textContent = "إعادة المحاولة";
-        } finally {
-          button.disabled = false;
-        }
-      };
-
-      $("seasonList").appendChild(row);
-    }
-  } catch (error) {
-    $("seasonStatus").textContent = "تعذّر تحميل المواسم. تحقق من الإنترنت.";
-  }
-}
-function closeModal() {
-  $("modal").classList.remove("open");
-  document.body.style.overflow = "";
-  active = null;
-}
-
-$("searchBtn").onclick = searchShows;
-$("query").addEventListener("keydown", event => {
-  if (event.key === "Enter") searchShows();
-});
-let searchTimer;
-$("query").addEventListener("input", () => {
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(() => {
-    if ($("query").value.trim().length >= 3) searchShows();
-    else if (!$("query").value.trim() && mode === "search") goHome();
-  }, 650);
-});
-$("filters").onclick = async event => {
-  const button = event.target.closest("[data-f]");
-  if (!button) return;
-  document.querySelectorAll("[data-f]").forEach(item =>
-    item.classList.toggle("active", item === button));
-  if (button.dataset.f === "all") { goHome(); return; }
-  await loadCategory(button.dataset.f);
+const TMDB_IDS={
+// أضف هنا TMDB ID المؤكد لكل مسلسل قبل إظهار زر المشاهدة.
+// مثال: "Weak Hero Class 1": 200709
 };
-$("loadMore").onclick = () => {
-  if (mode === "category" || mode === "search" || mode === "favorites") {
-    goHome();
-    return;
-  }
-  load();
-};
-$("close").onclick = closeModal;
-$("modal").onclick = event => { if (event.target === $("modal")) closeModal(); };
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") closeModal();
-});
-$("homeLink").onclick = event => { event.preventDefault(); goHome(); };
-$("navHome").onclick = goHome;
-$("navSearch").onclick = focusSearch;
-$("navFav").onclick = showFavorites;
-$("searchTop").onclick = focusSearch;
-$("favTop").onclick = showFavorites;
-$("discover").onclick = focusSearch;
 
+function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function plain(html){const div=document.createElement("div");div.innerHTML=html||"";return(div.textContent||"").trim()}
+function imageOf(show){return show?.image?.medium||show?.image?.original||""}
+function yearOf(show){return show?.premiered?.slice(0,4)||"غير معروف"}
+function languageName(language){return({Korean:"كوري",Japanese:"ياباني",Chinese:"صيني",English:"إنجليزي",Turkish:"تركي",Spanish:"إسباني",Arabic:"عربي",French:"فرنسي",Hindi:"هندي"})[language]||language||"غير محدد"}
+async function api(path){const r=await fetch(API+path);if(!r.ok)throw Error("HTTP "+r.status);return r.json()}
+function normalize(item){return item?.show||item}
+function merge(items){const m=new Map(shows.map(s=>[s.id,s]));items.map(normalize).filter(s=>s?.id).forEach(s=>m.set(s.id,s));shows=[...m.values()]}
+function matches(s,f){
+if(["Korean","Japanese","Chinese"].includes(f))return String(s.language||"").toLowerCase()===f.toLowerCase();
+if(f==="School")return(s.genres||[]).some(g=>/school|teen|youth/i.test(g))||/school|high school|teen|youth/i.test(plain((s.name||"")+" "+(s.summary||"")));
+if(f==="all")return true;
+return(s.genres||[]).some(g=>g.toLowerCase()===f.toLowerCase())
+}
+function filtered(list){let a=list.filter(s=>filter==="all"||matches(s,filter));if(mode==="favorites")a=a.filter(s=>favs.has(s.id));return a}
+function setStatus(title,msg=""){const b=$("status");b.hidden=false;b.replaceChildren();const st=document.createElement("strong");st.textContent=title;b.append(st,document.createTextNode(msg))}
+function hideStatus(){$("status").hidden=true}
+function render(list=shows){
+const items=filtered(list);$("grid").replaceChildren();
+if(!items.length){setStatus(mode==="favorites"?"المفضلة فارغة":"ما لقيناش نتائج"," جرّب تصنيفًا آخر أو ابحث باسم المسلسل.");$("count").textContent="0 نتيجة";return}
+hideStatus();const frag=document.createDocumentFragment();items.forEach(s=>frag.appendChild(makeCard(s)));$("grid").appendChild(frag);$("count").textContent=items.length+" نتيجة"
+}
+function makeCard(show){
+const card=document.createElement("article");card.className="card";card.tabIndex=0;
+const image=imageOf(show),saved=favs.has(show.id),genres=(show.genres||[]).slice(0,2).join(" • ")||languageName(show.language);
+card.innerHTML=`<button class="fav ${saved?"saved":""}" aria-label="المفضلة">${saved?"♥":"♡"}</button><span class="lang">${esc(languageName(show.language))}</span><div class="poster">${image?`<img loading="lazy" alt="" src="${esc(image)}">`:'<div class="placeholder">NT</div>'}</div><div class="info"><div class="title">${esc(show.name||"بدون عنوان")}</div><div class="meta">${esc(yearOf(show))} • ${esc(genres)}</div><div class="rating">★ ${esc(show.rating?.average??"—")}</div><div class="description">${esc(plain(show.summary)||"لا يوجد وصف متاح.")}</div></div>`;
+const img=card.querySelector("img");if(img)img.onerror=()=>{img.parentElement.innerHTML='<div class="placeholder">NT</div>'};
+card.querySelector(".fav").onclick=e=>{e.stopPropagation();toggleFavorite(show)};
+card.onclick=()=>openDetails(show);card.onkeydown=e=>{if(e.key==="Enter")openDetails(show)};return card
+}
+function toggleFavorite(show){if(favs.has(show.id))favs.delete(show.id);else favs.add(show.id);try{localStorage.setItem("notwin-tv-saved-v6",JSON.stringify([...favs]))}catch(e){}render(mode==="search"||mode==="category"?results:shows);updateModalFavoriteButton()}
+function updateModalFavoriteButton(){const b=$("modalFav");if(b&&active)b.textContent=favs.has(active.id)?"♥ إزالة من المفضلة":"♡ إضافة للمفضلة"}
+
+async function loadLibrary(reset=false){
+if(loading||(end&&!reset))return;loading=true;$("loadMore").disabled=true;$("loadMore").textContent="جارٍ التحميل...";
+if(reset){page=0;end=false;shows=[];results=[];$("grid").replaceChildren();setStatus("جارٍ تحميل المكتبة..."," يتم جلب المسلسلات.")}
+try{
+const data=await api("/shows?page="+page);
+if(!Array.isArray(data)||!data.length){end=true;setStatus("وصلنا لنهاية البيانات");return}
+merge(data);page++;mode="library";filter="all";results=[];$("loadWrap").hidden=false;$("heading").textContent="اكتشف المسلسلات";$("subheading").textContent="حمّل صفحات إضافية لتوسيع المكتبة";render(shows);$("loadText").textContent="تم تحميل "+shows.length+" مسلسل"
+}catch(e){console.error(e);setStatus("تعذّر الاتصال بالمكتبة","تحقق من الإنترنت وحاول مجددًا.")}
+finally{loading=false;$("loadMore").disabled=false;$("loadMore").textContent="تحميل المزيد"}
+}
+async function searchShows(){
+const q=$("query").value.trim(),token=++searchToken;if(!q){goHome();return}
+categoryToken++;mode="search";results=[];$("heading").textContent="نتائج البحث";$("subheading").textContent="نتائج من TVmaze";$("loadWrap").hidden=true;setStatus("جارٍ البحث..."," نبحث عن المسلسلات.");
+try{const data=await api("/search/shows?q="+encodeURIComponent(q));if(token!==searchToken)return;results=data.map(normalize).filter(Boolean);merge(results);render(results)}
+catch(e){if(token===searchToken)setStatus("فشل البحث","تحقق من الإنترنت وجرب مجددًا.")}
+}
+async function loadCategory(f){
+const token=++categoryToken;searchToken++;filter=f;mode="category";results=[];$("loadWrap").hidden=true;
+const names={Korean:"المسلسلات الكورية",Japanese:"المسلسلات اليابانية",Chinese:"المسلسلات الصينية",Drama:"مسلسلات الدراما",Romance:"المسلسلات الرومانسية",Action:"مسلسلات الأكشن",Thriller:"مسلسلات التشويق",Fantasy:"مسلسلات الخيال",School:"المسلسلات المدرسية"};
+$("heading").textContent=names[f]||"المسلسلات";$("subheading").textContent="البحث في مكتبة TVmaze";$("grid").replaceChildren();setStatus("جارٍ البحث في المكتبة..."," قد يستغرق ذلك بعض الوقت.");
+const found=new Map();let checked=0;
+try{
+for(let p=0;p<MAX_PAGES;p++){
+if(token!==categoryToken)return;
+const data=await api("/shows?page="+p);if(!Array.isArray(data)||!data.length)break;checked++;
+for(const s of data)if(matches(s,f))found.set(s.id,s);
+$("count").textContent=found.size+" نتيجة";
+if(found.size){merge([...found.values()]);results=[...found.values()];render(results)}
+if(found.size>=60)break
+}
+if(token!==categoryToken)return;results=[...found.values()];
+if(results.length){render(results);$("subheading").textContent="تم البحث في "+checked+" صفحة";$("loadText").textContent="لقينا "+results.length+" نتيجة."}
+else setStatus("ما لقيناش نتائج","جرّب البحث باسم المسلسل.");
+$("loadWrap").hidden=false;$("loadMore").textContent="العودة إلى المكتبة";$("loadMore").disabled=false
+}catch(e){if(token===categoryToken)setStatus("تعذّر تحميل التصنيف","تحقق من الإنترنت وجرب مجددًا.");$("loadWrap").hidden=false;$("loadMore").textContent="العودة إلى المكتبة";$("loadMore").disabled=false}
+}
+async function showFavorites(){
+categoryToken++;searchToken++;mode="favorites";filter="all";results=[];setNav("navFav");$("heading").textContent="المفضلة";$("subheading").textContent="المسلسلات المحفوظة على هذا الجهاز";$("loadWrap").hidden=true;render(shows);
+const missing=[...favs].filter(id=>!shows.some(s=>s.id===id)).slice(0,40);
+if(missing.length){setStatus("جارٍ استرجاع المفضلة...","");const got=await Promise.allSettled(missing.map(id=>api("/shows/"+id)));merge(got.filter(x=>x.status==="fulfilled").map(x=>x.value));if(mode==="favorites")render(shows)}
+}
+function setNav(id){["navHome","navSearch","navFav"].forEach(n=>$(n).classList.toggle("active",n===id))}
+function goHome(){categoryToken++;searchToken++;mode="library";filter="all";results=[];$("query").value="";$("heading").textContent="اكتشف المسلسلات";$("subheading").textContent="بيانات من مكتبة TVmaze";$("loadWrap").hidden=false;setNav("navHome");document.querySelectorAll("[data-f]").forEach(b=>b.classList.toggle("active",b.dataset.f==="all"));render(shows);window.scrollTo({top:0,behavior:"smooth"})}
+function focusSearch(){setNav("navSearch");$("searchArea").scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>$("query").focus(),200)}
+
+function openDetails(show){
+active=show;$("modalTitle").textContent=show.name||"بدون عنوان";
+$("modalMeta").textContent=languageName(show.language)+" • "+yearOf(show)+" • "+(show.genres||[]).join("، ")+" • التقييم: "+(show.rating?.average??"غير متوفر");
+$("summary").textContent=plain(show.summary)||"لا يوجد وصف متاح.";
+const banner=$("banner");banner.replaceChildren();if(imageOf(show)){const im=document.createElement("img");im.src=imageOf(show);im.alt="";im.onerror=()=>im.remove();banner.appendChild(im)}
+const tmdb=TMDB_IDS[show.name];
+$("actions").replaceChildren();
+const fav=document.createElement("button");fav.className="primary";fav.id="modalFav";fav.onclick=()=>toggleFavorite(active);$("actions").appendChild(fav);updateModalFavoriteButton();
+if(tmdb){const watch=document.createElement("a");watch.className="primary";watch.style.marginInlineStart="8px";watch.textContent="▶ شاهد الآن";watch.href="./watch.html?"+new URLSearchParams({id:String(tmdb),title:show.name,type:"tv"}).toString();$("actions").appendChild(watch)}
+else{const note=document.createElement("p");note.className="muted";note.textContent="المشاهدة لهذا العمل غير مربوطة بعد؛ نضيف معرّف CineSrc الصحيح عند التأكد منه."; $("actions").appendChild(note)}
+$("seasonStatus").textContent="جارٍ تحميل المواسم...";$("seasonList").replaceChildren();$("modal").classList.add("open");document.body.style.overflow="hidden";loadSeasons(show.id)
+}
+async function loadSeasons(id){
+try{
+const seasons=await api("/shows/"+id+"/seasons");$("seasonStatus").textContent=seasons.length?seasons.length+" موسم":"لا توجد معلومات مواسم.";
+for(const season of seasons){
+const row=document.createElement("div");row.className="episode";const heading=document.createElement("strong");heading.textContent="الموسم "+(season.number??"خاص");const info=document.createElement("p");info.textContent=(season.premiereDate||"تاريخ غير معروف")+" • "+(season.endDate||"");const btn=document.createElement("button");btn.className="secondary";btn.textContent="عرض الحلقات";const list=document.createElement("div");list.hidden=true;row.append(heading,info,btn,list);let loaded=false;
+btn.onclick=async()=>{
+if(loaded){list.hidden=!list.hidden;btn.textContent=list.hidden?"عرض الحلقات":"إخفاء الحلقات";return}
+btn.disabled=true;btn.textContent="جارٍ التحميل...";
+try{
+const eps=await api("/seasons/"+season.id+"/episodes");list.replaceChildren();
+if(!eps.length)list.textContent="لا توجد حلقات مسجلة.";
+for(const ep of eps){const item=document.createElement("div");item.className="episode";const h=document.createElement("strong");h.textContent="الحلقة "+(ep.number??"خاص")+": "+(ep.name||"بدون عنوان");const p=document.createElement("p");p.textContent=(ep.airdate||"تاريخ غير معروف")+" — "+(plain(ep.summary)||"لا يوجد ملخص.");item.append(h,p);list.appendChild(item)}
+loaded=true;list.hidden=false;btn.textContent="إخفاء الحلقات"
+}catch(e){btn.textContent="إعادة المحاولة"}finally{btn.disabled=false}
+};
+$("seasonList").appendChild(row)
+}
+}catch(e){$("seasonStatus").textContent="تعذّر تحميل المواسم. تحقق من الإنترنت."}
+}
+function closeModal(){$("modal").classList.remove("open");document.body.style.overflow="";active=null}
+
+$("searchBtn").onclick=searchShows;$("query").addEventListener("keydown",e=>{if(e.key==="Enter")searchShows()});
+let searchTimer;$("query").addEventListener("input",()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{if($("query").value.trim().length>=3)searchShows();else if(!$("query").value.trim()&&mode==="search")goHome()},650)});
+$("filters").onclick=async e=>{const b=e.target.closest("[data-f]");if(!b)return;document.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("active",x===b));if(b.dataset.f==="all"){goHome();return}await loadCategory(b.dataset.f)};
+$("loadMore").onclick=()=>{if(mode==="category"||mode==="search"||mode==="favorites"){goHome();return}loadLibrary(false)};
+$("close").onclick=closeModal;$("modal").onclick=e=>{if(e.target===$("modal"))closeModal()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+$("homeLink").onclick=e=>{e.preventDefault();goHome()};$("navHome").onclick=goHome;$("navSearch").onclick=focusSearch;$("navFav").onclick=showFavorites;$("searchTop").onclick=focusSearch;$("favTop").onclick=showFavorites;$("discover").onclick=focusSearch;
 loadLibrary(true);
 </script>
 </body>
