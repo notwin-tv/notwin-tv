@@ -1,862 +1,621 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080607">
-<title>المشاهدة | NOTWIN TV</title>
+<title>NOTWIN TV | المشاهدة</title>
 
 <style>
-:root {
-  --bg: #080607;
-  --panel: #140b0d;
-  --red: #c52b3b;
-  --red-light: #f04452;
-  --red-dark: #310b11;
-  --text: #f8f3f3;
-  --muted: #b6a3a6;
-  --border: rgba(197, 43, 59, .24);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  min-height: 100%;
-  background: var(--bg);
-  color-scheme: dark;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(145, 20, 36, .15), transparent 48%),
-    radial-gradient(ellipse at 0% 45%, rgba(75, 8, 18, .10), transparent 45%),
-    var(--bg);
-  color: var(--text);
-  font-family: Arial, Tahoma, sans-serif;
-}
-
-button, select {
-  font: inherit;
-}
-
-button {
-  -webkit-tap-highlight-color: transparent;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.page {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 16px 15px 35px;
-}
-
-/* Header */
-.topbar {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    "brand home"
-    "title title";
-  align-items: center;
-  gap: 15px 12px;
-  margin-bottom: 21px;
-}
-
-.brand {
-  grid-area: brand;
-  justify-self: start;
-  color: var(--red-light);
-  font-size: clamp(23px, 5vw, 29px);
-  font-weight: 900;
-  letter-spacing: -.8px;
-  white-space: nowrap;
-  text-shadow: 0 0 22px rgba(197, 43, 59, .19);
-}
-
-.home-link {
-  grid-area: home;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  min-width: 124px;
-  min-height: 48px;
-  padding: 11px 17px;
-  border: 1px solid rgba(197, 43, 59, .48);
-  border-radius: 14px;
-  background: linear-gradient(135deg, #351015, #190b0d);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 700;
-  box-shadow: 0 4px 18px rgba(145, 20, 36, .14);
-  white-space: nowrap;
-  transition: transform .15s, background .15s;
-}
-
-.home-link .home-icon {
-  font-size: 22px;
-  line-height: 1;
-}
-
-.home-link:active {
-  transform: scale(.97);
-  background: #50131d;
-}
-
-.show-title {
-  grid-area: title;
-  width: 100%;
-  min-width: 0;
-  overflow: hidden;
-  padding: 12px 13px;
-  border: 1px solid rgba(197, 43, 59, .16);
-  border-radius: 13px;
-  background: rgba(20, 11, 13, .85);
-  color: #f4e8e9;
-  font-size: clamp(16px, 4vw, 21px);
-  font-weight: 600;
-  text-align: center;
-  direction: ltr;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Video player */
-.player-card {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid rgba(197, 43, 59, .23);
-  border-radius: 19px;
-  background: #000;
-  box-shadow:
-    0 12px 34px rgba(0, 0, 0, .34),
-    0 0 25px rgba(120, 10, 25, .08);
-}
-
-.player-screen {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000;
-}
-
-.player-screen iframe {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: #000;
-}
-
-.player-top {
-  position: absolute;
-  z-index: 3;
-  top: 10px;
-  right: 11px;
-  left: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  pointer-events: none;
-}
-
-.episode-label,
-.fullscreen-btn {
-  pointer-events: auto;
-  background: rgba(12, 5, 7, .86);
-  color: #fff;
-  backdrop-filter: blur(8px);
-}
-
-.episode-label {
-  padding: 8px 11px;
-  border: 1px solid rgba(197, 43, 59, .34);
-  border-radius: 10px;
-  font-size: 13px;
-}
-
-.fullscreen-btn {
-  display: grid;
-  place-items: center;
-  width: 39px;
-  height: 39px;
-  border: 1px solid rgba(197, 43, 59, .38);
-  border-radius: 11px;
-  font-size: 25px;
-  cursor: pointer;
-  transition: background .15s, border-color .15s;
-}
-
-.fullscreen-btn:active {
-  background: #60121e;
-  border-color: var(--red-light);
-}
-
-.player-screen:fullscreen {
-  width: 100vw;
-  height: 100vh;
-  aspect-ratio: auto;
-  border-radius: 0;
-  background: #000;
-}
-
-.player-screen:fullscreen iframe {
-  width: 100%;
-  height: 100%;
-}
-
-/* Navigation controls */
-.controls {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr 1fr;
-  gap: 10px;
-  margin: 16px 0 0;
-}
-
-.control-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  min-width: 0;
-  min-height: 72px;
-  padding: 10px 5px;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  background: linear-gradient(145deg, #180c0f, #10090b);
-  color: var(--red-light);
-  cursor: pointer;
-  transition: transform .15s, background .15s, border-color .15s;
-}
-
-.control-btn:active {
-  transform: scale(.97);
-  background: #351015;
-  border-color: rgba(240, 68, 82, .55);
-}
-
-.control-btn:disabled {
-  opacity: .35;
-  cursor: not-allowed;
-}
-
-.control-btn .symbol {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.control-btn .label {
-  color: #eadcde;
-  font-size: 13px;
-}
-
-.control-btn.main {
-  border-color: rgba(197, 43, 59, .42);
-  background: linear-gradient(135deg, #391016, #1c0b0e);
-  box-shadow: inset 0 1px rgba(255, 255, 255, .025);
-}
-
-/* Seasons and episodes */
-.episodes-panel {
-  display: none;
-  margin-top: 15px;
-  padding: 15px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: linear-gradient(145deg, #170c0f, #10090b);
-}
-
-.episodes-panel.open {
-  display: block;
-}
-
-.selector-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.selector-group label {
-  display: block;
-  margin-bottom: 7px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.selector-group select {
-  width: 100%;
-  min-width: 0;
-  padding: 12px 9px;
-  border: 1px solid var(--border);
-  border-radius: 11px;
-  outline: none;
-  background: #0b0708;
-  color: #fff;
-}
-
-.selector-group select:focus {
-  border-color: var(--red-light);
-  box-shadow: 0 0 0 2px rgba(197, 43, 59, .10);
-}
-
-.episode-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(47px, 1fr));
-  gap: 8px;
-}
-
-.episode-item {
-  min-height: 43px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: #0d080a;
-  color: #eadcde;
-  cursor: pointer;
-  transition: background .15s, border-color .15s;
-}
-
-.episode-item:active {
-  background: #351015;
-}
-
-.episode-item.active {
-  border-color: var(--red-light);
-  background: linear-gradient(135deg, #a51f2b, #67121c);
-  color: #fff;
-  box-shadow: 0 3px 12px rgba(165, 31, 43, .18);
-}
-
-.loading-text {
-  padding-top: 12px;
-  color: var(--muted);
-  text-align: center;
-  font-size: 13px;
-}
-
-.error-text {
-  color: #ff9aa5;
-}
-
-@media (min-width: 650px) {
-  .page {
-    padding-top: 25px;
-  }
-
-  .topbar {
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-areas: "brand title home";
-    gap: 20px;
-    margin-bottom: 25px;
-  }
-
-  .show-title {
-    max-width: 440px;
-    border: 0;
-    background: transparent;
-    text-align: center;
-  }
-
-  .home-link {
-    justify-self: end;
-  }
-
-  .player-card {
-    border-radius: 22px;
-  }
-
-  .controls {
-    max-width: 490px;
-    margin: 19px auto 0;
-    gap: 13px;
-  }
-
-  .control-btn {
-    min-height: 76px;
-  }
-}
-
-@media (max-width: 380px) {
-  .page {
-    padding: 12px 10px 28px;
-  }
-
-  .topbar {
-    gap: 12px 8px;
-    margin-bottom: 15px;
-  }
-
-  .brand {
-    font-size: 22px;
-  }
-
-  .home-link {
-    min-width: 110px;
-    min-height: 44px;
-    padding: 9px 12px;
-    gap: 7px;
-    font-size: 13px;
-  }
-
-  .home-link .home-icon {
-    font-size: 20px;
-  }
-
-  .show-title {
-    padding: 10px;
-    font-size: 15px;
-  }
-
-  .player-card {
-    border-radius: 15px;
-  }
-
-  .controls {
-    gap: 7px;
-    margin-top: 12px;
-  }
-
-  .control-btn {
-    min-height: 64px;
-    border-radius: 12px;
-  }
-
-  .control-btn .symbol {
-    font-size: 21px;
-  }
-
-  .control-btn .label {
-    font-size: 12px;
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080607;color:#fff4f4;font-family:Arial,Tahoma,sans-serif;min-height:100vh}
+button,select{font:inherit;cursor:pointer}
+a{color:inherit;text-decoration:none}
+header{padding:17px 5%;display:flex;align-items:center;justify-content:space-between;background:#10090b;border-bottom:1px solid #291419;position:sticky;top:0;z-index:5}
+.logo{font-size:23px;font-weight:900}
+.logo span{color:#f04455}
+.back{padding:10px 14px;background:#1b0d10;color:white;border:1px solid #392027;border-radius:9px}
+main{width:92%;max-width:1100px;margin:24px auto 45px}
+.player{background:#000;border:1px solid #38171d;border-radius:12px;overflow:hidden}
+.player-header{padding:12px;background:#150b0d;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.player-header h2{font-size:15px}
+.player-actions{display:flex;gap:8px;align-items:center}
+.player-actions button,.player-actions select{background:#211014;color:white;border:1px solid #432027;padding:9px 10px;border-radius:8px}
+#video{display:block;width:100%;aspect-ratio:16/9;border:0;background:#000}
+.player-note{padding:12px;font-size:13px;color:#ad999d;line-height:1.8}
+.player-note a{color:#ff7986;text-decoration:underline}
+.details{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;margin-top:25px}
+.poster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;background:#160d0f;border:1px solid #291419}
+.tag{display:inline-block;color:#ff7885;background:#c52b3b20;padding:6px 10px;border-radius:7px;margin-bottom:10px;font-size:12px}
+h1{font-size:clamp(23px,4vw,32px);margin-bottom:12px}
+.meta{display:flex;flex-wrap:wrap;gap:12px;color:#ad999d;font-size:13px;margin-bottom:15px}
+.rating{color:#ffd27a}
+.overview{color:#c8b8bb;line-height:2;font-size:14px}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.btn{padding:11px 15px;border:0;border-radius:9px;background:#c52b3b;color:white;font-weight:bold}
+.btn.secondary{background:#1b0d10;border:1px solid #392027}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.section{margin-top:30px}
+.section h2{font-size:20px;margin-bottom:14px}
+.season-row{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}
+.season-btn{background:#140b0d;border:1px solid #392027;color:white;border-radius:9px;padding:10px 13px}
+.season-btn.active{background:#c52b3b;border-color:#c52b3b}
+.episodes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.episode{text-align:right;background:#140b0d;color:white;border:1px solid #291419;border-radius:10px;padding:13px;line-height:1.6}
+.episode.active{background:#c52b3b22;border-color:#c52b3b}
+.episode small{display:block;color:#ad999d;margin-top:5px}
+.status{color:#ad999d;text-align:center;padding:20px 12px;line-height:1.9}
+footer{border-top:1px solid #291419;color:#79696d;text-align:center;padding:22px;font-size:12px}
+[hidden]{display:none!important}
+@media(max-width:600px){
+header{padding:14px 4%}
+.logo{font-size:20px}
+main{margin-top:15px}
+.details{grid-template-columns:105px minmax(0,1fr);gap:13px}
+.overview{font-size:13px}
+.meta{gap:8px}
+.player-header{padding:10px}
+.player-actions button,.player-actions select{font-size:12px;padding:8px}
+.episodes{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 </style>
 </head>
 
 <body>
-<div class="page">
+<header>
+<a class="logo" href="./index.html">NOTWIN <span>TV</span></a>
+<button class="back" id="backBtn">رجوع ←</button>
+</header>
 
-  <header class="topbar">
-    <a class="brand" href="./index.html">notwin tv</a>
-
-    <div class="show-title" id="showTitle">
-      جاري تحميل المسلسل...
-    </div>
-
-    <a class="home-link" href="./index.html" aria-label="العودة إلى الصفحة الرئيسية">
-      <span class="home-icon" aria-hidden="true">⌂</span>
-      <span>الرئيسية</span>
-    </a>
-  </header>
-
-  <main>
-    <section class="player-card" aria-label="مشغل المسلسل">
-      <div class="player-screen" id="playerScreen">
-
-        <div class="player-top">
-          <div class="episode-label" id="episodeLabel">الحلقة 1</div>
-
-          <button
-            class="fullscreen-btn"
-            id="fullscreenBtn"
-            type="button"
-            aria-label="ملء الشاشة"
-            title="ملء الشاشة">⛶</button>
-        </div>
-
-        <iframe
-          id="videoFrame"
-          title="مشغل المسلسل"
-          src="about:blank"
-          allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
-          allowfullscreen
-          referrerpolicy="origin">
-        </iframe>
-
-      </div>
-    </section>
-
-    <nav class="controls" aria-label="التنقل بين الحلقات">
-
-      <button class="control-btn" id="previousBtn" type="button">
-        <span class="symbol" aria-hidden="true">|◀</span>
-        <span class="label">السابقة</span>
-      </button>
-
-      <button
-        class="control-btn main"
-        id="episodesBtn"
-        type="button"
-        aria-expanded="false"
-        aria-controls="episodesPanel">
-        <span class="symbol" aria-hidden="true">☷</span>
-        <span class="label">الحلقات</span>
-      </button>
-
-      <button class="control-btn" id="nextBtn" type="button">
-        <span class="symbol" aria-hidden="true">▶|</span>
-        <span class="label">التالية</span>
-      </button>
-
-    </nav>
-
-    <section class="episodes-panel" id="episodesPanel">
-      <div class="selector-row">
-
-        <div class="selector-group">
-          <label for="seasonSelect">اختيار الموسم</label>
-          <select id="seasonSelect">
-            <option value="1">الموسم 1</option>
-          </select>
-        </div>
-
-        <div class="selector-group">
-          <label for="episodeSelect">اختيار الحلقة</label>
-          <select id="episodeSelect">
-            <option value="1">الحلقة 1</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="episode-list" id="episodeList"></div>
-      <div class="loading-text" id="episodesStatus" aria-live="polite"></div>
-    </section>
-  </main>
+<main>
+<section class="player">
+<div class="player-header">
+<h2 id="playerTitle">جاري تحميل العمل...</h2>
+<div class="player-actions">
+<select id="quality" aria-label="الجودة">
+<option value="480">480p</option>
+<option value="720" selected>720p</option>
+</select>
+<button id="fullscreen">⛶ ملء الشاشة</button>
+</div>
 </div>
 
+<iframe id="video" src="about:blank" title="مشغل NOTWIN TV" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+<div class="player-note" id="playerNote">جاري تحميل معلومات العمل...</div>
+</section>
+
+<section class="details">
+<img class="poster" id="poster" alt="غلاف العمل">
+
+<div>
+<span class="tag" id="typeTag">NOTWIN TV</span>
+<h1 id="title">جاري التحميل...</h1>
+
+<div class="meta">
+<span id="year">—</span>
+<span class="rating" id="rating">★ —</span>
+<span id="runtime"></span>
+<span id="language"></span>
+</div>
+
+<p class="overview" id="overview">جاري تحميل القصة...</p>
+
+<div class="actions">
+<button class="btn secondary" id="favoriteBtn">♡ أضف للمفضلة</button>
+<button class="btn secondary" id="trailerBtn" hidden>▶ الإعلان الرسمي</button>
+<button class="btn secondary" id="platformBtn">منصات المشاهدة</button>
+</div>
+</div>
+</section>
+
+<section class="section" id="seasonSection" hidden>
+<h2>المواسم</h2>
+<div class="season-row" id="seasons"></div>
+
+<h2>الحلقات</h2>
+<div class="episodes" id="episodes">
+<div class="status">جاري تحميل الحلقات...</div>
+</div>
+
+<div class="actions">
+<button class="btn secondary" id="prevEpisode">الحلقة السابقة</button>
+<button class="btn" id="nextEpisode">الحلقة التالية ←</button>
+</div>
+</section>
+
+<section class="section" id="errorSection" hidden>
+<div class="status" id="errorMessage"></div>
+</section>
+</main>
+
+<footer>NOTWIN TV © <span id="currentYear"></span></footer>
+
 <script>
-(() => {
-  "use strict";
+"use strict";
 
-  const TMDB_KEY = "26c5ad9f51818e110945285552c11a75";
-  const TMDB_BASE = "https://api.themoviedb.org/3";
-  const EMBED_BASE = "https://cinesrc.st/embed/tv/";
+/* إعدادات TMDB */
+const API_KEY = "26c5ad9f51818e110945285552c11a75";
+const API_BASE = "https://api.themoviedb.org/3";
+const IMAGE_BASE = "https://image.tmdb.org/t/p/";
 
-  const params = new URLSearchParams(location.search);
-  const showId = params.get("id");
+const params = new URLSearchParams(location.search);
+const itemId = params.get("id");
+const type = params.get("type") === "tv" ? "tv" : "movie";
 
-  let season = Math.max(1, parseInt(params.get("season") || "1", 10) || 1);
-  let episode = Math.max(1, parseInt(params.get("episode") || "1", 10) || 1);
+let itemData = null;
+let seasonsData = [];
+let episodesData = [];
+let currentSeason = Number(params.get("s")) || 1;
+let currentEpisode = Number(params.get("e")) || 1;
+let favoriteItems = [];
 
-  const $ = id => document.getElementById(id);
+const $ = id => document.getElementById(id);
 
-  const showTitle = $("showTitle");
-  const episodeLabel = $("episodeLabel");
-  const videoFrame = $("videoFrame");
-  const playerScreen = $("playerScreen");
-  const fullscreenBtn = $("fullscreenBtn");
-  const episodesBtn = $("episodesBtn");
-  const episodesPanel = $("episodesPanel");
-  const seasonSelect = $("seasonSelect");
-  const episodeSelect = $("episodeSelect");
-  const episodeList = $("episodeList");
-  const episodesStatus = $("episodesStatus");
-  const previousBtn = $("previousBtn");
-  const nextBtn = $("nextBtn");
+$("currentYear").textContent = new Date().getFullYear();
 
-  let currentSeasonData = null;
-  let showSeasons = [];
+try {
+  const saved = JSON.parse(localStorage.getItem("notwin_favorites") || "[]");
+  favoriteItems = Array.isArray(saved) ? saved : [];
+} catch {
+  favoriteItems = [];
+}
 
-  function setStatus(message, isError = false) {
-    episodesStatus.textContent = message;
-    episodesStatus.classList.toggle("error-text", isError);
+$("backBtn").addEventListener("click", () => {
+  if (history.length > 1) {
+    history.back();
+  } else {
+    location.href = "./index.html";
+  }
+});
+
+function imageURL(path, size = "w500") {
+  return path ? IMAGE_BASE + size + path : "";
+}
+
+async function apiRequest(path) {
+  const separator = path.includes("?") ? "&" : "?";
+  const url = API_BASE + path + separator +
+    "api_key=" + encodeURIComponent(API_KEY) +
+    "&language=ar";
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("TMDB request failed: " + response.status);
   }
 
-  async function fetchTmdb(path) {
-    const url = `${TMDB_BASE}${path}?api_key=${encodeURIComponent(TMDB_KEY)}&language=ar`;
-    const response = await fetch(url);
+  return response.json();
+}
 
-    if (!response.ok) {
-      throw new Error(`TMDB HTTP ${response.status}`);
-    }
+function showError(message) {
+  $("errorSection").hidden = false;
+  $("errorMessage").textContent = message;
+  $("playerTitle").textContent = "تعذّر تحميل العمل";
+  $("playerNote").textContent = message;
+}
 
-    return response.json();
+function updateURL() {
+  const url = new URL(location.href);
+  url.searchParams.set("id", itemId);
+  url.searchParams.set("type", type);
+
+  if (type === "tv") {
+    url.searchParams.set("s", currentSeason);
+    url.searchParams.set("e", currentEpisode);
   }
 
-  function updateUrl() {
-    const url = new URL(location.href);
-    url.searchParams.set("season", season);
-    url.searchParams.set("episode", episode);
-    history.replaceState({}, "", url);
+  history.replaceState({}, "", url);
+}
+
+/*
+  مصدر الفيديو الخارجي ليس مضمونًا.
+  إذا لم يكن متاحًا أو لم يسمح بالتضمين،
+  استعمل مصدرًا رسميًا تملك حق تضمينه.
+*/
+function setPlayer() {
+  if (!itemId || !/^\d+$/.test(itemId)) return;
+
+  const quality = $("quality").value;
+  let embedURL;
+
+  if (type === "movie") {
+    embedURL = "https://cinesrc.st/embed/movie/" +
+      encodeURIComponent(itemId);
+  } else {
+    embedURL = "https://cinesrc.st/embed/tv/" +
+      encodeURIComponent(itemId) +
+      "?s=" + encodeURIComponent(currentSeason) +
+      "&e=" + encodeURIComponent(currentEpisode);
   }
 
-  function updatePlayer() {
-    episodeLabel.textContent = `الموسم ${season} · الحلقة ${episode}`;
+  $("video").src = embedURL;
 
-    if (showId) {
-      videoFrame.src =
-        `${EMBED_BASE}${encodeURIComponent(showId)}` +
-        `?s=${season}&e=${episode}`;
+  $("playerNote").textContent =
+    "إذا لم يعمل الفيديو، فقد يكون مصدر المشاهدة غير متاح أو لا يسمح بالتضمين. تقدر تستعمل الإعلان الرسمي أو تبحث عن منصات المشاهدة.";
+}
+
+$("quality").addEventListener("change", () => {
+  setPlayer();
+});
+
+$("fullscreen").addEventListener("click", async () => {
+  try {
+    const frame = $("video");
+
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+    } else if (frame.requestFullscreen) {
+      await frame.requestFullscreen();
     } else {
-      videoFrame.src = "about:blank";
+      await $("video").parentElement.requestFullscreen();
     }
-
-    seasonSelect.value = String(season);
-    episodeSelect.value = String(episode);
-
-    previousBtn.disabled = season === 1 && episode <= 1;
-    updateUrl();
+  } catch {
+    $("playerNote").textContent =
+      "ما قدرناش نفتحو ملء الشاشة. جرّب زر الشاشة الكاملة داخل المشغّل.";
   }
+});
 
-  function setEpisodeOptions(count) {
-    const total = Math.max(1, Number(count) || 1);
-    episodeSelect.replaceChildren();
+/* المفضلة */
+function favoriteKey() {
+  return type + "-" + itemId;
+}
 
-    for (let i = 1; i <= total; i++) {
-      const option = document.createElement("option");
-      option.value = String(i);
-      option.textContent = `الحلقة ${i}`;
-      episodeSelect.appendChild(option);
-    }
+function isFavorite() {
+  const key = favoriteKey();
 
-    if (episode > total) episode = total;
-    episodeSelect.value = String(episode);
-  }
+  return favoriteItems.some(item =>
+    typeof item === "string"
+      ? item === key
+      : item && (
+          item.key === key ||
+          (String(item.id) === String(itemId) && item.type === type)
+        )
+  );
+}
 
-  function renderEpisodeButtons(count) {
-    episodeList.replaceChildren();
-    const total = Math.max(1, Number(count) || 1);
+function updateFavoriteButton() {
+  $("favoriteBtn").textContent = isFavorite()
+    ? "♥ في المفضلة"
+    : "♡ أضف للمفضلة";
+}
 
-    for (let i = 1; i <= total; i++) {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "episode-item";
-      button.textContent = String(i);
-      button.setAttribute("aria-label", `الحلقة ${i}`);
+$("favoriteBtn").addEventListener("click", () => {
+  if (!itemData) return;
 
-      button.addEventListener("click", () => {
-        episode = i;
-        updatePlayer();
-        syncEpisodeHighlight();
-      });
+  const key = favoriteKey();
 
-      episodeList.appendChild(button);
-    }
-
-    syncEpisodeHighlight();
-  }
-
-  function syncEpisodeHighlight() {
-    [...episodeList.children].forEach((button, index) => {
-      button.classList.toggle("active", index + 1 === episode);
+  if (isFavorite()) {
+    favoriteItems = favoriteItems.filter(item =>
+      typeof item === "string"
+        ? item !== key
+        : !(item && (
+            item.key === key ||
+            (String(item.id) === String(itemId) && item.type === type)
+          ))
+    );
+  } else {
+    favoriteItems.push({
+      key,
+      id: String(itemId),
+      type,
+      title: itemData.title || itemData.name || "",
+      poster_path: itemData.poster_path || ""
     });
   }
 
-  async function loadSeason(seasonNumber) {
-    setStatus("جاري تحميل الحلقات...");
+  try {
+    localStorage.setItem("notwin_favorites", JSON.stringify(favoriteItems));
+    updateFavoriteButton();
+  } catch {
+    alert("ما قدرناش نحفظو المفضلة في المتصفح.");
+  }
+});
 
-    try {
-      const data = await fetchTmdb(
-        `/tv/${encodeURIComponent(showId)}/season/${seasonNumber}`
-      );
+/* البحث عن منصات المشاهدة */
+$("platformBtn").addEventListener("click", () => {
+  const name = itemData
+    ? (itemData.title || itemData.name || "")
+    : "";
 
-      currentSeasonData = data;
-      const count = data.episodes?.length || 1;
+  const query = encodeURIComponent(name + " official streaming");
 
-      if (data.episodes?.length) {
-        const episodeExists = data.episodes.some(
-          item => item.episode_number === episode
+  window.open(
+    "https://www.justwatch.com/search?q=" + query,
+    "_blank",
+    "noopener,noreferrer"
+  );
+});
+
+/* جلب معلومات الفيلم أو المسلسل */
+async function loadItem() {
+  if (!itemId || !/^\d+$/.test(itemId)) {
+    $("title").textContent = "رابط غير صالح";
+    showError("افتح العمل بالضغط على غلافه من الصفحة الرئيسية.");
+    return;
+  }
+
+  try {
+    itemData = await apiRequest(
+      "/" + type + "/" + encodeURIComponent(itemId) +
+      "?append_to_response=videos"
+    );
+
+    const name = itemData.title || itemData.name || "بدون عنوان";
+
+    document.title = name + " | NOTWIN TV";
+    $("title").textContent = name;
+    $("playerTitle").textContent = name;
+    $("typeTag").textContent = type === "movie" ? "فيلم" : "مسلسل";
+
+    const date = itemData.release_date || itemData.first_air_date || "";
+    $("year").textContent = date.slice(0, 4) || "السنة غير معروفة";
+
+    const rating = Number(itemData.vote_average);
+    $("rating").textContent = "★ " +
+      (Number.isFinite(rating) && rating > 0
+        ? rating.toFixed(1) + "/10"
+        : "—");
+
+    $("runtime").textContent = itemData.runtime
+      ? itemData.runtime + " دقيقة"
+      : "";
+
+    $("language").textContent = itemData.original_language
+      ? itemData.original_language.toUpperCase()
+      : "";
+
+    $("overview").textContent = itemData.overview ||
+      "القصة غير متوفرة باللغة العربية حاليًا.";
+
+    $("poster").src = imageURL(itemData.poster_path);
+    $("poster").alt = "غلاف " + name;
+
+    $("poster").onerror = () => {
+      $("poster").removeAttribute("src");
+      $("poster").alt = "الغلاف غير متوفر";
+    };
+
+    updateFavoriteButton();
+
+    const videos = itemData.videos?.results || [];
+
+    const trailer = videos.find(video =>
+      video.site === "YouTube" && video.type === "Trailer"
+    ) || videos.find(video => video.site === "YouTube");
+
+    if (trailer) {
+      $("trailerBtn").hidden = false;
+
+      $("trailerBtn").addEventListener("click", () => {
+        window.open(
+          "https://www.youtube.com/watch?v=" +
+            encodeURIComponent(trailer.key),
+          "_blank",
+          "noopener,noreferrer"
         );
-
-        if (!episodeExists) episode = 1;
-      } else {
-        episode = 1;
-      }
-
-      setEpisodeOptions(count);
-      renderEpisodeButtons(count);
-
-      setStatus(
-        data.episodes?.length
-          ? ""
-          : "لم يتم العثور على حلقات لهذا الموسم."
-      );
-    } catch (error) {
-      console.error("Season loading error:", error);
-      currentSeasonData = null;
-      setEpisodeOptions(episode);
-      renderEpisodeButtons(episode);
-      setStatus("تعذر تحميل قائمة الحلقات. تحقق من اتصال الإنترنت.", true);
-    }
-
-    updatePlayer();
-  }
-
-  async function loadShow() {
-    if (!showId) {
-      showTitle.textContent = "المسلسل غير محدد";
-      videoFrame.src = "about:blank";
-      previousBtn.disabled = true;
-      nextBtn.disabled = true;
-      setStatus("افتح المسلسل من الصفحة الرئيسية أولًا.", true);
-      return;
-    }
-
-    try {
-      const data = await fetchTmdb(`/tv/${encodeURIComponent(showId)}`);
-
-      showTitle.textContent =
-        data.name || data.original_name || "المشاهدة";
-
-      showSeasons = (data.seasons || [])
-        .filter(item => item.season_number > 0)
-        .map(item => item.season_number);
-
-      seasonSelect.replaceChildren();
-
-      if (showSeasons.length) {
-        showSeasons.forEach(number => {
-          const option = document.createElement("option");
-          option.value = String(number);
-          option.textContent = `الموسم ${number}`;
-          seasonSelect.appendChild(option);
-        });
-
-        if (!showSeasons.includes(season)) {
-          season = showSeasons[0];
-        }
-      } else {
-        const option = document.createElement("option");
-        option.value = String(season);
-        option.textContent = `الموسم ${season}`;
-        seasonSelect.appendChild(option);
-      }
-
-      seasonSelect.value = String(season);
-      await loadSeason(season);
-    } catch (error) {
-      console.error("Show loading error:", error);
-      showTitle.textContent = "المشاهدة";
-      setStatus("تعذر تحميل معلومات المسلسل. تحقق من الاتصال.", true);
-      setEpisodeOptions(episode);
-      renderEpisodeButtons(episode);
-      updatePlayer();
-    }
-  }
-
-  previousBtn.addEventListener("click", async () => {
-    if (season === 1 && episode <= 1) return;
-
-    if (episode > 1) {
-      episode--;
-      updatePlayer();
-      syncEpisodeHighlight();
-      return;
-    }
-
-    const previousSeasons = showSeasons.filter(number => number < season);
-
-    if (!previousSeasons.length) return;
-
-    season = Math.max(...previousSeasons);
-    episode = 1;
-
-    await loadSeason(season);
-
-    if (currentSeasonData?.episodes?.length) {
-      episode = currentSeasonData.episodes.length;
-      updatePlayer();
-      syncEpisodeHighlight();
-    }
-  });
-
-  nextBtn.addEventListener("click", async () => {
-    const total = currentSeasonData?.episodes?.length || episodeSelect.options.length || 1;
-
-    if (episode < total) {
-      episode++;
-      updatePlayer();
-      syncEpisodeHighlight();
-      return;
-    }
-
-    const nextSeasons = showSeasons.filter(number => number > season);
-
-    if (!nextSeasons.length) {
-      setStatus("وصلت إلى آخر حلقة متاحة.");
-      return;
-    }
-
-    season = Math.min(...nextSeasons);
-    episode = 1;
-    await loadSeason(season);
-  });
-
-  episodesBtn.addEventListener("click", () => {
-    const isOpen = episodesPanel.classList.toggle("open");
-
-    episodesBtn.setAttribute("aria-expanded", String(isOpen));
-
-    if (isOpen) {
-      episodesPanel.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest"
       });
     }
-  });
 
-  seasonSelect.addEventListener("change", async () => {
-    season = Number(seasonSelect.value) || 1;
-    episode = 1;
-    await loadSeason(season);
-  });
-
-  episodeSelect.addEventListener("change", () => {
-    episode = Number(episodeSelect.value) || 1;
-    updatePlayer();
-    syncEpisodeHighlight();
-  });
-
-  fullscreenBtn.addEventListener("click", async () => {
-    try {
-      if (document.fullscreenElement) {
-        await document.exitFullscreen();
-        return;
-      }
-
-      if (playerScreen.requestFullscreen) {
-        await playerScreen.requestFullscreen();
-      } else if (videoFrame.requestFullscreen) {
-        await videoFrame.requestFullscreen();
-      }
-
-      if (screen.orientation?.lock) {
-        try {
-          await screen.orientation.lock("landscape");
-        } catch (_) {
-          // بعض المتصفحات لا تسمح بقفل اتجاه الشاشة.
-        }
-      }
-    } catch (error) {
-      console.warn("Fullscreen unavailable:", error);
+    if (type === "movie") {
+      $("seasonSection").hidden = true;
+      setPlayer();
+    } else {
+      $("seasonSection").hidden = false;
+      await loadSeasons();
     }
-  });
+  } catch (error) {
+    console.error(error);
+    $("title").textContent = "حدث خطأ";
+    showError("ما قدرناش نجيبو معلومات العمل. تأكد من الإنترنت وعاود جرّب.");
+  }
+}
 
-  document.addEventListener("fullscreenchange", () => {
-    if (!document.fullscreenElement && screen.orientation?.unlock) {
-      try {
-        screen.orientation.unlock();
-      } catch (_) {}
+/* المواسم */
+async function loadSeasons() {
+  $("seasons").replaceChildren();
+
+  seasonsData = (itemData.seasons || []).filter(season =>
+    season.season_number > 0
+  );
+
+  if (!seasonsData.length) {
+    $("episodes").innerHTML =
+      '<div class="status">معلومات المواسم غير متوفرة.</div>';
+    return;
+  }
+
+  if (!seasonsData.some(season =>
+    season.season_number === currentSeason
+  )) {
+    currentSeason = seasonsData[0].season_number;
+  }
+
+  seasonsData.forEach(season => {
+    const button = document.createElement("button");
+
+    button.className = "season-btn";
+    button.textContent = season.name ||
+      ("الموسم " + season.season_number);
+
+    if (season.season_number === currentSeason) {
+      button.classList.add("active");
     }
+
+    button.addEventListener("click", async () => {
+      currentSeason = season.season_number;
+      currentEpisode = 1;
+
+      document.querySelectorAll(".season-btn").forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+      button.classList.add("active");
+
+      await loadEpisodes(currentSeason);
+    });
+
+    $("seasons").appendChild(button);
   });
 
-  loadShow();
-})();
+  await loadEpisodes(currentSeason);
+}
+
+/* الحلقات */
+async function loadEpisodes(seasonNumber) {
+  $("episodes").innerHTML =
+    '<div class="status">جاري تحميل الحلقات...</div>';
+
+  try {
+    const data = await apiRequest(
+      "/tv/" + encodeURIComponent(itemId) +
+      "/season/" + encodeURIComponent(seasonNumber)
+    );
+
+    episodesData = data.episodes || [];
+    $("episodes").replaceChildren();
+
+    if (!episodesData.length) {
+      $("episodes").innerHTML =
+        '<div class="status">معلومات الحلقات غير متوفرة.</div>';
+      return;
+    }
+
+    if (!episodesData.some(ep =>
+      ep.episode_number === currentEpisode
+    )) {
+      currentEpisode = episodesData[0].episode_number;
+    }
+
+    episodesData.forEach(episode => {
+      const button = document.createElement("button");
+      button.className = "episode";
+
+      if (episode.episode_number === currentEpisode) {
+        button.classList.add("active");
+      }
+
+      const number = document.createElement("span");
+      number.textContent = "الحلقة " + episode.episode_number;
+
+      const name = document.createElement("small");
+      name.textContent = episode.name || "بدون عنوان";
+
+      button.append(number, name);
+
+      button.addEventListener("click", () => {
+        currentEpisode = episode.episode_number;
+
+        document.querySelectorAll(".episode").forEach(btn =>
+          btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+        setPlayer();
+        updateURL();
+        updateEpisodeButtons();
+
+        $("playerTitle").textContent =
+          (itemData.name || itemData.title || "المسلسل") +
+          " — الموسم " + currentSeason +
+          "، الحلقة " + currentEpisode;
+      });
+
+      $("episodes").appendChild(button);
+    });
+
+    updateURL();
+    setPlayer();
+    updateEpisodeButtons();
+
+    const selected = episodesData.find(ep =>
+      ep.episode_number === currentEpisode
+    );
+
+    $("playerTitle").textContent =
+      (itemData.name || itemData.title || "المسلسل") +
+      " — الموسم " + currentSeason +
+      "، الحلقة " + currentEpisode +
+      (selected?.name ? " · " + selected.name : "");
+
+  } catch (error) {
+    console.error(error);
+
+    $("episodes").innerHTML =
+      '<div class="status">تعذّر تحميل الحلقات. جرّب مرة أخرى.</div>';
+  }
+}
+
+/* أزرار الحلقة السابقة والتالية */
+function updateEpisodeButtons() {
+  const index = episodesData.findIndex(ep =>
+    ep.episode_number === currentEpisode
+  );
+
+  $("prevEpisode").disabled = index <= 0;
+  $("nextEpisode").disabled =
+    index < 0 || index >= episodesData.length - 1;
+}
+
+$("prevEpisode").addEventListener("click", async () => {
+  const index = episodesData.findIndex(ep =>
+    ep.episode_number === currentEpisode
+  );
+
+  if (index > 0) {
+    currentEpisode = episodesData[index - 1].episode_number;
+    await loadEpisodes(currentSeason);
+    return;
+  }
+
+  const seasonIndex = seasonsData.findIndex(season =>
+    season.season_number === currentSeason
+  );
+
+  if (seasonIndex > 0) {
+    currentSeason = seasonsData[seasonIndex - 1].season_number;
+
+    document.querySelectorAll(".season-btn").forEach((button, i) => {
+      button.classList.toggle("active", i === seasonIndex - 1);
+    });
+
+    await loadEpisodes(currentSeason);
+
+    if (episodesData.length) {
+      currentEpisode = episodesData[episodesData.length - 1].episode_number;
+      await loadEpisodes(currentSeason);
+    }
+  }
+});
+
+$("nextEpisode").addEventListener("click", async () => {
+  const index = episodesData.findIndex(ep =>
+    ep.episode_number === currentEpisode
+  );
+
+  if (index >= 0 && index < episodesData.length - 1) {
+    currentEpisode = episodesData[index + 1].episode_number;
+    await loadEpisodes(currentSeason);
+    return;
+  }
+
+  const seasonIndex = seasonsData.findIndex(season =>
+    season.season_number === currentSeason
+  );
+
+  if (seasonIndex >= 0 && seasonIndex < seasonsData.length - 1) {
+    currentSeason = seasonsData[seasonIndex + 1].season_number;
+    currentEpisode = 1;
+
+    document.querySelectorAll(".season-btn").forEach((button, i) => {
+      button.classList.toggle("active", i === seasonIndex + 1);
+    });
+
+    await loadEpisodes(currentSeason);
+  }
+});
+
+loadItem();
 </script>
 </body>
-</html>
+  </html>
