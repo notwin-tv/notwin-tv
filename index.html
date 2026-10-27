@@ -17,6 +17,7 @@ header{position:sticky;top:0;z-index:10;display:flex;justify-content:space-betwe
 .brand span{color:var(--purple)}
 .btn,.secondary{border:1px solid var(--line);background:#ffffff08;color:white;padding:10px 14px;border-radius:12px}
 .primary{background:linear-gradient(135deg,#a87aff,#7046cf);border:0;color:white;padding:13px 18px;border-radius:12px;font-weight:bold}
+button:disabled{opacity:.55;cursor:wait}
 main{max-width:1250px;margin:auto;padding:22px 5% 95px}
 .hero{min-height:320px;padding:28px;display:flex;align-items:center;border:1px solid #a477ff25;border-radius:24px;background:linear-gradient(90deg,#080610ef,#10091c88),linear-gradient(0deg,#080610,transparent),url("sakura-bg.png") center/cover no-repeat}
 .hero>div{max-width:570px}.eyebrow,.pill{font-size:12px;color:#d5bdff;border:1px solid #9b6cff45;background:#9b6cff19;border-radius:99px;padding:7px 11px}
@@ -48,6 +49,7 @@ main{max-width:1250px;margin:auto;padding:22px 5% 95px}
 .bottom button{flex:1;max-width:180px;background:transparent;border:0;color:var(--muted);padding:9px}
 .bottom button.active{color:#d8c6ff;background:#9b6cff1d;border-radius:10px}
 footer{text-align:center;color:#786b89;font-size:11px;margin:28px 0}
+footer a{color:#b99aff}
 @media(max-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:700px){header{padding:10px 4%}main{padding:15px 4% 90px}.hero{min-height:285px;padding:20px}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.info{padding:8px}.title{font-size:12px}.search{flex-wrap:wrap}.search .primary{width:100%}}
 @media(max-width:390px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -58,19 +60,19 @@ footer{text-align:center;color:#786b89;font-size:11px;margin:28px 0}
 <a class="brand" href="#" id="homeLink">
 <div class="logo">NT</div><div>NOTWIN <span>TV</span></div>
 </a>
-<div><button class="btn" id="searchTop">⌕</button> <button class="btn" id="favTop">♡</button></div>
+<div><button class="btn" id="searchTop" aria-label="البحث">⌕</button> <button class="btn" id="favTop" aria-label="المفضلة">♡</button></div>
 </header>
 
 <main>
 <section class="hero"><div>
 <span class="eyebrow">YOUR NEXT STORY STARTS HERE</span>
 <h1>عالمك، <span>قصتك.</span></h1>
-<p>اكتشف المسلسلات والأفلام الآسيوية، وابدأ المشاهدة مباشرة من الغلاف.</p>
+<p>اكتشف المسلسلات والأفلام الآسيوية، وابدأ من صفحة المسلسل بضغطة واحدة.</p>
 <button class="primary" id="discover">اكتشف المسلسلات ←</button>
 </div></section>
 
 <div class="search" id="searchArea">
-<input id="query" type="search" placeholder="ابحث عن مسلسل باسمه...">
+<input id="query" type="search" placeholder="ابحث عن مسلسل باسمه..." autocomplete="off">
 <button class="primary" id="searchBtn">بحث</button>
 </div>
 
@@ -97,11 +99,11 @@ footer{text-align:center;color:#786b89;font-size:11px;margin:28px 0}
 <div id="grid" class="grid"></div>
 <div class="load" id="loadWrap" hidden>
 <button class="secondary" id="loadMore">تحميل المزيد</button>
-<p id="loadText" class="muted"></p>
+<p id="loadText"></p>
 </div>
 </section>
 
-<footer>معلومات المسلسلات من <a href="https://www.tvmaze.com/api" target="_blank" rel="noopener">TVmaze</a>. التوفر يعتمد على المصادر الخارجية.</footer>
+<footer>معلومات المسلسلات من <a href="https://www.tvmaze.com/api" target="_blank" rel="noopener">TVmaze</a>. معرّفات المسلسلات من TMDB. التوفر يعتمد على المصادر الخارجية.</footer>
 </main>
 
 <nav class="bottom">
@@ -114,20 +116,22 @@ footer{text-align:center;color:#786b89;font-size:11px;margin:28px 0}
 "use strict";
 
 const API="https://api.tvmaze.com";
-const MAX_PAGES=40;
-const $=id=>document.getElementById(id);
+const TMDB_API="https://api.themoviedb.org/3";
 
 /*
-  هذه الأرقام هي TMDB IDs وليست TVmaze IDs.
-  أضف فقط المعرفات التي تأكدت منها.
+  ملاحظة:
+  مفتاح TMDB في كود الموقع العام سيكون مرئيًا للزوار.
+  لا تضع هنا أي مفتاح سري أو كلمة مرور.
 */
-const TMDB_IDS={
-  "Weak Hero Class 1":200709
-};
+const TMDB_KEY="26c5ad9f51818e110945285552c11a75";
+const MAX_PAGES=40;
+const $=id=>document.getElementById(id);
 
 let shows=[],page=0,filter="all",mode="library",results=[];
 let loading=false,end=false,searchToken=0,categoryToken=0;
 let favs=new Set();
+let watchCache=new Map();
+let openingShowId=null;
 
 try{
   favs=new Set(JSON.parse(localStorage.getItem("notwin-tv-saved-v6")||"[]").map(Number));
@@ -146,7 +150,7 @@ function plain(html){
 }
 
 function imageOf(show){
-  return show?.image?.medium||show?.image?.original||"";
+  return show?.image?.original||show?.image?.medium||"";
 }
 
 function yearOf(show){
@@ -163,7 +167,7 @@ function languageName(language){
 
 async function api(path){
   const r=await fetch(API+path);
-  if(!r.ok)throw Error("HTTP "+r.status);
+  if(!r.ok)throw Error("TVmaze HTTP "+r.status);
   return r.json();
 }
 
@@ -222,22 +226,112 @@ function render(list=shows){
   $("count").textContent=items.length+" نتيجة";
 }
 
-/* الضغط على الغلاف يفتح المشاهدة مباشرة */
-function openWatch(show){
-  const tmdb=TMDB_IDS[show.name];
+/* تطبيع الأسماء لتسهيل مطابقة نتائج TMDB */
+function normalizeName(value){
+  return String(value||"")
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^\p{L}\p{N}]+/gu," ")
+    .trim();
+}
 
-  if(!tmdb){
-    alert("هذا العمل لم يُربط بالمشاهدة بعد. نحتاج معرّف TMDB الصحيح.");
-    return;
+/*
+  تحويل مسلسل TVmaze إلى معرّف TMDB.
+  لا نستعمل رقم TVmaze كأنه رقم TMDB.
+*/
+async function findTmdbShow(show){
+  if(watchCache.has(show.id))return watchCache.get(show.id);
+
+  const task=(async()=>{
+    const url=new URL(TMDB_API+"/search/tv");
+    url.searchParams.set("api_key",TMDB_KEY);
+    url.searchParams.set("query",show.name||"");
+    if(show.language==="Korean")url.searchParams.set("language","en-US");
+
+    const response=await fetch(url.toString());
+    if(!response.ok){
+      if(response.status===401)throw Error("مفتاح TMDB غير صالح أو غير مفعّل.");
+      throw Error("تعذر الاتصال بـ TMDB ("+response.status+").");
+    }
+
+    const data=await response.json();
+    const candidates=data.results||[];
+    if(!candidates.length)throw Error("لم نجد هذا المسلسل في TMDB.");
+
+    const wanted=normalizeName(show.name);
+    const exact=candidates.find(item=>
+      normalizeName(item.name)===wanted||
+      normalizeName(item.original_name)===wanted
+    );
+
+    /*
+      إذا لم توجد مطابقة واضحة، لا نختار نتيجة عشوائية
+      عندما تكون هناك عدة نتائج متشابهة.
+    */
+    const chosen=exact||(candidates.length===1?candidates[0]:null);
+
+    if(!chosen){
+      throw Error("وجدنا عدة أعمال متشابهة. يلزم ربط هذا المسلسل بمعرّف TMDB يدويًا.");
+    }
+
+    return {
+      id:chosen.id,
+      name:chosen.name||show.name,
+      original_name:chosen.original_name||"",
+      poster_path:chosen.poster_path||null
+    };
+  })();
+
+  watchCache.set(show.id,task);
+
+  try{
+    return await task;
+  }catch(error){
+    watchCache.delete(show.id);
+    throw error;
+  }
+}
+
+async function openWatch(show){
+  if(openingShowId!==null)return;
+
+  openingShowId=show.id;
+  const card=[...document.querySelectorAll(".card")]
+    .find(el=>el.getAttribute("aria-label")==="شاهد "+(show.name||"المسلسل"));
+
+  if(card){
+    card.style.opacity=".65";
+    card.setAttribute("aria-busy","true");
   }
 
-  const params=new URLSearchParams({
-    id:String(tmdb),
-    title:show.name,
-    type:"tv"
-  });
+  $("count").textContent="جارٍ الربط...";
+  try{
+    const tmdb=await findTmdbShow(show);
 
-  window.location.href="./watch.html?"+params.toString();
+    const params=new URLSearchParams({
+      id:String(tmdb.id),
+      title:show.name||tmdb.name,
+      type:"tv",
+      season:"1",
+      episode:"1"
+    });
+
+    window.location.href="./watch.html?"+params.toString();
+  }catch(error){
+    console.error("NOTWIN TV TMDB link error:",error);
+    alert(
+      (error.message||"تعذر إيجاد معرّف المسلسل.")+
+      "\n\nيمكنك تجربة مسلسل آخر أو إضافة معرّف TMDB الصحيح لهذا العمل."
+    );
+    $("count").textContent="جاهز";
+  }finally{
+    openingShowId=null;
+    if(card){
+      card.style.opacity="";
+      card.removeAttribute("aria-busy");
+    }
+  }
 }
 
 function makeCard(show){
@@ -315,7 +409,8 @@ async function loadLibrary(reset=false){
 
     if(!Array.isArray(data)||!data.length){
       end=true;
-      setStatus("وصلنا لنهاية البيانات");
+      if(!shows.length)setStatus("وصلنا لنهاية البيانات");
+      else render(shows);
       return;
     }
 
@@ -331,7 +426,8 @@ async function loadLibrary(reset=false){
     $("loadText").textContent="تم تحميل "+shows.length+" مسلسل";
   }catch(e){
     console.error(e);
-    setStatus("تعذّر الاتصال بالمكتبة"," تحقق من الإنترنت وحاول مجددًا.");
+    if(!shows.length)setStatus("تعذّر الاتصال بالمكتبة"," تحقق من الإنترنت وحاول مجددًا.");
+    else render(shows);
   }finally{
     loading=false;
     $("loadMore").disabled=false;
@@ -352,6 +448,7 @@ async function searchShows(){
   $("heading").textContent="نتائج البحث";
   $("subheading").textContent="نتائج من TVmaze";
   $("loadWrap").hidden=true;
+  $("grid").replaceChildren();
   setStatus("جارٍ البحث..."," نبحث عن المسلسلات.");
 
   try{
